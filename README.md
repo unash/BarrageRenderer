@@ -19,6 +19,8 @@
 1. 直接下载demo就可以运行; 并尝试修改ViewController中的相关参数以了解如何使用;
 2. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', :git => 'https://github.com/unash/BarrageRenderer.git'*  并在工程目录下的命令行中运行 pod update
 3. 或者将代码下载下来, 将BarrageRenderer/目录添加到您的工程当中.
+4. 在需要使用弹幕渲染功能的地方 #import "BarrageHeader.h".
+5. 相关的一篇博文: http://blog.exbye.com/2015/07/an-open-source-ios-barrage-renderer/
 
 ## 缺点及改进方向:
 * 提高弹幕绘制效率,在>10条/s弹幕频率情况下,会有丢帧现象.
