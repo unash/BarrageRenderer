@@ -1,0 +1,14 @@
+PODS:
+  - BarrageRenderer (1.0.0)
+
+DEPENDENCIES:
+  - BarrageRenderer (from `../`)
+
+EXTERNAL SOURCES:
+  BarrageRenderer:
+    :path: ../
+
+SPEC CHECKSUMS:
+  BarrageRenderer: c5f6e5b1f508eec039bd915da268aa5978860afb
+
+COCOAPODS: 0.35.0
