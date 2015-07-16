@@ -46,7 +46,10 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.bounds = self.superview.bounds;
+    self.frame = self.superview.bounds;
+    self.userInteractionEnabled = NO;
+    [self.superview bringSubviewToFront:self];
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)drawSpirits:(NSArray *)spirits
