@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
   s.author             = { "unash" => "unash@exbye.com" }
  
-  s.source       = { :git => "https://github.com/unash/BarrageRenderer.git", :tag => "1.0" }
+  s.source       = { :git => "https://github.com/unash/BarrageRenderer.git", :branch => "master" }
 
   s.source_files  = "BarrageRenderer/*.{h,m}","BarrageRenderer/*/*.{h,m}"
 end
