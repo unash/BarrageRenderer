@@ -60,9 +60,11 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    /// 添加根据z-index 排序
+    /// 添加根据z-index 增序排列
     if (self.zIndex) {
-        [self stackSpirits];
+        _spirits = [_spirits sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [@(((BarrageSpirit *)obj1).z_index) compare:@(((BarrageSpirit *)obj2).z_index)];
+        }];
     }
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextClearRect(context, rect); // 不加不行
@@ -70,23 +72,6 @@
     for (BarrageSpirit * spirit in _spirits) {
         [spirit drawInContext:context];
     }
-}
-
-/// 冒泡法排序,值越大越往后
-- (void)stackSpirits
-{
-    NSMutableArray * spirits = [NSMutableArray arrayWithArray:_spirits];
-    NSInteger num = spirits.count;
-    for (NSInteger i = 0; i < num - 1; i++) { //TODO: 这里如果num 换成 spirits.count, 会产生诡异的死循环
-        for (NSInteger j = i+1; j < num; j++) {
-            BarrageSpirit * spiritA = [spirits objectAtIndex:i];
-            BarrageSpirit * spiritB = [spirits objectAtIndex:j];
-            if (spiritA.z_index > spiritB.z_index) {
-                [spirits exchangeObjectAtIndex:i withObjectAtIndex:j];
-            }
-        }
-    }
-    _spirits = [spirits copy];
 }
 
 @end
