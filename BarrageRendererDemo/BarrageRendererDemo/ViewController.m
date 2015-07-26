@@ -43,7 +43,7 @@
     [super viewDidAppear:animated];
     //    [self bashSendBarrage];
     NSSafeObject * safeObj = [[NSSafeObject alloc]initWithObject:self withSelector:@selector(autoSendBarrage)];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
     [self performSelector:@selector(viewChanged) withObject:nil afterDelay:10.0f];
 }
 
@@ -108,7 +108,7 @@
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageWalkImageSpirit";
-    [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, 20)] forKey:@"image"];
+    [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, random_between(10,30))] forKey:@"image"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"duration"];
@@ -121,7 +121,7 @@
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageFloatImageSpirit";
-    [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, 20)] forKey:@"image"];
+    [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, random_between(10,30))] forKey:@"image"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"duration"];
