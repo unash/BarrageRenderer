@@ -56,9 +56,8 @@
 }
 
 /// 派发精灵
-- (BOOL)dispatchSpiritsWithPausedDuration:(NSTimeInterval)pausedDuration
+- (void)dispatchSpiritsWithPausedDuration:(NSTimeInterval)pausedDuration
 {
-    BOOL statusChanged = NO;
     for (NSInteger i = 0; i < _activeSpirits.count; i ++) { // 活跃精灵队列
         BarrageSpirit * spirit = [_activeSpirits objectAtIndex:i];
         if (!spirit.isValid) {
@@ -66,8 +65,7 @@
                 [_deadSpirits addObject:spirit];
             }
             [_activeSpirits removeObjectAtIndex:i--];
-            NSLog(@"%@",@"remove spirit");
-            statusChanged = YES;
+            [self deactiveSpirit:spirit];
         }
     }
     
@@ -80,10 +78,9 @@
             if (overtime < timeWindow) {
                 [_activeSpirits addObject:spirit];
                 [self activeSpirit:spirit];
-                statusChanged = YES;
             }
             else
-            {// 需要将过期的精灵直接放到_deadSpirits中; statusChanged并不随之变化
+            {// 需要将过期的精灵直接放到_deadSpirits中;
                 if (_cacheDeadSpirits) {
                     [_deadSpirits addObject:spirit];
                 }
@@ -91,15 +88,21 @@
             [_waitingSpirits removeObjectAtIndex:i--];
         }
     }
-    return statusChanged;
 }
 
 /// 激活精灵
 - (void)activeSpirit:(BarrageSpirit *)spirit
 {
-    NSLog(@"%@",@"add spirit");
     if (self.delegate && [self.delegate respondsToSelector:@selector(willShowSpirit:)]) {
         [self.delegate willShowSpirit:spirit];
+    }
+}
+
+/// 精灵失活
+- (void)deactiveSpirit:(BarrageSpirit *)spirit
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willHideSpirit:)]) {
+        [self.delegate willHideSpirit:spirit];
     }
 }
 

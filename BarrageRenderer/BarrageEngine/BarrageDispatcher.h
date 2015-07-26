@@ -30,6 +30,7 @@
 @protocol BarrageDispatchDelegate <NSObject>
 @required
 - (void)willShowSpirit:(BarrageSpirit *)spirit;
+- (void)willHideSpirit:(BarrageSpirit *)spirit;
 @end
 
 /// 弹幕调度器,主要完成负载均衡的工作
@@ -41,7 +42,7 @@
 - (void)addSpirit:(BarrageSpirit *)spirit;
 
 /// 派发精灵,如果有变化,则返回YES; 否则返回NO
-- (BOOL)dispatchSpiritsWithPausedDuration:(NSTimeInterval)pausedDuration;
+- (void)dispatchSpiritsWithPausedDuration:(NSTimeInterval)pausedDuration;
 
 /// 是否开启过期精灵缓存功能,默认关闭,所以 deadSpirits.count = 0
 @property (nonatomic,assign)BOOL cacheDeadSpirits;

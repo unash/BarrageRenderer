@@ -62,6 +62,8 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     if (self = [super init]) {
         _hostView = view;
         _canvas = [[BarrageCanvas alloc]initWithFrame:_hostView.bounds];
+        _spiritClassMap = [[NSMutableDictionary alloc]init];
+//        _canvas.zIndex = YES;
         [_hostView addSubview:_canvas];
         _context = [[NSMutableDictionary alloc]init];
         _recording = NO;
@@ -196,34 +198,18 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 /// 渲染
 - (void)render
 {
-    BOOL statusChanged = [_dispatcher dispatchSpiritsWithPausedDuration:self.pausedDuration]; // 存在状态变化的精灵
+    [_dispatcher dispatchSpiritsWithPausedDuration:self.pausedDuration]; // 分发精灵
     NSArray * activeSpirits = _dispatcher.activeSpirits;
-    if (statusChanged) {
-        [self updateClassMapWithActiveSpirits:activeSpirits];
-    }
     // 绘制
     [_canvas drawSpirits:activeSpirits];
     for (BarrageSpirit * spirit in activeSpirits) {
         [spirit updateWithTime:_time];
     }
-}
-
-/// 更新活跃精灵类型索引
-- (void)updateClassMapWithActiveSpirits:(NSArray *)activeSpirits
-{
-    _spiritClassMap = [[NSMutableDictionary alloc]initWithCapacity:activeSpirits.count];
-    for (BarrageSpirit * spirit in activeSpirits) {
-        NSString * className = NSStringFromClass([spirit class]);
-        NSMutableArray * itemMap = [_spiritClassMap objectForKey:className];
-        if (!itemMap) {
-            itemMap = [[NSMutableArray alloc]init];
-            [_spiritClassMap setObject:itemMap forKey:className];
-        }
-        [itemMap addObject:spirit];
     }
 }
 
 #pragma mark - BarrageDispatchDelegate
+
 - (void)willShowSpirit:(BarrageSpirit *)spirit
 {
     NSValue * value = [NSValue valueWithCGRect:_canvas.bounds];
@@ -236,6 +222,36 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     
     [_context setObject:@(_time) forKey:kBarrageRendererContextTimestamp];
     [spirit activeWithContext:_context];
+    [self indexAddSpirit:spirit];
+}
+
+- (void)willHideSpirit:(BarrageSpirit *)spirit
+{
+    [self indexRemoveSpirit:spirit];
+}
+
+#pragma mark - indexing
+/// 更新活跃精灵类型索引
+- (void)indexAddSpirit:(BarrageSpirit *)spirit
+{
+    NSString * className = NSStringFromClass([spirit class]);
+    NSMutableArray * itemMap = [_spiritClassMap objectForKey:className];
+    if (!itemMap) {
+        itemMap = [[NSMutableArray alloc]init];
+        [_spiritClassMap setObject:itemMap forKey:className];
+    }
+    [itemMap addObject:spirit];
+}
+/// 更新活跃精灵类型索引
+- (void)indexRemoveSpirit:(BarrageSpirit *)spirit
+{
+    NSString * className = NSStringFromClass([spirit class]);
+    NSMutableArray * itemMap = [_spiritClassMap objectForKey:className];
+    if (!itemMap) {
+        itemMap = [[NSMutableArray alloc]init];
+        [_spiritClassMap setObject:itemMap forKey:className];
+    }
+    [itemMap removeObject:spirit];
 }
 
 @end
