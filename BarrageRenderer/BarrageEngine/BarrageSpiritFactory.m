@@ -87,8 +87,8 @@
         id borderWidth = [descriptor.params objectForKey:@"borderWidth"];
         if (borderWidth) textSpirit.borderWidth = [borderWidth doubleValue];
         
-        id bgColor = [descriptor.params objectForKey:@"bgColor"];
-        if (bgColor) textSpirit.bgColor = bgColor;
+        id backgroundColor = [descriptor.params objectForKey:@"backgroundColor"];
+        if (backgroundColor) textSpirit.backgroundColor = backgroundColor;
         
         id textColor = [descriptor.params objectForKey:@"textColor"];
         if (textColor) textSpirit.textColor = textColor;
@@ -112,8 +112,8 @@
         id borderWidth = [descriptor.params objectForKey:@"borderWidth"];
         if (borderWidth) textSpirit.borderWidth = [borderWidth doubleValue];
         
-        id bgColor = [descriptor.params objectForKey:@"bgColor"];
-        if (bgColor) textSpirit.bgColor = bgColor;
+        id backgroundColor = [descriptor.params objectForKey:@"backgroundColor"];
+        if (backgroundColor) textSpirit.backgroundColor = backgroundColor;
         
         id textColor = [descriptor.params objectForKey:@"textColor"];
         if (textColor) textSpirit.textColor = textColor;
@@ -134,8 +134,8 @@
         id borderWidth = [descriptor.params objectForKey:@"borderWidth"];
         if (borderWidth) imageSpirit.borderWidth = [borderWidth doubleValue];
         
-        id bgColor = [descriptor.params objectForKey:@"bgColor"];
-        if (bgColor) imageSpirit.bgColor = bgColor;
+        id backgroundColor = [descriptor.params objectForKey:@"backgroundColor"];
+        if (backgroundColor) imageSpirit.backgroundColor = backgroundColor;
         
         id cornerRadius = [descriptor.params objectForKey:@"cornerRadius"];
         if (cornerRadius) imageSpirit.cornerRadius = [cornerRadius doubleValue];
@@ -153,8 +153,8 @@
         id borderWidth = [descriptor.params objectForKey:@"borderWidth"];
         if (borderWidth) imageSpirit.borderWidth = [borderWidth doubleValue];
         
-        id bgColor = [descriptor.params objectForKey:@"bgColor"];
-        if (bgColor) imageSpirit.bgColor = bgColor;
+        id backgroundColor = [descriptor.params objectForKey:@"backgroundColor"];
+        if (backgroundColor) imageSpirit.backgroundColor = backgroundColor;
         
         id cornerRadius = [descriptor.params objectForKey:@"cornerRadius"];
         if (cornerRadius) imageSpirit.cornerRadius = [cornerRadius doubleValue];

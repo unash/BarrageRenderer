@@ -30,7 +30,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _bgColor = [UIColor clearColor];
+        _backgroundColor = [UIColor clearColor];
         _borderWidth = 0.0f;
         _borderColor = [UIColor clearColor];
         _cornerRadius = 0.0f;
@@ -50,7 +50,7 @@
     }
     imageView.layer.borderColor = self.borderColor.CGColor;
     imageView.layer.borderWidth = self.borderWidth;
-    imageView.backgroundColor = self.bgColor;
+    imageView.backgroundColor = self.backgroundColor;
     return imageView;
 }
 

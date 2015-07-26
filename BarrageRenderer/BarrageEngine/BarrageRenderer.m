@@ -77,8 +77,9 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     __weak id weakSelf = self;
     _clock = [BarrageClock clockWithHandler:^(NSTimeInterval time){
+        BarrageRenderer * strongSelf = weakSelf;
         _time = time;
-        [weakSelf update];
+        [strongSelf update];
     }];
 }
 
@@ -107,8 +108,8 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     else if(_pausedTime)
     {
         _pausedDuration += [[NSDate date]timeIntervalSinceDate:_pausedTime];
-        _pausedTime = nil;
     }
+    _pausedTime = nil;
     [_clock start];
 }
 
@@ -132,6 +133,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     _startTime = nil;
     [_clock stop];
+    [_dispatcher deactiveAllSpirits];
 }
 
 - (void)setSpeed:(CGFloat)speed
@@ -139,6 +141,11 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     if (speed > 0) {
         _clock.speed = speed;
     }
+}
+
+- (CGFloat)speed
+{
+    return _clock.speed;
 }
 
 - (NSTimeInterval)pausedDuration
@@ -197,7 +204,12 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 
 #pragma mark - BarrageDispatchDelegate
 
-- (void)willShowSpirit:(BarrageSpirit *)spirit
+- (BOOL)shouldActiveSpirit:(BarrageSpirit *)spirit
+{
+    return !_pausedTime;
+}
+
+- (void)willActiveSpirit:(BarrageSpirit *)spirit
 {
     NSValue * value = [NSValue valueWithCGRect:_canvas.bounds];
     [_context setObject:value forKey:kBarrageRendererContextCanvasBounds];
@@ -232,7 +244,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     return index;
 }
 
-- (void)willHideSpirit:(BarrageSpirit *)spirit
+- (void)willDeactiveSpirit:(BarrageSpirit *)spirit
 {
     [self indexRemoveSpirit:spirit];
     [spirit.view removeFromSuperview];

@@ -33,7 +33,6 @@
     [super layoutSubviews];
     self.frame = self.superview.bounds;
     self.userInteractionEnabled = NO;
-    [self.superview bringSubviewToFront:self];
     self.backgroundColor = [UIColor clearColor];
 }
 

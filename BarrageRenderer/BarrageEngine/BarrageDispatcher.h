@@ -28,9 +28,11 @@
 
 @class BarrageSpirit;
 @protocol BarrageDispatchDelegate <NSObject>
+@optional
+- (BOOL)shouldActiveSpirit:(BarrageSpirit *)spirit;
 @required
-- (void)willShowSpirit:(BarrageSpirit *)spirit;
-- (void)willHideSpirit:(BarrageSpirit *)spirit;
+- (void)willActiveSpirit:(BarrageSpirit *)spirit;
+- (void)willDeactiveSpirit:(BarrageSpirit *)spirit;
 @end
 
 /// 弹幕调度器,主要完成负载均衡的工作
@@ -50,6 +52,9 @@
 @property (nonatomic,strong,readonly)NSArray * waitingSpirits;  // 当前等待的精灵
 @property (nonatomic,strong,readonly)NSArray * activeSpirits;   // 当前活跃的精灵
 @property (nonatomic,strong,readonly)NSArray * deadSpirits;     // 当前过期的精灵
+
+/// 停止当前被激活的精灵
+- (void)deactiveAllSpirits;
 
 @property (nonatomic,weak)id<BarrageDispatchDelegate> delegate; //
 

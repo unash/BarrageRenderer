@@ -32,7 +32,7 @@
 + (instancetype)clockWithHandler:(void (^)(NSTimeInterval time))block;
 
 /// 时间流速,默认值为1.0f
-@property(nonatomic,assign)CGFloat speed;
+@property(nonatomic,assign)CGFloat speed; // 必须大于0,否则无效
 
 /// 启动时间引擎
 - (void)start;

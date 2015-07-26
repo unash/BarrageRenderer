@@ -53,7 +53,7 @@
 - (void)receive:(BarrageDescriptor *)descriptor;
 
 /// 调整弹幕反应,需要>0,否则会被抛弃
-- (void)setSpeed:(CGFloat)speed;
+@property(nonatomic,assign)CGFloat speed;
 
 /// 返回给外部的view
 @property(nonatomic,weak)UIView * view;

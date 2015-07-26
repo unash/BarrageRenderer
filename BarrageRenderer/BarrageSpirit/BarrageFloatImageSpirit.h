@@ -31,7 +31,7 @@
 
 @property(nonatomic,strong)UIImage * image;
 
-@property(nonatomic,strong)UIColor * bgColor;
+@property(nonatomic,strong)UIColor * backgroundColor;
 
 @property(nonatomic,assign)CGFloat borderWidth;
 @property(nonatomic,strong)UIColor * borderColor;

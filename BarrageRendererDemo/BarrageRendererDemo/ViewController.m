@@ -30,20 +30,19 @@
     _renderer = [[BarrageRenderer alloc]init];
     [_renderer setSpeed:1.0f];
     [self.view addSubview:_renderer.view];
+    [self.view sendSubviewToBack:_renderer.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [_renderer start];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    //    [self bashSendBarrage];
     NSSafeObject * safeObj = [[NSSafeObject alloc]initWithObject:self withSelector:@selector(autoSendBarrage)];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
     [self performSelector:@selector(viewChanged) withObject:nil afterDelay:10.0f];
 }
 
@@ -57,26 +56,68 @@
     [_renderer stop];
 }
 
-- (void)autoSendBarrage
+#pragma mark - Action
+- (IBAction)start:(id)sender
 {
-    [_renderer receive:[self floatTextSpiritDescriptor]];
-    [_renderer receive:[self walkTextSpiritDescriptor]];
-//    [_renderer receive:[self floatImageSpiritDescriptor]];
-    [_renderer receive:[self walkImageSpiritDescriptor]];
+    [_renderer start];
+}
+- (IBAction)stop:(id)sender
+{
+    [_renderer stop];
+}
+- (IBAction)pause:(id)sender
+{
+    [_renderer pause];
+}
+- (IBAction)resume:(id)sender
+{
+    [_renderer start];
+}
+- (IBAction)send:(id)sender
+{
+    [self manualSendBarrage];
+}
+- (IBAction)faster:(id)sender
+{
+    CGFloat speed = _renderer.speed + 0.5;
+    if (speed >= 10) {
+        speed = 10.0f;
+    }
+    _renderer.speed = speed;
+}
+- (IBAction)slower:(id)sender
+{
+    CGFloat speed = _renderer.speed - 0.5;
+    if (speed <= 0.5f) {
+        speed = 0.5;
+    }
+    _renderer.speed = speed;
 }
 
-- (void)bashSendBarrage
+- (void)autoSendBarrage
 {
-    for (int i = 0; i < 30; i++) {
-        [_renderer receive:[self floatTextSpiritDescriptor]];
-        [_renderer receive:[self walkTextSpiritDescriptor]];
-        [_renderer receive:[self floatImageSpiritDescriptor]];
-        [_renderer receive:[self walkImageSpiritDescriptor]];
-    }
+    [_renderer receive:[self floatTextSpiritDescriptorWithDirection:2]];
+    [_renderer receive:[self walkTextSpiritDescriptorWithDirection:1]];
+//    [_renderer receive:[self floatImageSpiritDescriptorWithDirection:1]];
+    [_renderer receive:[self walkImageSpiritDescriptorWithDirection:2]];
+}
+
+- (void)manualSendBarrage
+{
+    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+    descriptor.spiritName = @"BarrageWalkTextSpirit";
+    [descriptor.params setObject:[NSString stringWithFormat:@"过场弹幕:%ld",(long)_index++] forKey:@"text"];
+    [descriptor.params setObject:@(random_between(10,30)) forKey:@"fontSize"];
+    [descriptor.params setObject:[UIColor greenColor] forKey:@"borderColor"];
+    [descriptor.params setObject:[UIColor yellowColor] forKey:@"backgroundColor"];
+    [descriptor.params setObject:@(1) forKey:@"borderWidth"];
+    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
+    [descriptor.params setObject:@(3) forKey:@"direction"];
+    [_renderer receive:descriptor];
 }
 
 /// 生成精灵描述
-- (BarrageDescriptor *)walkTextSpiritDescriptor
+- (BarrageDescriptor *)walkTextSpiritDescriptorWithDirection:(NSInteger)direction
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageWalkTextSpirit";
@@ -84,12 +125,12 @@
     [descriptor.params setObject:@(random_between(10,30)) forKey:@"fontSize"];
     [descriptor.params setObject:[UIColor blueColor] forKey:@"textColor"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
-    [descriptor.params setObject:@(1) forKey:@"direction"];
+    [descriptor.params setObject:@(direction) forKey:@"direction"];
     return descriptor;
 }
 
 /// 生成精灵描述
-- (BarrageDescriptor *)floatTextSpiritDescriptor
+- (BarrageDescriptor *)floatTextSpiritDescriptorWithDirection:(NSInteger)direction
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageFloatTextSpirit";
@@ -99,12 +140,12 @@
     [descriptor.params setObject:[UIColor purpleColor] forKey:@"textColor"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"duration"];
-    [descriptor.params setObject:@(3) forKey:@"direction"];
+    [descriptor.params setObject:@(direction) forKey:@"direction"];
     return descriptor;
 }
 
 /// 生成精灵描述
-- (BarrageDescriptor *)walkImageSpiritDescriptor
+- (BarrageDescriptor *)walkImageSpiritDescriptorWithDirection:(NSInteger)direction
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageWalkImageSpirit";
@@ -112,12 +153,12 @@
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"duration"];
-    [descriptor.params setObject:@(2) forKey:@"direction"];
+    [descriptor.params setObject:@(direction) forKey:@"direction"];
     return descriptor;
 }
 
 /// 生成精灵描述
-- (BarrageDescriptor *)floatImageSpiritDescriptor
+- (BarrageDescriptor *)floatImageSpiritDescriptorWithDirection:(NSInteger)direction
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageFloatImageSpirit";
@@ -125,7 +166,7 @@
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"duration"];
-    [descriptor.params setObject:@(4) forKey:@"direction"];
+    [descriptor.params setObject:@(direction) forKey:@"direction"];
     return descriptor;
 }
 

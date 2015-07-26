@@ -31,7 +31,7 @@
 
 @property(nonatomic,strong)NSString * text;
 
-@property(nonatomic,strong)UIColor * bgColor;
+@property(nonatomic,strong)UIColor * backgroundColor;
 
 @property(nonatomic,strong)UIColor * textColor; // 字体颜色
 @property(nonatomic,assign)CGFloat fontSize;

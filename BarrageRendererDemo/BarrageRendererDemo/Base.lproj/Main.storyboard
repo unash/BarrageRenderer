@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,7 +16,115 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRi-RB-7dS">
+                                <rect key="frame" x="101.5" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="暂停">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pause:" destination="vXZ-lx-hvc" eventType="touchDown" id="dt3-0U-cie"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C05-I6-CZs">
+                                <rect key="frame" x="182" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="恢复">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resume:" destination="vXZ-lx-hvc" eventType="touchDown" id="J0B-Iq-a1s"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dt8-CZ-hTT">
+                                <rect key="frame" x="262.5" y="560" width="75" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="停止">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stop:" destination="vXZ-lx-hvc" eventType="touchDown" id="UkO-aU-SUV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTN-NO-nCv">
+                                <rect key="frame" x="342.5" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="发送">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="send:" destination="vXZ-lx-hvc" eventType="touchDown" id="CsS-vN-MP3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybS-P6-UJA">
+                                <rect key="frame" x="423" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="加速">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="faster:" destination="vXZ-lx-hvc" eventType="touchDown" id="snd-eV-BjV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcU-eX-tKm">
+                                <rect key="frame" x="503.5" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="减速">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="slower:" destination="vXZ-lx-hvc" eventType="touchDown" id="IwB-DX-8T8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKP-P3-DE5">
+                                <rect key="frame" x="21" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="开始">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="start:" destination="vXZ-lx-hvc" eventType="touchDown" id="xkg-du-H7p"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ybS-P6-UJA" secondAttribute="bottom" constant="10" id="1hu-3W-2EP"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="rRi-RB-7dS" secondAttribute="height" id="5r1-C2-hFa"/>
+                            <constraint firstItem="TcU-eX-tKm" firstAttribute="leading" secondItem="ybS-P6-UJA" secondAttribute="trailing" constant="5" id="7wg-sS-poc"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="GKP-P3-DE5" secondAttribute="height" id="APB-8Z-NHQ"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="TcU-eX-tKm" secondAttribute="width" id="JSK-gG-mUD"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="leading" secondItem="NTN-NO-nCv" secondAttribute="trailing" constant="5" id="JcZ-JW-oSB"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="rRi-RB-7dS" secondAttribute="width" id="LKy-45-xKv"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="Dt8-CZ-hTT" secondAttribute="height" id="LUM-eb-x8U"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="NTN-NO-nCv" secondAttribute="width" id="UAh-ew-N8n"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="Dt8-CZ-hTT" secondAttribute="width" id="V7X-EY-1N2"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Dt8-CZ-hTT" secondAttribute="bottom" constant="10" id="Y7m-4i-8dg"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="C05-I6-CZs" secondAttribute="height" id="YKn-Vm-tm9"/>
+                            <constraint firstItem="NTN-NO-nCv" firstAttribute="leading" secondItem="Dt8-CZ-hTT" secondAttribute="trailing" constant="5" id="YPe-dB-e4U"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="C05-I6-CZs" secondAttribute="width" id="Z2D-G1-qD3"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="rRi-RB-7dS" secondAttribute="bottom" constant="10" id="bvi-MC-auE"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="GKP-P3-DE5" secondAttribute="width" id="cKo-kQ-SbS"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="NTN-NO-nCv" secondAttribute="bottom" constant="10" id="dDR-Pe-Qhr"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="GKP-P3-DE5" secondAttribute="bottom" constant="10" id="dlN-VB-mbe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TcU-eX-tKm" secondAttribute="trailing" constant="5" id="ePS-ai-VEu"/>
+                            <constraint firstItem="C05-I6-CZs" firstAttribute="leading" secondItem="rRi-RB-7dS" secondAttribute="trailing" constant="5" id="gUW-F0-sgF"/>
+                            <constraint firstItem="rRi-RB-7dS" firstAttribute="leading" secondItem="GKP-P3-DE5" secondAttribute="trailing" constant="5" id="gXO-Hm-D8d"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="TcU-eX-tKm" secondAttribute="bottom" constant="10" id="glf-cb-zym"/>
+                            <constraint firstItem="GKP-P3-DE5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="5" id="iF9-Vh-JzH"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="C05-I6-CZs" secondAttribute="bottom" constant="10" id="jhI-wj-1CK"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="TcU-eX-tKm" secondAttribute="height" id="lZA-O5-XKZ"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="NTN-NO-nCv" secondAttribute="height" id="naF-wJ-2Gj"/>
+                            <constraint firstItem="Dt8-CZ-hTT" firstAttribute="leading" secondItem="C05-I6-CZs" secondAttribute="trailing" constant="5" id="p3M-PR-iXD"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

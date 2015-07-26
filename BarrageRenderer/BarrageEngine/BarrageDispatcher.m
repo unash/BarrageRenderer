@@ -57,6 +57,19 @@
     }
 }
 
+/// 停止当前被激活的精灵
+- (void)deactiveAllSpirits
+{
+    for (NSInteger i = 0; i < _activeSpirits.count; i ++) { // 活跃精灵队列
+        BarrageSpirit * spirit = [_activeSpirits objectAtIndex:i];
+        if (_cacheDeadSpirits) {
+            [_deadSpirits addObject:spirit];
+        }
+        [self deactiveSpirit:spirit];
+        [_activeSpirits removeObjectAtIndex:i--];
+    }
+}
+
 /// 派发精灵
 - (void)dispatchSpiritsWithPausedDuration:(NSTimeInterval)pausedDuration
 {
@@ -78,8 +91,10 @@
         NSTimeInterval overtime = [date timeIntervalSinceDate:_startTime] - pausedDuration - spirit.delay;
         if (overtime >= 0) {
             if (overtime < timeWindow) {
-                [self activeSpirit:spirit];
-                [_activeSpirits addObject:spirit];
+                if ([self shouldActiveSpirit:spirit]) {
+                    [self activeSpirit:spirit];
+                    [_activeSpirits addObject:spirit];
+                }
             }
             else
             {// 需要将过期的精灵直接放到_deadSpirits中;
@@ -92,19 +107,28 @@
     }
 }
 
+/// 是否可以激活精灵
+- (BOOL)shouldActiveSpirit:(BarrageSpirit *)spirit
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shouldActiveSpirit:)]) {
+        return [self.delegate shouldActiveSpirit:spirit];
+    }
+    return YES;
+}
+
 /// 激活精灵
 - (void)activeSpirit:(BarrageSpirit *)spirit
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(willShowSpirit:)]) {
-        [self.delegate willShowSpirit:spirit];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willActiveSpirit:)]) {
+        [self.delegate willActiveSpirit:spirit];
     }
 }
 
 /// 精灵失活
 - (void)deactiveSpirit:(BarrageSpirit *)spirit
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(willHideSpirit:)]) {
-        [self.delegate willHideSpirit:spirit];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willDeactiveSpirit:)]) {
+        [self.delegate willDeactiveSpirit:spirit];
     }
 }
 

@@ -50,11 +50,16 @@
 {
     if (self = [super init]) {
         _block = block;
-        self.speed = 1.0f;
-        self.launched = NO;
-        _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
+        [self reset];
     }
     return self;
+}
+
+- (void)reset
+{
+     _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
+    _speed = 1.0f;
+    self.launched = NO;
 }
 
 - (void)update
@@ -71,15 +76,19 @@
     else
     {
         _previousDate = [NSDate date];
-        [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
         self.launched = YES;
     }
 }
 
 - (void)setSpeed:(CGFloat)speed
 {
-    _speed = speed;
-    _pausedSpeed = _speed;
+    if (speed > 0.0f) {
+        if (_speed != 0.0f) { // 非暂停状态
+            _speed = speed;
+        }
+        _pausedSpeed = speed;
+    }
 }
 
 - (void)pause
@@ -90,7 +99,7 @@
 - (void)stop
 {
     [_displayLink invalidate];
-    self.launched = NO;
+    [self reset];
 }
 
 /// 更新逻辑时间系统

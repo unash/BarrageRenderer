@@ -30,7 +30,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _bgColor = [UIColor clearColor];
+        _backgroundColor = [UIColor clearColor];
         _textColor = [UIColor blackColor];
         _borderWidth = 0.0f;
         _borderColor = [UIColor clearColor];
@@ -54,7 +54,7 @@
     }
     label.layer.borderColor = self.borderColor.CGColor;
     label.layer.borderWidth = self.borderWidth;
-    label.backgroundColor = self.bgColor;
+    label.backgroundColor = self.backgroundColor;
     return label;
 }
 
