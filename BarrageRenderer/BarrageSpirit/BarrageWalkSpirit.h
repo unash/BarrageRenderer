@@ -24,39 +24,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageTextSpirit.h"
+#import "BarrageSpirit.h"
 
-@implementation BarrageTextSpirit
+typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
+    BarrageWalkDirectionR2L = 1, // 右向左
+    BarrageWalkDirectionL2R,     // 左向右
+    BarrageWalkDirectionT2B,     // 上往下
+    BarrageWalkDirectionB2T      // 下往上
+};
 
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _bgColor = [UIColor clearColor];
-        _textColor = [UIColor blackColor];
-        _borderWidth = 0.0f;
-        _borderColor = [UIColor clearColor];
-        _fontSize = 16.0f;
-        _cornerRadius = 0.0f;
-    }
-    return self;
-}
+/// 移动文字精灵
+@interface BarrageWalkSpirit : BarrageSpirit
 
-#pragma mark - launch
+/// 速度,point/second
+@property(nonatomic,assign)CGFloat speed;
 
-- (UIView *)bindingView
-{
-    UILabel * label = [[UILabel alloc]init];
-    label.text = self.text;
-    label.textColor = self.textColor;
-    label.font = [UIFont systemFontOfSize:self.fontSize];
-    if (self.cornerRadius > 0) {
-        label.layer.cornerRadius = self.cornerRadius;
-        label.clipsToBounds = YES;
-    }
-    label.layer.borderColor = self.borderColor.CGColor;
-    label.layer.borderWidth = self.borderWidth;
-    label.backgroundColor = self.bgColor;
-    return label;
-}
+/// 运动方向
+@property(nonatomic,assign)BarrageWalkDirection direction;
+
+/// 需要在originInBounds:withSpirits: 方法中修改 _destination的值以表示运动的终点
+@property(nonatomic,assign,readonly)CGPoint destination;
 
 @end

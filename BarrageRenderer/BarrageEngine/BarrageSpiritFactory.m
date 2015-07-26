@@ -26,10 +26,12 @@
 
 #import "BarrageSpiritFactory.h"
 #import "BarrageDescriptor.h"
+
 #import "BarrageSpirit.h"
-#import "BarrageTextSpirit.h"
-#import "BarrageFloatTextSpirit.h"
+#import "BarrageWalkSpirit.h"
+#import "BarrageFloatSpirit.h"
 #import "BarrageWalkTextSpirit.h"
+#import "BarrageFloatTextSpirit.h"
 
 @implementation BarrageSpiritFactory
 
@@ -46,8 +48,28 @@
 //    static int zindex = 1000;
 //    spirit.z_index = zindex--;
     
-    if ([spirit isKindOfClass:[BarrageTextSpirit class]]) {
-        BarrageTextSpirit * textSpirit = (BarrageTextSpirit *)spirit;
+    if ([spirit isKindOfClass:[BarrageWalkSpirit class]]) {
+        BarrageWalkSpirit * walkSpirit = (BarrageWalkTextSpirit *)spirit;
+        
+        id direction = [descriptor.params objectForKey:@"direction"];
+        if (direction) walkSpirit.direction = [direction integerValue];
+        
+        id speed = [descriptor.params objectForKey:@"speed"];
+        if (speed) walkSpirit.speed = [speed doubleValue];
+    }
+    
+    if ([spirit isKindOfClass:[BarrageFloatSpirit class]]) {
+        BarrageFloatSpirit * floatSpirit = (BarrageFloatSpirit *)spirit;
+        
+        id direction = [descriptor.params objectForKey:@"direction"];
+        if (direction) floatSpirit.direction = [direction integerValue];
+        
+        id duration = [descriptor.params objectForKey:@"duration"];
+        if (duration) floatSpirit.duration = [duration doubleValue];
+    }
+    
+    if ([spirit isKindOfClass:[BarrageWalkTextSpirit class]]) {
+        BarrageWalkTextSpirit * textSpirit = (BarrageWalkTextSpirit *)spirit;
         
         id text = [descriptor.params objectForKey:@"text"];
         if (text) textSpirit.text = text;
@@ -69,26 +91,33 @@
         
         id borderColor = [descriptor.params objectForKey:@"borderColor"];
         if (borderColor) textSpirit.borderColor = borderColor;
-        
-        if ([textSpirit isKindOfClass:[BarrageWalkTextSpirit class]]) {
-            BarrageWalkTextSpirit * walkTextSpirit = (BarrageWalkTextSpirit *)textSpirit;
-            
-            id direction = [descriptor.params objectForKey:@"direction"];
-            if (direction) walkTextSpirit.direction = [direction integerValue];
-            
-            id speed = [descriptor.params objectForKey:@"speed"];
-            if (speed) walkTextSpirit.speed = [speed doubleValue];
-        }
-        if ([textSpirit isKindOfClass:[BarrageFloatTextSpirit class]]) {
-            BarrageFloatTextSpirit * floatTextSpirit = (BarrageFloatTextSpirit *)textSpirit;
-            
-            id direction = [descriptor.params objectForKey:@"direction"];
-            if (direction) floatTextSpirit.direction = [direction integerValue];
-            
-            id duration = [descriptor.params objectForKey:@"duration"];
-            if (duration) floatTextSpirit.duration = [duration doubleValue];
-        }
     }
+    
+    if ([spirit isKindOfClass:[BarrageFloatTextSpirit class]]) {
+        BarrageFloatTextSpirit * textSpirit = (BarrageFloatTextSpirit *)spirit;
+        
+        id text = [descriptor.params objectForKey:@"text"];
+        if (text) textSpirit.text = text;
+        
+        id fontSize = [descriptor.params objectForKey:@"fontSize"];
+        if (fontSize) textSpirit.fontSize = [fontSize doubleValue];
+        
+        id borderWidth = [descriptor.params objectForKey:@"borderWidth"];
+        if (borderWidth) textSpirit.borderWidth = [borderWidth doubleValue];
+        
+        id bgColor = [descriptor.params objectForKey:@"bgColor"];
+        if (bgColor) textSpirit.bgColor = bgColor;
+        
+        id textColor = [descriptor.params objectForKey:@"textColor"];
+        if (textColor) textSpirit.textColor = textColor;
+        
+        id cornerRadius = [descriptor.params objectForKey:@"cornerRadius"];
+        if (cornerRadius) textSpirit.cornerRadius = [cornerRadius doubleValue];
+        
+        id borderColor = [descriptor.params objectForKey:@"borderColor"];
+        if (borderColor) textSpirit.borderColor = borderColor;
+    }
+    
     return spirit;
 }
 

@@ -26,107 +26,36 @@
 
 #import "BarrageFloatTextSpirit.h"
 
-@interface BarrageFloatTextSpirit()
-{
-    NSTimeInterval _leftActiveTime;
-}
-@end
-
 @implementation BarrageFloatTextSpirit
-
 - (instancetype)init
 {
     if (self = [super init]) {
-        _direction = BarrageFloatDirectionT2B;
-        self.duration = 1.0f;
+        _bgColor = [UIColor clearColor];
+        _textColor = [UIColor blackColor];
+        _borderWidth = 0.0f;
+        _borderColor = [UIColor clearColor];
+        _fontSize = 16.0f;
+        _cornerRadius = 0.0f;
     }
     return self;
 }
 
-- (void)setDuration:(NSTimeInterval)duration
-{
-    _duration = duration;
-    _leftActiveTime = _duration;
-}
+#pragma mark - launch
 
-- (void)updateWithTime:(NSTimeInterval)time
+- (UIView *)bindingView
 {
-    [super updateWithTime:time];
-    _leftActiveTime = self.duration - (time - self.timestamp);
-}
-
-- (NSTimeInterval)estimateActiveTime
-{
-    return _leftActiveTime;
-}
-
-- (BOOL)validWithTime:(NSTimeInterval)time
-{
-    return [self estimateActiveTime] > 0;
-}
-
-- (CGPoint)originInBounds:(CGRect)rect withSpirits:(NSArray *)spirits
-{
-    // 获取同方向精灵
-    NSMutableArray * synclasticSpirits = [[NSMutableArray alloc]initWithCapacity:spirits.count];
-    for (BarrageFloatTextSpirit * spirit in spirits) {
-        if (spirit.direction == _direction) {
-            [synclasticSpirits addObject:spirit];
-        }
+    UILabel * label = [[UILabel alloc]init];
+    label.text = self.text;
+    label.textColor = self.textColor;
+    label.font = [UIFont systemFontOfSize:self.fontSize];
+    if (self.cornerRadius > 0) {
+        label.layer.cornerRadius = self.cornerRadius;
+        label.clipsToBounds = YES;
     }
-    
-    BOOL down = self.direction == BarrageFloatDirectionT2B; // 是否是朝下方向
-    
-    static BOOL const AVAERAGE_STRATEGY = NO; // YES:条纹平均精灵策略; NO:最快时间策略(体验会好一些)
-    static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
-    NSTimeInterval stripMaxActiveTimes[STRIP_NUM]={0}; // 每一条网格 已有精灵中最后退出屏幕的时间
-    NSUInteger stripSpiritNumbers[STRIP_NUM]={0}; // 每一条网格 包含精灵的数目
-    CGFloat stripHeight = rect.size.height/STRIP_NUM; // 水平条高度
-    
-    NSUInteger overlandStripNum = (NSUInteger)ceil((double)self.size.height/stripHeight); // 横跨网格条数目
-    NSUInteger availableFrom = 0;
-    NSUInteger leastActiveTimeStrip = 0; // 最小时间的行
-    NSUInteger leastActiveSpiritStrip = 0; // 最小网格精灵的行
-    
-    for (NSUInteger i = 0; i < STRIP_NUM; i++) {
-        //寻找当前行里包含的spirits
-        CGFloat stripFrom = down?(i * stripHeight+rect.origin.y):(rect.origin.y+rect.size.height - i * stripHeight);
-        CGFloat stripTo = down?(stripFrom + stripHeight):(stripFrom-stripHeight);
-        
-        for (BarrageFloatTextSpirit * spirit in synclasticSpirits) {
-            CGFloat spiritFrom = down?spirit.origin.y:(spirit.origin.y+spirit.size.height);
-            CGFloat spiritTo = down?(spirit.origin.y + spirit.size.height):spirit.origin.y;
-            if (fabs(spiritTo-spiritFrom)+fabs(stripTo-stripFrom)>MAX(fabs(stripTo-spiritFrom), fabs(spiritTo-stripFrom))) { // 在条条里
-                stripSpiritNumbers[i]++;
-                NSTimeInterval activeTime = [spirit estimateActiveTime];
-                if (activeTime > stripMaxActiveTimes[i]){
-                    stripMaxActiveTimes[i] = activeTime;
-                }
-            }
-        }
-        if (stripMaxActiveTimes[i] > 0) {
-            availableFrom = i+1;
-        }
-        else if (i - availableFrom >= overlandStripNum - 1){
-            break; // eureka!
-        }
-        if (i <= STRIP_NUM - overlandStripNum) {
-            if (stripMaxActiveTimes[i] < stripMaxActiveTimes[leastActiveTimeStrip]) {
-                leastActiveTimeStrip = i;
-            }
-            if (stripSpiritNumbers[i] < stripSpiritNumbers[leastActiveSpiritStrip]) {
-                leastActiveSpiritStrip = i;
-            }
-        }
-    }
-    if (availableFrom > STRIP_NUM - overlandStripNum) { // 那就是没有找到喽
-        availableFrom = AVAERAGE_STRATEGY?leastActiveSpiritStrip:leastActiveTimeStrip; // 使用最小个数 or 使用最短时间
-    }
-    
-    CGPoint origin = CGPointZero;
-    origin.x = (rect.origin.x+rect.size.width-self.size.width)/2;
-    origin.y = down?(stripHeight * availableFrom+rect.origin.y):(rect.origin.y+rect.size.height-stripHeight * availableFrom - self.size.height);
-    return origin;
+    label.layer.borderColor = self.borderColor.CGColor;
+    label.layer.borderWidth = self.borderWidth;
+    label.backgroundColor = self.bgColor;
+    return label;
 }
 
 @end

@@ -24,25 +24,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageTextSpirit.h"
-
-typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
-    BarrageWalkDirectionR2L = 1, // 右向左
-    BarrageWalkDirectionL2R,     // 左向右
-    BarrageWalkDirectionT2B,     // 上往下
-    BarrageWalkDirectionB2T      // 下往上
-};
+#import "BarrageWalkSpirit.h"
 
 /// 移动文字精灵
-@interface BarrageWalkTextSpirit : BarrageTextSpirit
+@interface BarrageWalkTextSpirit : BarrageWalkSpirit
 
-/// 速度,point/second
-@property(nonatomic,assign)CGFloat speed;
+@property(nonatomic,strong)NSString * text;
 
-/// 运动方向
-@property(nonatomic,assign)BarrageWalkDirection direction;
+@property(nonatomic,strong)UIColor * bgColor;
 
-/// 需要在originInBounds:withSpirits: 方法中修改 _destination的值以表示运动的终点
-@property(nonatomic,assign,readonly)CGPoint destination;
+@property(nonatomic,strong)UIColor * textColor; // 字体颜色
+@property(nonatomic,assign)CGFloat fontSize;
+
+@property(nonatomic,assign)CGFloat borderWidth;
+@property(nonatomic,strong)UIColor * borderColor;
+@property(nonatomic,assign)CGFloat cornerRadius; // 圆角,此属性十分影响绘制性能,谨慎使用
 
 @end
