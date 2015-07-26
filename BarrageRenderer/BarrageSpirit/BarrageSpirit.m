@@ -27,14 +27,14 @@
 #import "BarrageSpirit.h"
 
 @interface BarrageSpirit()
+
 @end
 
 @implementation BarrageSpirit
 
 @synthesize origin = _origin;
 @synthesize valid = _valid;
-@synthesize size = _size;
-@synthesize position = _position;
+@synthesize view = _view;
 
 - (instancetype)init
 {
@@ -43,27 +43,22 @@
         _birth = [NSDate date];
         _valid = YES;
         _origin.x = _origin.y = MAXFLOAT;
-        _size = CGSizeZero;
         _z_index = 0;
     }
     return self;
 }
 
-//TODO: 绘图相当影响效率
-- (void)drawInContext:(CGContextRef)context
-{
-    return;
-}
+#pragma mark - update
 
 - (void)updateWithTime:(NSTimeInterval)time
 {
-    _position = [self positionWithTime:time];
     _valid = [self validWithTime:time];
+    _view.frame = [self rectWithTime:time];
 }
 
-- (CGPoint)positionWithTime:(NSTimeInterval)time
+- (CGRect)rectWithTime:(NSTimeInterval)time
 {
-    return self.origin;
+    return CGRectMake(_origin.x, _origin.y, self.size.width, self.size.height);
 }
 
 - (BOOL)validWithTime:(NSTimeInterval)time
@@ -71,14 +66,24 @@
     return YES;
 }
 
+#pragma mark - launch
+
 - (void)activeWithContext:(NSDictionary *)context
 {
     CGRect rect = [[context objectForKey:kBarrageRendererContextCanvasBounds]CGRectValue];
     NSArray * spirits = [context objectForKey:kBarrageRendererContextRelatedSpirts];
-    NSTimeInterval timestamp = [[context objectForKey:kBarrageRendererContextTimestamp]doubleValue]; //TODO: doubleValue 可以嘛?
+    NSTimeInterval timestamp = [[context objectForKey:kBarrageRendererContextTimestamp]doubleValue];
     _timestamp = timestamp;
-    _size = [self sizeInBounds:rect];
+    _view = [self bindingView];
+    [_view sizeToFit];
     _origin = [self originInBounds:rect withSpirits:spirits];
+    _view.frame = CGRectMake(_origin.x, _origin.y, self.size.width, self.size.height);
+}
+
+/// 返回绑定的view
+- (UIView *)bindingView
+{
+    return [[UIView alloc]init];
 }
 
 ///  区域内的初始位置,只在刚加入渲染器的时候被调用;子类继承需要override.
@@ -89,9 +94,16 @@
     return CGPointMake(x, y);
 }
 
-- (CGSize)sizeInBounds:(CGRect)rect
+#pragma mark - attributes
+
+- (CGPoint)position
 {
-    return CGSizeZero;
+    return self.view.frame.origin;
+}
+
+- (CGSize)size
+{
+    return self.view.bounds.size;
 }
 
 @end

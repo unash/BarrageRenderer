@@ -28,10 +28,4 @@
 
 @interface BarrageCanvas : UIView
 
-/// 绘制活跃精灵
-- (void)drawSpirits:(NSArray *)spirits;
-
-/// 是否开启z-index功能,开启之后,性能会稍有降低,绘图会按照z_index进行,值越大,越靠上;默认关闭.
-@property(nonatomic,assign)BOOL zIndex;
-
 @end

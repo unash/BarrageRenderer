@@ -47,8 +47,8 @@
 /// 是否开启过期精灵缓存功能,默认关闭,所以 deadSpirits.count = 0
 @property (nonatomic,assign)BOOL cacheDeadSpirits;
 
-@property (nonatomic,strong,readonly)NSArray * activeSpirits;   // 当前活跃的精灵
 @property (nonatomic,strong,readonly)NSArray * waitingSpirits;  // 当前等待的精灵
+@property (nonatomic,strong,readonly)NSArray * activeSpirits;   // 当前活跃的精灵
 @property (nonatomic,strong,readonly)NSArray * deadSpirits;     // 当前过期的精灵
 
 @property (nonatomic,weak)id<BarrageDispatchDelegate> delegate; //

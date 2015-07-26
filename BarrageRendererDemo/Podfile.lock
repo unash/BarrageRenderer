@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  BarrageRenderer: c5f6e5b1f508eec039bd915da268aa5978860afb
+  BarrageRenderer: ce9948a0ef1bf924819f4ae5c58f5cecfc8a68f6
 
 COCOAPODS: 0.35.0

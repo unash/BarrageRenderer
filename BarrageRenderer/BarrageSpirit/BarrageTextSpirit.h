@@ -38,6 +38,6 @@
 
 @property(nonatomic,assign)CGFloat borderWidth;
 @property(nonatomic,strong)UIColor * borderColor;
-@property(nonatomic,assign)CGFloat cornerRadius; // 圆角
+@property(nonatomic,assign)CGFloat cornerRadius; // 圆角,此属性十分影响绘制性能,谨慎使用
 
 @end

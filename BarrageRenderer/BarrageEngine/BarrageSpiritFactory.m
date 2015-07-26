@@ -30,7 +30,6 @@
 #import "BarrageTextSpirit.h"
 #import "BarrageFloatTextSpirit.h"
 #import "BarrageWalkTextSpirit.h"
-#import "BarrageAttributedTextSpirit.h"
 
 @implementation BarrageSpiritFactory
 
@@ -44,6 +43,8 @@
         spirit = [[BarrageFloatTextSpirit alloc]init];
     }
     spirit.delay = [[descriptor.params objectForKey:@"delay"]doubleValue];
+//    static int zindex = 1000;
+//    spirit.z_index = zindex--;
     
     if ([spirit isKindOfClass:[BarrageTextSpirit class]]) {
         BarrageTextSpirit * textSpirit = (BarrageTextSpirit *)spirit;

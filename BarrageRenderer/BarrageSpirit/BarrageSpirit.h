@@ -36,8 +36,7 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 {
     CGPoint _origin;
     BOOL _valid;
-    CGSize _size;
-    CGPoint _position;
+    UIView * _view;
 }
 
 /// 延时, 这个是相对于rendered的绝对时间/秒
@@ -65,27 +64,31 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 /// 是否有效,默认YES; 当过了动画时间之后,就会被标记成NO; 永世不得翻身;子类可能需要在 updateWithTime: 中修改 _valid成员变量
 @property(nonatomic,assign,readonly,getter=isValid)BOOL valid;
 
+/// 输出的view,这样就不必自己再绘制图形了,并且可以使用硬件加速
+@property(nonatomic,strong,readonly)UIView * view;
+
+#pragma mark - called
+
 /// 结合相关上下文激活精灵; 如要覆盖, 请要先调用super方法
 - (void)activeWithContext:(NSDictionary *)context;
 
 /// 用相对时间更新状态; 最好不要覆盖此方法; 如要覆盖, 请要先调用super方法
 - (void)updateWithTime:(NSTimeInterval)time;
 
-#pragma mark - override
+#pragma mark - override -
 
+#pragma mark update
 /// _position, 此时刻的位置
-- (CGPoint)positionWithTime:(NSTimeInterval)time;
+- (CGRect)rectWithTime:(NSTimeInterval)time;
 
 /// _valid, 此时刻是否还有效
 - (BOOL)validWithTime:(NSTimeInterval)time;
 
-/// _size的初始大小
-- (CGSize)sizeInBounds:(CGRect)rect;
-
+#pragma mark launch
 /// 返回弹幕的初始位置
 - (CGPoint)originInBounds:(CGRect)rect withSpirits:(NSArray *)spirits;
 
-/// 绘制精灵; 子类调用此方法时可能需要先调用一下父类方法
-- (void)drawInContext:(CGContextRef)context; // 在上下文中绘制
+/// 绑定的view
+- (UIView *)bindingView;
 
 @end

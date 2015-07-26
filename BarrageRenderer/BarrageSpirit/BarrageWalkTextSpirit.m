@@ -46,18 +46,21 @@
     return self;
 }
 
+#pragma mark - update
+
 - (BOOL)validWithTime:(NSTimeInterval)time
 {
     return [self estimateActiveTime] > 0;
 }
 
-- (CGPoint)positionWithTime:(NSTimeInterval)time
+- (CGRect)rectWithTime:(NSTimeInterval)time
 {
     CGFloat X = self.destination.x - self.origin.x;
     CGFloat Y = self.destination.y - self.origin.y;
     CGFloat L = sqrt(X*X + Y*Y);
     NSTimeInterval duration = time - self.timestamp;
-    return CGPointMake(self.origin.x + duration * self.speed * X/L, self.origin.y + duration * self.speed * Y/L);
+    CGPoint position = CGPointMake(self.origin.x + duration * self.speed * X/L, self.origin.y + duration * self.speed * Y/L);
+    return CGRectMake(position.x, position.y, self.size.width, self.size.height);
 }
 
 /// 估算精灵的剩余存活时间
@@ -66,21 +69,23 @@
     CGFloat activeDistance = 0;
     switch (_direction) {
         case BarrageWalkDirectionR2L:
-            activeDistance = _position.x - _destination.x;
+            activeDistance = self.position.x - _destination.x;
             break;
         case BarrageWalkDirectionL2R:
-            activeDistance = _destination.x - _position.x;
+            activeDistance = _destination.x - self.position.x;
             break;
         case BarrageWalkDirectionT2B:
-            activeDistance = _destination.y - _position.y;
+            activeDistance = _destination.y - self.position.y;
             break;
         case BarrageWalkDirectionB2T:
-            activeDistance = _position.y - _destination.y;
+            activeDistance = self.position.y - _destination.y;
         default:
             break;
     }
     return activeDistance/self.speed;
 }
+
+#pragma mark - launch
 
 - (CGPoint)originInBounds:(CGRect)rect withSpirits:(NSArray *)spirits
 {
@@ -93,7 +98,7 @@
     }
     
     static BOOL const AVAERAGE_STRATEGY = YES; // YES:条纹平均精灵策略(体验会好一些); NO:最快时间策略
-    static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
+    static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
     NSTimeInterval stripMaxActiveTimes[STRIP_NUM]={0}; // 每一条网格 已有精灵中最后退出屏幕的时间
     NSUInteger stripSpiritNumbers[STRIP_NUM]={0}; // 每一条网格 包含精灵的数目
     CGFloat stripHeight = rect.size.height/STRIP_NUM; // 水平条高度

@@ -25,23 +25,8 @@
 // THE SOFTWARE.
 
 #import "BarrageCanvas.h"
-#import "BarrageSpirit.h"
-
-@interface BarrageCanvas()
-{
-    NSArray * _spirits;
-}
-@end
 
 @implementation BarrageCanvas
-
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _zIndex = NO;
-    }
-    return self;
-}
 
 - (void)layoutSubviews
 {
@@ -52,26 +37,16 @@
     self.backgroundColor = [UIColor clearColor];
 }
 
-- (void)drawSpirits:(NSArray *)spirits
+- (void)willMoveToSuperview:(UIView *)newSuperview
 {
-    _spirits = spirits;
-    [self setNeedsDisplay];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)willMoveToWindow:(UIWindow *)newWindow
 {
-    /// 添加根据z-index 增序排列
-    if (self.zIndex) {
-        _spirits = [_spirits sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [@(((BarrageSpirit *)obj1).z_index) compare:@(((BarrageSpirit *)obj2).z_index)];
-        }];
-    }
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextClearRect(context, rect); // 不加不行
-    [super drawRect:rect];
-    for (BarrageSpirit * spirit in _spirits) {
-        [spirit drawInContext:context];
-    }
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
 @end

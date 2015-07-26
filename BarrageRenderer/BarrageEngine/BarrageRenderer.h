@@ -34,8 +34,6 @@
 
 #pragma mark - life cycle
 
-- (instancetype)initWithView:(UIView *)view; // 将弹幕显示绑定到view上,不会retain
-
 #pragma mark - control
 
 /// 启动弹幕, 内部时钟从0开始
@@ -56,6 +54,14 @@
 
 /// 调整弹幕反应,需要>0,否则会被抛弃
 - (void)setSpeed:(CGFloat)speed;
+
+/// 返回给外部的view
+@property(nonatomic,weak)UIView * view;
+
+#pragma mark - z-index
+
+/// 是否开启z-index功能,开启之后,性能会稍有降低,绘图会按照z_index进行,值越大,越靠上;默认关闭.
+@property(nonatomic,assign)BOOL zIndex;
 
 #pragma mark - record
 

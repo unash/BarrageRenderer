@@ -64,8 +64,8 @@
             if (_cacheDeadSpirits) {
                 [_deadSpirits addObject:spirit];
             }
-            [_activeSpirits removeObjectAtIndex:i--];
             [self deactiveSpirit:spirit];
+            [_activeSpirits removeObjectAtIndex:i--];
         }
     }
     
@@ -76,8 +76,8 @@
         NSTimeInterval overtime = [date timeIntervalSinceDate:_startTime] - pausedDuration - spirit.delay;
         if (overtime >= 0) {
             if (overtime < timeWindow) {
-                [_activeSpirits addObject:spirit];
                 [self activeSpirit:spirit];
+                [_activeSpirits addObject:spirit];
             }
             else
             {// 需要将过期的精灵直接放到_deadSpirits中;
@@ -104,22 +104,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(willHideSpirit:)]) {
         [self.delegate willHideSpirit:spirit];
     }
-}
-
-#pragma mark - 属性返回
-- (NSArray *)activeSpirits
-{
-    return [_activeSpirits copy];
-}
-
-- (NSArray *)waitingSpirits
-{
-    return [_waitingSpirits copy];
-}
-
-- (NSArray *)deadSpirits
-{
-    return [_deadSpirits copy];
 }
 
 @end

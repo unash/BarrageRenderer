@@ -38,14 +38,13 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 
 @interface BarrageRenderer()<BarrageDispatchDelegate>
 {
-    __weak UIView * _hostView; // 宿主
     BarrageDispatcher * _dispatcher; //调度器
     BarrageCanvas * _canvas; // 画布
     BarrageClock * _clock;
     NSMutableDictionary * _spiritClassMap;
     __block NSTimeInterval _time;
     NSMutableDictionary * _context; // 渲染器上下文
-
+    
     NSMutableArray * _records;//记录数组
     NSDate * _startTime; //如果是nil,表示弹幕渲染不在运行中; 否则,表示开始的时间
     NSTimeInterval _pausedDuration; // 暂停持续时间
@@ -57,14 +56,12 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 @implementation BarrageRenderer
 @synthesize pausedDuration = _pausedDuration;
 #pragma mark - init
-- (instancetype)initWithView:(UIView *)view
+- (instancetype)init
 {
     if (self = [super init]) {
-        _hostView = view;
-        _canvas = [[BarrageCanvas alloc]initWithFrame:_hostView.bounds];
+        _canvas = [[BarrageCanvas alloc]init];
         _spiritClassMap = [[NSMutableDictionary alloc]init];
-//        _canvas.zIndex = YES;
-        [_hostView addSubview:_canvas];
+        _zIndex = NO;
         _context = [[NSMutableDictionary alloc]init];
         _recording = NO;
         _startTime = nil; // 尚未开始
@@ -188,23 +185,13 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     }
 }
 
-#pragma mark - render
+#pragma mark - update
 /// 每个刷新周期执行一次
 - (void)update
 {
-    [self render];
-}
-
-/// 渲染
-- (void)render
-{
     [_dispatcher dispatchSpiritsWithPausedDuration:self.pausedDuration]; // 分发精灵
-    NSArray * activeSpirits = _dispatcher.activeSpirits;
-    // 绘制
-    [_canvas drawSpirits:activeSpirits];
-    for (BarrageSpirit * spirit in activeSpirits) {
+    for (BarrageSpirit * spirit in _dispatcher.activeSpirits) {
         [spirit updateWithTime:_time];
-    }
     }
 }
 
@@ -221,16 +208,37 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     }
     
     [_context setObject:@(_time) forKey:kBarrageRendererContextTimestamp];
+    
+    NSInteger index = [self viewIndexOfSpirit:spirit];
+    
     [spirit activeWithContext:_context];
     [self indexAddSpirit:spirit];
+    [_canvas insertSubview:spirit.view atIndex:index];
+}
+
+- (NSUInteger)viewIndexOfSpirit:(BarrageSpirit *)spirit
+{
+    NSInteger index = _dispatcher.activeSpirits.count;
+    
+    /// 添加根据z-index 增序排列
+    if (self.zIndex) {
+        NSMutableArray * preSpirits = [[NSMutableArray alloc]initWithArray:_dispatcher.activeSpirits];
+        [preSpirits addObject:spirit];
+        NSArray * sortedSpirits = [preSpirits sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [@(((BarrageSpirit *)obj1).z_index) compare:@(((BarrageSpirit *)obj2).z_index)];
+        }];
+        index = [sortedSpirits indexOfObject:spirit];
+    }
+    return index;
 }
 
 - (void)willHideSpirit:(BarrageSpirit *)spirit
 {
     [self indexRemoveSpirit:spirit];
+    [spirit.view removeFromSuperview];
 }
 
-#pragma mark - indexing
+#pragma mark - indexing className-spirits
 /// 更新活跃精灵类型索引
 - (void)indexAddSpirit:(BarrageSpirit *)spirit
 {
@@ -242,6 +250,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     }
     [itemMap addObject:spirit];
 }
+
 /// 更新活跃精灵类型索引
 - (void)indexRemoveSpirit:(BarrageSpirit *)spirit
 {
@@ -252,6 +261,13 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         [_spiritClassMap setObject:itemMap forKey:className];
     }
     [itemMap removeObject:spirit];
+}
+
+#pragma mark - attributes
+
+- (UIView *)view
+{
+    return _canvas;
 }
 
 @end

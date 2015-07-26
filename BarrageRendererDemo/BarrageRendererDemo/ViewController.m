@@ -25,14 +25,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _index = 0;
+    _renderer = [[BarrageRenderer alloc]init];
+    [_renderer setSpeed:1.0f];
+    [self.view addSubview:_renderer.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    _index = 0;
-    _renderer = [[BarrageRenderer alloc]initWithView:self.view];
-    [_renderer setSpeed:1.0f];
     [_renderer start];
 }
 
@@ -41,14 +42,13 @@
     [super viewDidAppear:animated];
     //    [self bashSendBarrage];
     NSSafeObject * safeObj = [[NSSafeObject alloc]initWithObject:self withSelector:@selector(autoSendBarrage)];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
     [self performSelector:@selector(viewChanged) withObject:nil afterDelay:10.0f];
 }
 
 - (void)viewChanged
 {
-    //    self.view.frame = CGRectMake(20, 20, self.view.frame.size.width - 100, self.view.frame.size.height - 100);
-    [_renderer setSpeed:3.0f];
+    [_renderer setSpeed:2.0f];
 }
 
 - (void)dealloc
@@ -78,7 +78,7 @@
     [descriptor.params setObject:[NSString stringWithFormat:@"过场弹幕:%ld",(long)_index++] forKey:@"text"];
     [descriptor.params setObject:@(random_between(10,30)) forKey:@"fontSize"];
     [descriptor.params setObject:[UIColor blueColor] forKey:@"textColor"];
-    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+30) forKey:@"speed"];
+    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(2) forKey:@"direction"];
     return descriptor;
 }
@@ -92,7 +92,7 @@
     [descriptor.params setObject:@(random_between(10,15)) forKey:@"fontSize"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:[UIColor purpleColor] forKey:@"textColor"];
-    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+30) forKey:@"speed"];
+    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"duration"];
     [descriptor.params setObject:@(2) forKey:@"direction"];
     return descriptor;
