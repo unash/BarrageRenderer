@@ -14,7 +14,7 @@
 *  概念较清晰,可以为任意UIView绑定弹幕,当然弹幕内容需要创建控件输入.
 *  因为作者记性比较差,所以在很多紧要处添加了注释,理解代码更容易.
 
-![效果动画](./BarrageRendererDemo.gif)
+<iframe height=498 width=700 src="http://player.youku.com/embed/XMTI5NDM4ODk3Ng==" frameborder=0 allowfullscreen></iframe>
 
 ## 使用方式
 1. 直接下载demo就可以运行; 并尝试修改ViewController中的相关参数以了解如何使用;
