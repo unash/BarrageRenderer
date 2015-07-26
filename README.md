@@ -13,9 +13,10 @@
 *  丰富的扩展接口, 实现了父类的接口就可以自定义弹幕动画.
 *  概念较清晰,可以为任意UIView绑定弹幕,当然弹幕内容需要创建控件输入.
 *  因为作者记性比较差,所以在很多紧要处添加了注释,理解代码更容易.
-
-![效果动画](./BarrageRendererDemo.gif)
-
+ 
+	![效果动画](./BarrageRendererDemo.gif)
+	视频演示地址: http://v.youku.com/v_show/id_XMTI5NDM4ODk3Ng==.html
+ 
 ## 使用方式
 1. 直接下载demo就可以运行; 并尝试修改ViewController中的相关参数以了解如何使用;
 2. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', :git => 'https://github.com/unash/BarrageRenderer.git'*  并在工程目录下的命令行中运行 pod update
