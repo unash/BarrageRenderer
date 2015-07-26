@@ -32,18 +32,25 @@
 #import "BarrageFloatSpirit.h"
 #import "BarrageWalkTextSpirit.h"
 #import "BarrageFloatTextSpirit.h"
+#import "BarrageWalkImageSpirit.h"
+#import "BarrageFloatImageSpirit.h"
 
 @implementation BarrageSpiritFactory
 
 + (BarrageSpirit *)createSpiritWithDescriptor:(BarrageDescriptor *)descriptor
 {
     BarrageSpirit * spirit = nil;
-    if ([descriptor.spiritName isEqualToString:@"BarrageWalkTextSpirit"]) {
-        spirit = [[BarrageWalkTextSpirit alloc]init];
+    
+    if (descriptor.spiritName.length != 0) {
+        Class class = NSClassFromString(descriptor.spiritName);
+        if (class) {
+            spirit = [[class alloc]init];
+        }
     }
-    else if ([descriptor.spiritName isEqualToString:@"BarrageFloatTextSpirit"]) {
-        spirit = [[BarrageFloatTextSpirit alloc]init];
+    if (!spirit) {
+        return nil;
     }
+    
     spirit.delay = [[descriptor.params objectForKey:@"delay"]doubleValue];
 //    static int zindex = 1000;
 //    spirit.z_index = zindex--;
@@ -116,6 +123,44 @@
         
         id borderColor = [descriptor.params objectForKey:@"borderColor"];
         if (borderColor) textSpirit.borderColor = borderColor;
+    }
+    
+    if ([spirit isKindOfClass:[BarrageFloatImageSpirit class]]) {
+        BarrageFloatImageSpirit * imageSpirit = (BarrageFloatImageSpirit *)spirit;
+        
+        id image = [descriptor.params objectForKey:@"image"];
+        if (image) imageSpirit.image = image;
+        
+        id borderWidth = [descriptor.params objectForKey:@"borderWidth"];
+        if (borderWidth) imageSpirit.borderWidth = [borderWidth doubleValue];
+        
+        id bgColor = [descriptor.params objectForKey:@"bgColor"];
+        if (bgColor) imageSpirit.bgColor = bgColor;
+        
+        id cornerRadius = [descriptor.params objectForKey:@"cornerRadius"];
+        if (cornerRadius) imageSpirit.cornerRadius = [cornerRadius doubleValue];
+        
+        id borderColor = [descriptor.params objectForKey:@"borderColor"];
+        if (borderColor) imageSpirit.borderColor = borderColor;
+    }
+    
+    if ([spirit isKindOfClass:[BarrageWalkImageSpirit class]]) {
+        BarrageWalkImageSpirit * imageSpirit = (BarrageWalkImageSpirit *)spirit;
+        
+        id image = [descriptor.params objectForKey:@"image"];
+        if (image) imageSpirit.image = image;
+        
+        id borderWidth = [descriptor.params objectForKey:@"borderWidth"];
+        if (borderWidth) imageSpirit.borderWidth = [borderWidth doubleValue];
+        
+        id bgColor = [descriptor.params objectForKey:@"bgColor"];
+        if (bgColor) imageSpirit.bgColor = bgColor;
+        
+        id cornerRadius = [descriptor.params objectForKey:@"cornerRadius"];
+        if (cornerRadius) imageSpirit.cornerRadius = [cornerRadius doubleValue];
+        
+        id borderColor = [descriptor.params objectForKey:@"borderColor"];
+        if (borderColor) imageSpirit.borderColor = borderColor;
     }
     
     return spirit;

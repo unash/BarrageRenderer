@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6D55A75E9E6287C3EC838B09 /* libPods-BarrageRendererDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */; };
+		CCC0B4A21B6549C40088CFDE /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC0B4A11B6549C40088CFDE /* avatar.png */; };
+		CCC0B4A51B654DD50088CFDE /* UIImage+Barrage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC0B4A41B654DD50088CFDE /* UIImage+Barrage.m */; };
 		CCECEDCB1B5662F500098E7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCECEDCA1B5662F500098E7A /* main.m */; };
 		CCECEDCE1B5662F500098E7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCECEDCD1B5662F500098E7A /* AppDelegate.m */; };
 		CCECEDD11B5662F500098E7A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCECEDD01B5662F500098E7A /* ViewController.m */; };
@@ -21,6 +23,9 @@
 		1C26C0B8A6A60E09DB1FAC28 /* Pods-BarrageRendererDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.release.xcconfig"; sourceTree = "<group>"; };
 		5C13A3B15DEEFF78D2777351 /* Pods-BarrageRendererDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarrageRendererDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCC0B4A11B6549C40088CFDE /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
+		CCC0B4A31B654DD50088CFDE /* UIImage+Barrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Barrage.h"; sourceTree = "<group>"; };
+		CCC0B4A41B654DD50088CFDE /* UIImage+Barrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Barrage.m"; sourceTree = "<group>"; };
 		CCECEDC51B5662F500098E7A /* BarrageRendererDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarrageRendererDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCECEDC91B5662F500098E7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCECEDCA1B5662F500098E7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -81,6 +86,9 @@
 				CCECEDCD1B5662F500098E7A /* AppDelegate.m */,
 				CCECEDCF1B5662F500098E7A /* ViewController.h */,
 				CCECEDD01B5662F500098E7A /* ViewController.m */,
+				CCC0B4A31B654DD50088CFDE /* UIImage+Barrage.h */,
+				CCC0B4A41B654DD50088CFDE /* UIImage+Barrage.m */,
+				CCC0B4A11B6549C40088CFDE /* avatar.png */,
 				CCECEDD21B5662F500098E7A /* Main.storyboard */,
 				CCECEDD51B5662F500098E7A /* Images.xcassets */,
 				CCECEDD71B5662F500098E7A /* LaunchScreen.xib */,
@@ -175,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCC0B4A21B6549C40088CFDE /* avatar.png in Resources */,
 				CCECEDD41B5662F500098E7A /* Main.storyboard in Resources */,
 				CCECEDD91B5662F500098E7A /* LaunchScreen.xib in Resources */,
 				CCECEDD61B5662F500098E7A /* Images.xcassets in Resources */,
@@ -223,6 +232,7 @@
 			files = (
 				CCECEDF11B56673E00098E7A /* NSSafeObject.m in Sources */,
 				CCECEDD11B5662F500098E7A /* ViewController.m in Sources */,
+				CCC0B4A51B654DD50088CFDE /* UIImage+Barrage.m in Sources */,
 				CCECEDCE1B5662F500098E7A /* AppDelegate.m in Sources */,
 				CCECEDCB1B5662F500098E7A /* main.m in Sources */,
 			);

@@ -52,7 +52,9 @@
 
 - (void)addSpirit:(BarrageSpirit *)spirit
 {
-    [_waitingSpirits addObject:spirit];
+    if ([spirit isKindOfClass:[BarrageSpirit class]]) {
+        [_waitingSpirits addObject:spirit];
+    }
 }
 
 /// 派发精灵
