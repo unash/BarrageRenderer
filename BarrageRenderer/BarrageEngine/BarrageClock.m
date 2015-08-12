@@ -76,7 +76,7 @@
     else
     {
         _previousDate = [NSDate date];
-        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
         self.launched = YES;
     }
 }
