@@ -100,6 +100,7 @@
     [_renderer receive:[self walkTextSpiritDescriptorWithDirection:1]];
 //    [_renderer receive:[self floatImageSpiritDescriptorWithDirection:1]];
     [_renderer receive:[self walkImageSpiritDescriptorWithDirection:2]];
+    [_renderer receive:[self repeatingWalkTextSpiritDescriptorWithDirection:3]];
 }
 
 - (void)manualSendBarrage
@@ -126,6 +127,21 @@
     [descriptor.params setObject:[UIColor blueColor] forKey:@"textColor"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(direction) forKey:@"direction"];
+    return descriptor;
+}
+
+/// 生成精灵描述
+- (BarrageDescriptor *)repeatingWalkTextSpiritDescriptorWithDirection:(NSInteger)direction
+{
+    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+    descriptor.spiritName = @"BarrageRepeatingWalkTextSpirit";
+    [descriptor.params setObject:[NSString stringWithFormat:@"过场弹幕:%ld",(long)_index++] forKey:@"text"];
+    [descriptor.params setObject:@(random_between(10,30)) forKey:@"fontSize"];
+    [descriptor.params setObject:[UIColor blueColor] forKey:@"textColor"];
+    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+150) forKey:@"speed"];
+    [descriptor.params setObject:@(direction) forKey:@"direction"];
+    [descriptor.params setObject:@(3) forKey:@"side"];
+    [descriptor.params setObject:@(2) forKey:@"repeatTime"];
     return descriptor;
 }
 

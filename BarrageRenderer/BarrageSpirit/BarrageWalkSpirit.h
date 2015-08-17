@@ -35,6 +35,9 @@ typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
 
 /// 移动文字精灵
 @interface BarrageWalkSpirit : BarrageSpirit
+{
+    CGPoint _destination;
+}
 
 /// 速度,point/second
 @property(nonatomic,assign)CGFloat speed;

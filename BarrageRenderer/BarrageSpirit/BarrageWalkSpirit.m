@@ -29,7 +29,6 @@
 @interface BarrageWalkSpirit()
 {
     BarrageWalkDirection _direction;
-    CGPoint _destination;
 }
 @end
 
