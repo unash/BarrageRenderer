@@ -106,4 +106,11 @@
     return self.view.bounds.size;
 }
 
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+#ifdef DEBUG
+    NSLog(@"[Class:%@] hasNo - [Property:%@]; [Value:%@] will be discarded.",NSStringFromClass([self class]),key,value);
+#endif
+}
+
 @end

@@ -25,7 +25,6 @@
 5. 相关的一篇博文: http://blog.exbye.com/2015/07/an-open-source-ios-barrage-renderer/
 
 ## 改进方向
-* 利用反射以简化弹幕工厂BarrageFactor.
 * 引入UIView对象池,以减少创建弹幕view的cpu消耗.
 * 完善批量加载弹幕,XML文件格式制定，弹幕持久化支持;或支持其他格式xml文件.
 * 支持设定一屏显示的弹幕的最大长度,支持控制弹幕的流速.
