@@ -98,9 +98,8 @@
 {
     [_renderer receive:[self floatTextSpiritDescriptorWithDirection:2]];
     [_renderer receive:[self walkTextSpiritDescriptorWithDirection:1]];
-//    [_renderer receive:[self floatImageSpiritDescriptorWithDirection:1]];
+    [_renderer receive:[self floatImageSpiritDescriptorWithDirection:1]];
     [_renderer receive:[self walkImageSpiritDescriptorWithDirection:2]];
-    [_renderer receive:[self repeatingWalkTextSpiritDescriptorWithDirection:3]];
 }
 
 - (void)manualSendBarrage
@@ -108,7 +107,7 @@
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageWalkTextSpirit";
     [descriptor.params setObject:[NSString stringWithFormat:@"过场弹幕:%ld",(long)_index++] forKey:@"text"];
-    [descriptor.params setObject:@(random_between(10,30)) forKey:@"fontSize"];
+    [descriptor.params setObject:@(20.0f) forKey:@"fontSize"];
     [descriptor.params setObject:[UIColor greenColor] forKey:@"borderColor"];
     [descriptor.params setObject:[UIColor yellowColor] forKey:@"backgroundColor"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
@@ -123,25 +122,10 @@
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageWalkTextSpirit";
     [descriptor.params setObject:[NSString stringWithFormat:@"过场弹幕:%ld",(long)_index++] forKey:@"text"];
-    [descriptor.params setObject:@(random_between(10,30)) forKey:@"fontSize"];
+    [descriptor.params setObject:@(20.0f) forKey:@"fontSize"];
     [descriptor.params setObject:[UIColor blueColor] forKey:@"textColor"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(direction) forKey:@"direction"];
-    return descriptor;
-}
-
-/// 生成精灵描述
-- (BarrageDescriptor *)repeatingWalkTextSpiritDescriptorWithDirection:(NSInteger)direction
-{
-    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
-    descriptor.spiritName = @"BarrageRepeatingWalkTextSpirit";
-    [descriptor.params setObject:[NSString stringWithFormat:@"过场弹幕:%ld",(long)_index++] forKey:@"text"];
-    [descriptor.params setObject:@(random_between(10,30)) forKey:@"fontSize"];
-    [descriptor.params setObject:[UIColor blueColor] forKey:@"textColor"];
-    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+150) forKey:@"speed"];
-    [descriptor.params setObject:@(direction) forKey:@"direction"];
-    [descriptor.params setObject:@(3) forKey:@"side"];
-    [descriptor.params setObject:@(2) forKey:@"repeatTime"];
     return descriptor;
 }
 
@@ -151,7 +135,7 @@
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageFloatTextSpirit";
     [descriptor.params setObject:[NSString stringWithFormat:@"悬浮弹幕:%ld",(long)_index++] forKey:@"text"];
-    [descriptor.params setObject:@(random_between(10,15)) forKey:@"fontSize"];
+    [descriptor.params setObject:@(12.0f) forKey:@"fontSize"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:[UIColor purpleColor] forKey:@"textColor"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
@@ -165,7 +149,7 @@
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageWalkImageSpirit";
-    [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, random_between(10,30))] forKey:@"image"];
+    [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, 20.0f)] forKey:@"image"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"duration"];
@@ -178,7 +162,7 @@
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spiritName = @"BarrageFloatImageSpirit";
-    [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, random_between(10,30))] forKey:@"image"];
+    [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, 20.0f)] forKey:@"image"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"duration"];
