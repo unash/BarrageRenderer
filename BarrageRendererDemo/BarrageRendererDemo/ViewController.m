@@ -51,6 +51,11 @@
     [_renderer setSpeed:2.0f];
 }
 
+- (void)viewWillLayoutSubviews
+{
+    [_renderer.view setNeedsLayout];
+}
+
 - (void)dealloc
 {
     [_renderer stop];

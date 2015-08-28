@@ -59,6 +59,7 @@
 {
      _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
     _speed = 1.0f;
+    _pausedSpeed = _speed;
     self.launched = NO;
 }
 
