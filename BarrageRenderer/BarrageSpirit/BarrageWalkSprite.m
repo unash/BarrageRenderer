@@ -24,15 +24,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageWalkSpirit.h"
+#import "BarrageWalkSprite.h"
 
-@interface BarrageWalkSpirit()
+@interface BarrageWalkSprite()
 {
     BarrageWalkDirection _direction;
 }
 @end
 
-@implementation BarrageWalkSpirit
+@implementation BarrageWalkSprite
 @synthesize direction = _direction;
 @synthesize destination = _destination;
 
@@ -86,20 +86,20 @@
 
 #pragma mark - launch
 
-- (CGPoint)originInBounds:(CGRect)rect withSpirits:(NSArray *)spirits
+- (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites
 {
     // 获取同方向精灵
-    NSMutableArray * synclasticSpirits = [[NSMutableArray alloc]initWithCapacity:spirits.count];
-    for (BarrageWalkSpirit * spirit in spirits) {
-        if (spirit.direction == _direction) {
-            [synclasticSpirits addObject:spirit];
+    NSMutableArray * synclasticSprites = [[NSMutableArray alloc]initWithCapacity:sprites.count];
+    for (BarrageWalkSprite * sprite in sprites) {
+        if (sprite.direction == _direction) {
+            [synclasticSprites addObject:sprite];
         }
     }
     
     static BOOL const AVAERAGE_STRATEGY = YES; // YES:条纹平均精灵策略(体验会好一些); NO:最快时间策略
     static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
     NSTimeInterval stripMaxActiveTimes[STRIP_NUM]={0}; // 每一条网格 已有精灵中最后退出屏幕的时间
-    NSUInteger stripSpiritNumbers[STRIP_NUM]={0}; // 每一条网格 包含精灵的数目
+    NSUInteger stripSpriteNumbers[STRIP_NUM]={0}; // 每一条网格 包含精灵的数目
     CGFloat stripHeight = rect.size.height/STRIP_NUM; // 水平条高度
     CGFloat stripWidth = rect.size.width/STRIP_NUM; // 竖直条宽度
     BOOL oritation = _direction == BarrageWalkDirectionL2R || _direction == BarrageWalkDirectionR2L; // 方向, YES代表水平弹幕
@@ -116,23 +116,23 @@
     NSTimeInterval maxActiveTime = oritation?rect.size.width/self.speed:rect.size.height/self.speed;
     NSUInteger availableFrom = 0;
     NSUInteger leastActiveTimeStrip = 0; // 最小时间的行
-    NSUInteger leastActiveSpiritStrip = 0; // 最小网格的行
+    NSUInteger leastActiveSpriteStrip = 0; // 最小网格的行
     
     for (NSUInteger i = 0; i < STRIP_NUM; i++) {
-        //寻找当前行里包含的spirits
+        //寻找当前行里包含的sprites
         CGFloat stripFrom = i * (oritation?stripHeight:stripWidth);
         CGFloat stripTo = stripFrom + (oritation?stripHeight:stripWidth);
         CGFloat lastDistanceAllOut = YES;
-        for (BarrageWalkSpirit * spirit in synclasticSpirits) {
-            CGFloat spiritFrom = oritation?spirit.origin.y:spirit.origin.x;
-            CGFloat spiritTo = spiritFrom + (oritation?spirit.size.height:spirit.size.width);
-            if ((spiritTo-spiritFrom)+(stripTo-stripFrom)>MAX(stripTo-spiritFrom, spiritTo-stripFrom)) { // 在条条里
-                stripSpiritNumbers[i]++;
-                NSTimeInterval activeTime = [spirit estimateActiveTime];
+        for (BarrageWalkSprite * sprite in synclasticSprites) {
+            CGFloat spriteFrom = oritation?sprite.origin.y:sprite.origin.x;
+            CGFloat spriteTo = spriteFrom + (oritation?sprite.size.height:sprite.size.width);
+            if ((spriteTo-spriteFrom)+(stripTo-stripFrom)>MAX(stripTo-spriteFrom, spriteTo-stripFrom)) { // 在条条里
+                stripSpriteNumbers[i]++;
+                NSTimeInterval activeTime = [sprite estimateActiveTime];
                 if (activeTime > stripMaxActiveTimes[i]){ // 获取最慢的那个
                     stripMaxActiveTimes[i] = activeTime;
-                    CGFloat distance = oritation?fabs(spirit.position.x-spirit.origin.x):fabs(spirit.position.y-spirit.origin.y);
-                    lastDistanceAllOut = distance > (oritation?spirit.size.width:spirit.size.height);
+                    CGFloat distance = oritation?fabs(sprite.position.x-sprite.origin.x):fabs(sprite.position.y-sprite.origin.y);
+                    lastDistanceAllOut = distance > (oritation?sprite.size.width:sprite.size.height);
                 }
             }
         }
@@ -146,13 +146,13 @@
             if (stripMaxActiveTimes[i] < stripMaxActiveTimes[leastActiveTimeStrip]) {
                 leastActiveTimeStrip = i;
             }
-            if (stripSpiritNumbers[i] < stripSpiritNumbers[leastActiveSpiritStrip]) {
-                leastActiveSpiritStrip = i;
+            if (stripSpriteNumbers[i] < stripSpriteNumbers[leastActiveSpriteStrip]) {
+                leastActiveSpriteStrip = i;
             }
         }
     }
     if (availableFrom > STRIP_NUM - overlandStripNum) { // 那就是没有找到喽
-        availableFrom = AVAERAGE_STRATEGY?leastActiveSpiritStrip:leastActiveTimeStrip; // 使用最小个数 or 使用最短时间
+        availableFrom = AVAERAGE_STRATEGY?leastActiveSpriteStrip:leastActiveTimeStrip; // 使用最小个数 or 使用最短时间
     }
     
     CGPoint origin = CGPointZero;

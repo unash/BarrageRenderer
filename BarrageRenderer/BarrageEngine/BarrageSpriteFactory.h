@@ -24,20 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageWalkSpirit.h"
+#import <Foundation/Foundation.h>
+@class BarrageSprite;
+@class BarrageDescriptor;
 
-/// 移动文字精灵
-@interface BarrageWalkTextSpirit : BarrageWalkSpirit
-
-@property(nonatomic,strong)NSString * text;
-
-@property(nonatomic,strong)UIColor * backgroundColor;
-
-@property(nonatomic,strong)UIColor * textColor; // 字体颜色
-@property(nonatomic,assign)CGFloat fontSize;
-
-@property(nonatomic,assign)CGFloat borderWidth;
-@property(nonatomic,strong)UIColor * borderColor;
-@property(nonatomic,assign)CGFloat cornerRadius; // 圆角,此属性十分影响绘制性能,谨慎使用
-
+@interface BarrageSpriteFactory : NSObject
+/// 通过描述符创建精灵
++ (BarrageSprite *)createSpriteWithDescriptor:(BarrageDescriptor *)descriptor;
 @end

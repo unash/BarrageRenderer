@@ -24,10 +24,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageWalkSpirit.h"
+#import "BarrageWalkSprite.h"
 
 /// 移动文字精灵
-@interface BarrageWalkImageSpirit : BarrageWalkSpirit
+@interface BarrageWalkImageSprite : BarrageWalkSprite
 
 @property(nonatomic,strong)UIImage * image;
 

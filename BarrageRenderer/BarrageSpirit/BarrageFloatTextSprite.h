@@ -24,22 +24,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "BarrageFloatSprite.h"
 
+/// 悬浮文字精灵
+@interface BarrageFloatTextSprite : BarrageFloatSprite
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+@property(nonatomic,strong)NSString * text;
 
-    BOOL divideLine(CGFloat * from, CGFloat * to, CGFloat *begin, CGFloat *end);
-    BOOL searchMaxSpace(CGFloat * p_from,CGFloat * p_to,CGFloat begins[],CGFloat ends[], NSInteger n, CGFloat threshold);
-    /// 生成在[min,max]的随机数
-    CGFloat random_between(CGFloat min, CGFloat max);
-    
-#ifdef __cplusplus
-}
-#endif
+@property(nonatomic,strong)UIColor * backgroundColor;
 
-@interface BarrageSpiritUtility : NSObject
+@property(nonatomic,strong)UIColor * textColor; // 字体颜色
+@property(nonatomic,assign)CGFloat fontSize;
+
+@property(nonatomic,assign)CGFloat borderWidth;
+@property(nonatomic,strong)UIColor * borderColor;
+@property(nonatomic,assign)CGFloat cornerRadius; // 圆角,此属性十分影响绘制性能,谨慎使用
+
 
 @end

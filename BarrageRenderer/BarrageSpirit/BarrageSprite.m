@@ -24,13 +24,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageSpirit.h"
+#import "BarrageSprite.h"
 
-@interface BarrageSpirit()
+@interface BarrageSprite()
 
 @end
 
-@implementation BarrageSpirit
+@implementation BarrageSprite
 
 @synthesize origin = _origin;
 @synthesize valid = _valid;
@@ -71,12 +71,12 @@
 - (void)activeWithContext:(NSDictionary *)context
 {
     CGRect rect = [[context objectForKey:kBarrageRendererContextCanvasBounds]CGRectValue];
-    NSArray * spirits = [context objectForKey:kBarrageRendererContextRelatedSpirts];
+    NSArray * sprites = [context objectForKey:kBarrageRendererContextRelatedSpirts];
     NSTimeInterval timestamp = [[context objectForKey:kBarrageRendererContextTimestamp]doubleValue];
     _timestamp = timestamp;
     _view = [self bindingView];
     [_view sizeToFit];
-    _origin = [self originInBounds:rect withSpirits:spirits];
+    _origin = [self originInBounds:rect withSprites:sprites];
     _view.frame = CGRectMake(_origin.x, _origin.y, self.size.width, self.size.height);
 }
 
@@ -87,7 +87,7 @@
 }
 
 ///  区域内的初始位置,只在刚加入渲染器的时候被调用;子类继承需要override.
-- (CGPoint)originInBounds:(CGRect)rect withSpirits:(NSArray *)spirits
+- (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites
 {
     CGFloat x = random_between(rect.origin.x, rect.origin.x+rect.size.width-self.size.width);
     CGFloat y = random_between(rect.origin.y, rect.origin.y+rect.size.height-self.size.height);

@@ -24,34 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageFloatImageSpirit.h"
+#import <Foundation/Foundation.h>
 
-@implementation BarrageFloatImageSpirit
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _backgroundColor = [UIColor clearColor];
-        _borderWidth = 0.0f;
-        _borderColor = [UIColor clearColor];
-        _cornerRadius = 0.0f;
-    }
-    return self;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+    BOOL divideLine(CGFloat * from, CGFloat * to, CGFloat *begin, CGFloat *end);
+    BOOL searchMaxSpace(CGFloat * p_from,CGFloat * p_to,CGFloat begins[],CGFloat ends[], NSInteger n, CGFloat threshold);
+    /// 生成在[min,max]的随机数
+    CGFloat random_between(CGFloat min, CGFloat max);
+    
+#ifdef __cplusplus
 }
+#endif
 
-#pragma mark - launch
-
-- (UIView *)bindingView
-{
-    UIImageView * imageView = [[UIImageView alloc]init];
-    imageView.image = _image;
-    if (self.cornerRadius > 0) {
-        imageView.layer.cornerRadius = self.cornerRadius;
-        imageView.clipsToBounds = YES;
-    }
-    imageView.layer.borderColor = self.borderColor.CGColor;
-    imageView.layer.borderWidth = self.borderWidth;
-    imageView.backgroundColor = self.backgroundColor;
-    return imageView;
-}
+@interface BarrageSpriteUtility : NSObject
 
 @end

@@ -24,29 +24,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageSpiritFactory.h"
-#import "BarrageDescriptor.h"
-#import "BarrageSpirit.h"
+#import "BarrageFloatTextSprite.h"
 
-@implementation BarrageSpiritFactory
-
-+ (BarrageSpirit *)createSpiritWithDescriptor:(BarrageDescriptor *)descriptor
+@implementation BarrageFloatTextSprite
+- (instancetype)init
 {
-    BarrageSpirit * spirit = nil;
-    
-    if (descriptor.spiritName.length != 0) {
-        Class class = NSClassFromString(descriptor.spiritName);
-        if (class) {
-            spirit = [[class alloc]init];
-        }
+    if (self = [super init]) {
+        _backgroundColor = [UIColor clearColor];
+        _textColor = [UIColor blackColor];
+        _borderWidth = 0.0f;
+        _borderColor = [UIColor clearColor];
+        _fontSize = 16.0f;
+        _cornerRadius = 0.0f;
     }
-    if (spirit) {
-        for (NSString * key in [descriptor.params allKeys]) {
-            id value = descriptor.params[key];
-            [spirit setValue:value forKey:key];
-        }
+    return self;
+}
+
+#pragma mark - launch
+
+- (UIView *)bindingView
+{
+    UILabel * label = [[UILabel alloc]init];
+    label.text = self.text;
+    label.textColor = self.textColor;
+    label.font = [UIFont systemFontOfSize:self.fontSize];
+    if (self.cornerRadius > 0) {
+        label.layer.cornerRadius = self.cornerRadius;
+        label.clipsToBounds = YES;
     }
-    return spirit;
+    label.layer.borderColor = self.borderColor.CGColor;
+    label.layer.borderWidth = self.borderWidth;
+    label.backgroundColor = self.backgroundColor;
+    return label;
 }
 
 @end

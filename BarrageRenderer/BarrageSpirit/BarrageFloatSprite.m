@@ -24,15 +24,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageFloatSpirit.h"
+#import "BarrageFloatSprite.h"
 
-@interface BarrageFloatSpirit()
+@interface BarrageFloatSprite()
 {
     NSTimeInterval _leftActiveTime;
 }
 @end
 
-@implementation BarrageFloatSpirit
+@implementation BarrageFloatSprite
 
 - (instancetype)init
 {
@@ -65,13 +65,13 @@
     return [self estimateActiveTime] > 0;
 }
 
-- (CGPoint)originInBounds:(CGRect)rect withSpirits:(NSArray *)spirits
+- (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites
 {
     // 获取同方向精灵
-    NSMutableArray * synclasticSpirits = [[NSMutableArray alloc]initWithCapacity:spirits.count];
-    for (BarrageFloatSpirit * spirit in spirits) {
-        if (spirit.direction == _direction) {
-            [synclasticSpirits addObject:spirit];
+    NSMutableArray * synclasticSprites = [[NSMutableArray alloc]initWithCapacity:sprites.count];
+    for (BarrageFloatSprite * sprite in sprites) {
+        if (sprite.direction == _direction) {
+            [synclasticSprites addObject:sprite];
         }
     }
     
@@ -80,25 +80,25 @@
     static BOOL const AVAERAGE_STRATEGY = NO; // YES:条纹平均精灵策略; NO:最快时间策略(体验会好一些)
     static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
     NSTimeInterval stripMaxActiveTimes[STRIP_NUM]={0}; // 每一条网格 已有精灵中最后退出屏幕的时间
-    NSUInteger stripSpiritNumbers[STRIP_NUM]={0}; // 每一条网格 包含精灵的数目
+    NSUInteger stripSpriteNumbers[STRIP_NUM]={0}; // 每一条网格 包含精灵的数目
     CGFloat stripHeight = rect.size.height/STRIP_NUM; // 水平条高度
     
     NSUInteger overlandStripNum = (NSUInteger)ceil((double)self.size.height/stripHeight); // 横跨网格条数目
     NSUInteger availableFrom = 0;
     NSUInteger leastActiveTimeStrip = 0; // 最小时间的行
-    NSUInteger leastActiveSpiritStrip = 0; // 最小网格精灵的行
+    NSUInteger leastActiveSpriteStrip = 0; // 最小网格精灵的行
     
     for (NSUInteger i = 0; i < STRIP_NUM; i++) {
-        //寻找当前行里包含的spirits
+        //寻找当前行里包含的sprites
         CGFloat stripFrom = down?(i * stripHeight+rect.origin.y):(rect.origin.y+rect.size.height - i * stripHeight);
         CGFloat stripTo = down?(stripFrom + stripHeight):(stripFrom-stripHeight);
         
-        for (BarrageFloatSpirit * spirit in synclasticSpirits) {
-            CGFloat spiritFrom = down?spirit.origin.y:(spirit.origin.y+spirit.size.height);
-            CGFloat spiritTo = down?(spirit.origin.y + spirit.size.height):spirit.origin.y;
-            if (fabs(spiritTo-spiritFrom)+fabs(stripTo-stripFrom)>MAX(fabs(stripTo-spiritFrom), fabs(spiritTo-stripFrom))) { // 在条条里
-                stripSpiritNumbers[i]++;
-                NSTimeInterval activeTime = [spirit estimateActiveTime];
+        for (BarrageFloatSprite * sprite in synclasticSprites) {
+            CGFloat spriteFrom = down?sprite.origin.y:(sprite.origin.y+sprite.size.height);
+            CGFloat spriteTo = down?(sprite.origin.y + sprite.size.height):sprite.origin.y;
+            if (fabs(spriteTo-spriteFrom)+fabs(stripTo-stripFrom)>MAX(fabs(stripTo-spriteFrom), fabs(spriteTo-stripFrom))) { // 在条条里
+                stripSpriteNumbers[i]++;
+                NSTimeInterval activeTime = [sprite estimateActiveTime];
                 if (activeTime > stripMaxActiveTimes[i]){
                     stripMaxActiveTimes[i] = activeTime;
                 }
@@ -114,13 +114,13 @@
             if (stripMaxActiveTimes[i] < stripMaxActiveTimes[leastActiveTimeStrip]) {
                 leastActiveTimeStrip = i;
             }
-            if (stripSpiritNumbers[i] < stripSpiritNumbers[leastActiveSpiritStrip]) {
-                leastActiveSpiritStrip = i;
+            if (stripSpriteNumbers[i] < stripSpriteNumbers[leastActiveSpriteStrip]) {
+                leastActiveSpriteStrip = i;
             }
         }
     }
     if (availableFrom > STRIP_NUM - overlandStripNum) { // 那就是没有找到喽
-        availableFrom = AVAERAGE_STRATEGY?leastActiveSpiritStrip:leastActiveTimeStrip; // 使用最小个数 or 使用最短时间
+        availableFrom = AVAERAGE_STRATEGY?leastActiveSpriteStrip:leastActiveTimeStrip; // 使用最小个数 or 使用最短时间
     }
     
     CGPoint origin = CGPointZero;

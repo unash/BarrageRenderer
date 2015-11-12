@@ -24,17 +24,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageFloatTextSpirit.h"
+#import "BarrageFloatImageSprite.h"
 
-@implementation BarrageFloatTextSpirit
+@implementation BarrageFloatImageSprite
 - (instancetype)init
 {
     if (self = [super init]) {
         _backgroundColor = [UIColor clearColor];
-        _textColor = [UIColor blackColor];
         _borderWidth = 0.0f;
         _borderColor = [UIColor clearColor];
-        _fontSize = 16.0f;
         _cornerRadius = 0.0f;
     }
     return self;
@@ -44,18 +42,16 @@
 
 - (UIView *)bindingView
 {
-    UILabel * label = [[UILabel alloc]init];
-    label.text = self.text;
-    label.textColor = self.textColor;
-    label.font = [UIFont systemFontOfSize:self.fontSize];
+    UIImageView * imageView = [[UIImageView alloc]init];
+    imageView.image = _image;
     if (self.cornerRadius > 0) {
-        label.layer.cornerRadius = self.cornerRadius;
-        label.clipsToBounds = YES;
+        imageView.layer.cornerRadius = self.cornerRadius;
+        imageView.clipsToBounds = YES;
     }
-    label.layer.borderColor = self.borderColor.CGColor;
-    label.layer.borderWidth = self.borderWidth;
-    label.backgroundColor = self.backgroundColor;
-    return label;
+    imageView.layer.borderColor = self.borderColor.CGColor;
+    imageView.layer.borderWidth = self.borderWidth;
+    imageView.backgroundColor = self.backgroundColor;
+    return imageView;
 }
 
 @end

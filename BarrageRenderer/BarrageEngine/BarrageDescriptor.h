@@ -31,7 +31,7 @@
 
 - (instancetype)initWithString:(NSString *)xml; //TODO: 待实现
 
-@property(nonatomic,strong)NSString * spiritName; //类名
+@property(nonatomic,strong)NSString * spriteName; //类名
 
 @property(nonatomic,strong,readonly)NSMutableDictionary * params; // 属性字典
 

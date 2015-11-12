@@ -24,21 +24,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageFloatSpirit.h"
+#import "BarrageWalkTextSprite.h"
 
-/// 悬浮文字精灵
-@interface BarrageFloatTextSpirit : BarrageFloatSpirit
+@implementation BarrageWalkTextSprite
 
-@property(nonatomic,strong)NSString * text;
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _backgroundColor = [UIColor clearColor];
+        _textColor = [UIColor blackColor];
+        _borderWidth = 0.0f;
+        _borderColor = [UIColor clearColor];
+        _fontSize = 16.0f;
+        _cornerRadius = 0.0f;
+    }
+    return self;
+}
 
-@property(nonatomic,strong)UIColor * backgroundColor;
+#pragma mark - launch
 
-@property(nonatomic,strong)UIColor * textColor; // 字体颜色
-@property(nonatomic,assign)CGFloat fontSize;
-
-@property(nonatomic,assign)CGFloat borderWidth;
-@property(nonatomic,strong)UIColor * borderColor;
-@property(nonatomic,assign)CGFloat cornerRadius; // 圆角,此属性十分影响绘制性能,谨慎使用
-
-
+- (UIView *)bindingView
+{
+    UILabel * label = [[UILabel alloc]init];
+    label.text = self.text;
+    label.textColor = self.textColor;
+    label.font = [UIFont systemFontOfSize:self.fontSize];
+    if (self.cornerRadius > 0) {
+        label.layer.cornerRadius = self.cornerRadius;
+        label.clipsToBounds = YES;
+    }
+    label.layer.borderColor = self.borderColor.CGColor;
+    label.layer.borderWidth = self.borderWidth;
+    label.backgroundColor = self.backgroundColor;
+    return label;
+}
 @end

@@ -24,9 +24,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageSpiritUtility.h"
+#import "BarrageSpriteUtility.h"
 
-@implementation BarrageSpiritUtility
+@implementation BarrageSpriteUtility
 
 
 /// 一维线段分割函数

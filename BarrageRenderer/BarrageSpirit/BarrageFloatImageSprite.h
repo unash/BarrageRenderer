@@ -24,35 +24,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageWalkImageSpirit.h"
+#import "BarrageFloatSprite.h"
 
-@implementation BarrageWalkImageSpirit
+/// 悬浮文字精灵
+@interface BarrageFloatImageSprite : BarrageFloatSprite
 
-- (instancetype)init
-{
-    if (self = [super init]) {
-        _backgroundColor = [UIColor clearColor];
-        _borderWidth = 0.0f;
-        _borderColor = [UIColor clearColor];
-        _cornerRadius = 0.0f;
-    }
-    return self;
-}
+@property(nonatomic,strong)UIImage * image;
 
-#pragma mark - launch
+@property(nonatomic,strong)UIColor * backgroundColor;
 
-- (UIView *)bindingView
-{
-    UIImageView * imageView = [[UIImageView alloc]init];
-    imageView.image = _image;
-    if (self.cornerRadius > 0) {
-        imageView.layer.cornerRadius = self.cornerRadius;
-        imageView.clipsToBounds = YES;
-    }
-    imageView.layer.borderColor = self.borderColor.CGColor;
-    imageView.layer.borderWidth = self.borderWidth;
-    imageView.backgroundColor = self.backgroundColor;
-    return imageView;
-}
+@property(nonatomic,assign)CGFloat borderWidth;
+@property(nonatomic,strong)UIColor * borderColor;
+@property(nonatomic,assign)CGFloat cornerRadius; // 圆角,此属性十分影响绘制性能,谨慎使用
+
 
 @end

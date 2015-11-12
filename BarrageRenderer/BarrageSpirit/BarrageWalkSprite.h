@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageSpirit.h"
+#import "BarrageSprite.h"
 
 typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
     BarrageWalkDirectionR2L = 1, // 右向左
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
 };
 
 /// 移动文字精灵
-@interface BarrageWalkSpirit : BarrageSpirit
+@interface BarrageWalkSprite : BarrageSprite
 {
     CGPoint _destination;
 }
@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
 /// 运动方向
 @property(nonatomic,assign)BarrageWalkDirection direction;
 
-/// 需要在originInBounds:withSpirits: 方法中修改 _destination的值以表示运动的终点
+/// 需要在originInBounds:withSprites: 方法中修改 _destination的值以表示运动的终点
 @property(nonatomic,assign,readonly)CGPoint destination;
 
 @end

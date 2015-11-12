@@ -27,8 +27,8 @@
 #import "BarrageRenderer.h"
 #import "BarrageCanvas.h"
 #import "BarrageDispatcher.h"
-#import "BarrageSpirit.h"
-#import "BarrageSpiritFactory.h"
+#import "BarrageSprite.h"
+#import "BarrageSpriteFactory.h"
 #import "BarrageClock.h"
 #import "BarrageDescriptor.h"
 
@@ -41,7 +41,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     BarrageDispatcher * _dispatcher; //调度器
     BarrageCanvas * _canvas; // 画布
     BarrageClock * _clock;
-    NSMutableDictionary * _spiritClassMap;
+    NSMutableDictionary * _spriteClassMap;
     __block NSTimeInterval _time;
     NSMutableDictionary * _context; // 渲染器上下文
     
@@ -60,7 +60,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     if (self = [super init]) {
         _canvas = [[BarrageCanvas alloc]init];
-        _spiritClassMap = [[NSMutableDictionary alloc]init];
+        _spriteClassMap = [[NSMutableDictionary alloc]init];
         _zIndex = NO;
         _context = [[NSMutableDictionary alloc]init];
         _recording = NO;
@@ -90,8 +90,8 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         return;
     }
     [self convertDelayTime:descriptor];
-    BarrageSpirit * spirit = [BarrageSpiritFactory createSpiritWithDescriptor:descriptor];
-    [_dispatcher addSpirit:spirit];
+    BarrageSprite * sprite = [BarrageSpriteFactory createSpriteWithDescriptor:descriptor];
+    [_dispatcher addSprite:sprite];
     if (_recording) {
         [self recordDescriptor:descriptor];
     }
@@ -133,7 +133,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     _startTime = nil;
     [_clock stop];
-    [_dispatcher deactiveAllSpirits];
+    [_dispatcher deactiveAllSprites];
 }
 
 - (void)setSpeed:(CGFloat)speed
@@ -196,83 +196,83 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 /// 每个刷新周期执行一次
 - (void)update
 {
-    [_dispatcher dispatchSpiritsWithPausedDuration:self.pausedDuration]; // 分发精灵
-    for (BarrageSpirit * spirit in _dispatcher.activeSpirits) {
-        [spirit updateWithTime:_time];
+    [_dispatcher dispatchSpritesWithPausedDuration:self.pausedDuration]; // 分发精灵
+    for (BarrageSprite * sprite in _dispatcher.activeSprites) {
+        [sprite updateWithTime:_time];
     }
 }
 
 #pragma mark - BarrageDispatchDelegate
 
-- (BOOL)shouldActiveSpirit:(BarrageSpirit *)spirit
+- (BOOL)shouldActiveSprite:(BarrageSprite *)sprite
 {
     return !_pausedTime;
 }
 
-- (void)willActiveSpirit:(BarrageSpirit *)spirit
+- (void)willActiveSprite:(BarrageSprite *)sprite
 {
     NSValue * value = [NSValue valueWithCGRect:_canvas.bounds];
     [_context setObject:value forKey:kBarrageRendererContextCanvasBounds];
     
-    NSArray * itemMap = [_spiritClassMap objectForKey:NSStringFromClass([spirit class])];
+    NSArray * itemMap = [_spriteClassMap objectForKey:NSStringFromClass([sprite class])];
     if (itemMap) {
         [_context setObject:[itemMap copy] forKey:kBarrageRendererContextRelatedSpirts];
     }
     
     [_context setObject:@(_time) forKey:kBarrageRendererContextTimestamp];
     
-    NSInteger index = [self viewIndexOfSpirit:spirit];
+    NSInteger index = [self viewIndexOfSprite:sprite];
     
-    [spirit activeWithContext:_context];
-    [self indexAddSpirit:spirit];
-    [_canvas insertSubview:spirit.view atIndex:index];
+    [sprite activeWithContext:_context];
+    [self indexAddSprite:sprite];
+    [_canvas insertSubview:sprite.view atIndex:index];
 }
 
-- (NSUInteger)viewIndexOfSpirit:(BarrageSpirit *)spirit
+- (NSUInteger)viewIndexOfSprite:(BarrageSprite *)sprite
 {
-    NSInteger index = _dispatcher.activeSpirits.count;
+    NSInteger index = _dispatcher.activeSprites.count;
     
     /// 添加根据z-index 增序排列
     if (self.zIndex) {
-        NSMutableArray * preSpirits = [[NSMutableArray alloc]initWithArray:_dispatcher.activeSpirits];
-        [preSpirits addObject:spirit];
-        NSArray * sortedSpirits = [preSpirits sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [@(((BarrageSpirit *)obj1).z_index) compare:@(((BarrageSpirit *)obj2).z_index)];
+        NSMutableArray * preSprites = [[NSMutableArray alloc]initWithArray:_dispatcher.activeSprites];
+        [preSprites addObject:sprite];
+        NSArray * sortedSprites = [preSprites sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [@(((BarrageSprite *)obj1).z_index) compare:@(((BarrageSprite *)obj2).z_index)];
         }];
-        index = [sortedSpirits indexOfObject:spirit];
+        index = [sortedSprites indexOfObject:sprite];
     }
     return index;
 }
 
-- (void)willDeactiveSpirit:(BarrageSpirit *)spirit
+- (void)willDeactiveSprite:(BarrageSprite *)sprite
 {
-    [self indexRemoveSpirit:spirit];
-    [spirit.view removeFromSuperview];
+    [self indexRemoveSprite:sprite];
+    [sprite.view removeFromSuperview];
 }
 
-#pragma mark - indexing className-spirits
+#pragma mark - indexing className-sprites
 /// 更新活跃精灵类型索引
-- (void)indexAddSpirit:(BarrageSpirit *)spirit
+- (void)indexAddSprite:(BarrageSprite *)sprite
 {
-    NSString * className = NSStringFromClass([spirit class]);
-    NSMutableArray * itemMap = [_spiritClassMap objectForKey:className];
+    NSString * className = NSStringFromClass([sprite class]);
+    NSMutableArray * itemMap = [_spriteClassMap objectForKey:className];
     if (!itemMap) {
         itemMap = [[NSMutableArray alloc]init];
-        [_spiritClassMap setObject:itemMap forKey:className];
+        [_spriteClassMap setObject:itemMap forKey:className];
     }
-    [itemMap addObject:spirit];
+    [itemMap addObject:sprite];
 }
 
 /// 更新活跃精灵类型索引
-- (void)indexRemoveSpirit:(BarrageSpirit *)spirit
+- (void)indexRemoveSprite:(BarrageSprite *)sprite
 {
-    NSString * className = NSStringFromClass([spirit class]);
-    NSMutableArray * itemMap = [_spiritClassMap objectForKey:className];
+    NSString * className = NSStringFromClass([sprite class]);
+    NSMutableArray * itemMap = [_spriteClassMap objectForKey:className];
     if (!itemMap) {
         itemMap = [[NSMutableArray alloc]init];
-        [_spiritClassMap setObject:itemMap forKey:className];
+        [_spriteClassMap setObject:itemMap forKey:className];
     }
-    [itemMap removeObject:spirit];
+    [itemMap removeObject:sprite];
 }
 
 #pragma mark - attributes

@@ -26,13 +26,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class BarrageSpirit;
+@class BarrageSprite;
 @protocol BarrageDispatchDelegate <NSObject>
 @optional
-- (BOOL)shouldActiveSpirit:(BarrageSpirit *)spirit;
+- (BOOL)shouldActiveSprite:(BarrageSprite *)sprite;
 @required
-- (void)willActiveSpirit:(BarrageSpirit *)spirit;
-- (void)willDeactiveSpirit:(BarrageSpirit *)spirit;
+- (void)willActiveSprite:(BarrageSprite *)sprite;
+- (void)willDeactiveSprite:(BarrageSprite *)sprite;
 @end
 
 /// 弹幕调度器,主要完成负载均衡的工作
@@ -41,20 +41,20 @@
 - (instancetype)initWithStartTime:(NSDate *)startTime;
 
 /// 添加精灵
-- (void)addSpirit:(BarrageSpirit *)spirit;
+- (void)addSprite:(BarrageSprite *)sprite;
 
 /// 派发精灵,如果有变化,则返回YES; 否则返回NO
-- (void)dispatchSpiritsWithPausedDuration:(NSTimeInterval)pausedDuration;
+- (void)dispatchSpritesWithPausedDuration:(NSTimeInterval)pausedDuration;
 
-/// 是否开启过期精灵缓存功能,默认关闭,所以 deadSpirits.count = 0
-@property (nonatomic,assign)BOOL cacheDeadSpirits;
+/// 是否开启过期精灵缓存功能,默认关闭,所以 deadSprites.count = 0
+@property (nonatomic,assign)BOOL cacheDeadSprites;
 
-@property (nonatomic,strong,readonly)NSArray * waitingSpirits;  // 当前等待的精灵
-@property (nonatomic,strong,readonly)NSArray * activeSpirits;   // 当前活跃的精灵
-@property (nonatomic,strong,readonly)NSArray * deadSpirits;     // 当前过期的精灵
+@property (nonatomic,strong,readonly)NSArray * waitingSprites;  // 当前等待的精灵
+@property (nonatomic,strong,readonly)NSArray * activeSprites;   // 当前活跃的精灵
+@property (nonatomic,strong,readonly)NSArray * deadSprites;     // 当前过期的精灵
 
 /// 停止当前被激活的精灵
-- (void)deactiveAllSpirits;
+- (void)deactiveAllSprites;
 
 @property (nonatomic,weak)id<BarrageDispatchDelegate> delegate; //
 

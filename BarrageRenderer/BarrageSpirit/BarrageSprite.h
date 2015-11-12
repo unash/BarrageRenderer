@@ -25,14 +25,14 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "BarrageSpiritUtility.h"
+#import "BarrageSpriteUtility.h"
 
 extern NSString * const kBarrageRendererContextCanvasBounds;  // 画布大小
 extern NSString * const kBarrageRendererContextRelatedSpirts; // 相关精灵
 extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 
 /// 精灵基类
-@interface BarrageSpirit : NSObject
+@interface BarrageSprite : NSObject
 {
     CGPoint _origin;
     BOOL _valid;
@@ -52,7 +52,7 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 // 最底层是0, 往上依次叠加; 默认值是0
 @property(nonatomic,assign)NSUInteger z_index;
 
-/// 起始位置,为了获取这个值,子类需要重写 originInBounds:withSpirits: 方法
+/// 起始位置,为了获取这个值,子类需要重写 originInBounds:withSprites: 方法
 @property(nonatomic,assign,readonly)CGPoint origin;
 
 /// 为了获取此值,子类可能需要在 updateWithTime: 中修改 _position成员变量
@@ -86,7 +86,7 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 
 #pragma mark launch
 /// 返回弹幕的初始位置
-- (CGPoint)originInBounds:(CGRect)rect withSpirits:(NSArray *)spirits;
+- (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites;
 
 /// 绑定的view
 - (UIView *)bindingView;

@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "BarrageHeader.h"
 #import "NSSafeObject.h"
-#import "BarrageSpiritUtility.h"
+#import "BarrageSpriteUtility.h"
 #import "UIImage+Barrage.h"
 
 @interface ViewController()
@@ -101,16 +101,16 @@
 
 - (void)autoSendBarrage
 {
-    [_renderer receive:[self floatTextSpiritDescriptorWithDirection:2]];
-    [_renderer receive:[self walkTextSpiritDescriptorWithDirection:1]];
-    [_renderer receive:[self floatImageSpiritDescriptorWithDirection:1]];
-    [_renderer receive:[self walkImageSpiritDescriptorWithDirection:2]];
+    [_renderer receive:[self floatTextSpriteDescriptorWithDirection:2]];
+    [_renderer receive:[self walkTextSpriteDescriptorWithDirection:1]];
+    [_renderer receive:[self floatImageSpriteDescriptorWithDirection:1]];
+    [_renderer receive:[self walkImageSpriteDescriptorWithDirection:2]];
 }
 
 - (void)manualSendBarrage
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
-    descriptor.spiritName = @"BarrageWalkTextSpirit";
+    descriptor.spriteName = @"BarrageWalkTextSprite";
     [descriptor.params setObject:[NSString stringWithFormat:@"过场弹幕:%ld",(long)_index++] forKey:@"text"];
     [descriptor.params setObject:@(20.0f) forKey:@"fontSize"];
     [descriptor.params setObject:[UIColor greenColor] forKey:@"borderColor"];
@@ -122,10 +122,10 @@
 }
 
 /// 生成精灵描述
-- (BarrageDescriptor *)walkTextSpiritDescriptorWithDirection:(NSInteger)direction
+- (BarrageDescriptor *)walkTextSpriteDescriptorWithDirection:(NSInteger)direction
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
-    descriptor.spiritName = @"BarrageWalkTextSpirit";
+    descriptor.spriteName = @"BarrageWalkTextSprite";
     [descriptor.params setObject:[NSString stringWithFormat:@"过场弹幕:%ld",(long)_index++] forKey:@"text"];
     [descriptor.params setObject:@(20.0f) forKey:@"fontSize"];
     [descriptor.params setObject:[UIColor blueColor] forKey:@"textColor"];
@@ -135,10 +135,10 @@
 }
 
 /// 生成精灵描述
-- (BarrageDescriptor *)floatTextSpiritDescriptorWithDirection:(NSInteger)direction
+- (BarrageDescriptor *)floatTextSpriteDescriptorWithDirection:(NSInteger)direction
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
-    descriptor.spiritName = @"BarrageFloatTextSpirit";
+    descriptor.spriteName = @"BarrageFloatTextSprite";
     [descriptor.params setObject:[NSString stringWithFormat:@"悬浮弹幕:%ld",(long)_index++] forKey:@"text"];
     [descriptor.params setObject:@(12.0f) forKey:@"fontSize"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
@@ -150,10 +150,10 @@
 }
 
 /// 生成精灵描述
-- (BarrageDescriptor *)walkImageSpiritDescriptorWithDirection:(NSInteger)direction
+- (BarrageDescriptor *)walkImageSpriteDescriptorWithDirection:(NSInteger)direction
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
-    descriptor.spiritName = @"BarrageWalkImageSpirit";
+    descriptor.spriteName = @"BarrageWalkImageSprite";
     [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, 20.0f)] forKey:@"image"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
@@ -163,10 +163,10 @@
 }
 
 /// 生成精灵描述
-- (BarrageDescriptor *)floatImageSpiritDescriptorWithDirection:(NSInteger)direction
+- (BarrageDescriptor *)floatImageSpriteDescriptorWithDirection:(NSInteger)direction
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
-    descriptor.spiritName = @"BarrageFloatImageSpirit";
+    descriptor.spriteName = @"BarrageFloatImageSprite";
     [descriptor.params setObject:[[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40, 20.0f)] forKey:@"image"];
     [descriptor.params setObject:@(1) forKey:@"borderWidth"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];

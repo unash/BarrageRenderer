@@ -24,11 +24,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-@class BarrageSpirit;
-@class BarrageDescriptor;
+#import "BarrageSpriteFactory.h"
+#import "BarrageDescriptor.h"
+#import "BarrageSprite.h"
 
-@interface BarrageSpiritFactory : NSObject
-/// 通过描述符创建精灵
-+ (BarrageSpirit *)createSpiritWithDescriptor:(BarrageDescriptor *)descriptor;
+@implementation BarrageSpriteFactory
+
++ (BarrageSprite *)createSpriteWithDescriptor:(BarrageDescriptor *)descriptor
+{
+    BarrageSprite * sprite = nil;
+    
+    if (descriptor.spriteName.length != 0) {
+        Class class = NSClassFromString(descriptor.spriteName);
+        if (class) {
+            sprite = [[class alloc]init];
+        }
+    }
+    if (sprite) {
+        for (NSString * key in [descriptor.params allKeys]) {
+            id value = descriptor.params[key];
+            [sprite setValue:value forKey:key];
+        }
+    }
+    return sprite;
+}
+
 @end

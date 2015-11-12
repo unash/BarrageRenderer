@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "BarrageSpirit.h"
+#import "BarrageSprite.h"
 
 typedef NS_ENUM(NSUInteger, BarrageFloatDirection) {
     BarrageFloatDirectionT2B = 1,     // 上往下
@@ -32,7 +32,7 @@ typedef NS_ENUM(NSUInteger, BarrageFloatDirection) {
 };
 
 /// 悬浮文字精灵
-@interface BarrageFloatSpirit : BarrageSpirit
+@interface BarrageFloatSprite : BarrageSprite
 
 /// 存活时间
 @property(nonatomic,assign)NSTimeInterval duration;

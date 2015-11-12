@@ -25,13 +25,13 @@
 // THE SOFTWARE.
 
 #import "BarrageDispatcher.h"
-#import "BarrageSpirit.h"
+#import "BarrageSprite.h"
 
 @interface BarrageDispatcher()
 {
-    NSMutableArray * _activeSpirits;
-    NSMutableArray * _waitingSpirits;
-    NSMutableArray * _deadSpirits;
+    NSMutableArray * _activeSprites;
+    NSMutableArray * _waitingSprites;
+    NSMutableArray * _deadSprites;
     NSDate * _startTime;
 }
 @end
@@ -41,94 +41,94 @@
 - (instancetype)initWithStartTime:(NSDate *)startTime
 {
     if (self = [super init]) {
-        _activeSpirits = [[NSMutableArray alloc]init];
-        _waitingSpirits = [[NSMutableArray alloc]init];
-        _deadSpirits = [[NSMutableArray alloc]init];
-        _cacheDeadSpirits = NO;
+        _activeSprites = [[NSMutableArray alloc]init];
+        _waitingSprites = [[NSMutableArray alloc]init];
+        _deadSprites = [[NSMutableArray alloc]init];
+        _cacheDeadSprites = NO;
         _startTime = startTime;
     }
     return self;
 }
 
-- (void)addSpirit:(BarrageSpirit *)spirit
+- (void)addSprite:(BarrageSprite *)sprite
 {
-    if ([spirit isKindOfClass:[BarrageSpirit class]]) {
-        [_waitingSpirits addObject:spirit];
+    if ([sprite isKindOfClass:[BarrageSprite class]]) {
+        [_waitingSprites addObject:sprite];
     }
 }
 
 /// 停止当前被激活的精灵
-- (void)deactiveAllSpirits
+- (void)deactiveAllSprites
 {
-    for (NSInteger i = 0; i < _activeSpirits.count; i ++) { // 活跃精灵队列
-        BarrageSpirit * spirit = [_activeSpirits objectAtIndex:i];
-        if (_cacheDeadSpirits) {
-            [_deadSpirits addObject:spirit];
+    for (NSInteger i = 0; i < _activeSprites.count; i ++) { // 活跃精灵队列
+        BarrageSprite * sprite = [_activeSprites objectAtIndex:i];
+        if (_cacheDeadSprites) {
+            [_deadSprites addObject:sprite];
         }
-        [self deactiveSpirit:spirit];
-        [_activeSpirits removeObjectAtIndex:i--];
+        [self deactiveSprite:sprite];
+        [_activeSprites removeObjectAtIndex:i--];
     }
 }
 
 /// 派发精灵
-- (void)dispatchSpiritsWithPausedDuration:(NSTimeInterval)pausedDuration
+- (void)dispatchSpritesWithPausedDuration:(NSTimeInterval)pausedDuration
 {
-    for (NSInteger i = 0; i < _activeSpirits.count; i ++) { // 活跃精灵队列
-        BarrageSpirit * spirit = [_activeSpirits objectAtIndex:i];
-        if (!spirit.isValid) {
-            if (_cacheDeadSpirits) {
-                [_deadSpirits addObject:spirit];
+    for (NSInteger i = 0; i < _activeSprites.count; i ++) { // 活跃精灵队列
+        BarrageSprite * sprite = [_activeSprites objectAtIndex:i];
+        if (!sprite.isValid) {
+            if (_cacheDeadSprites) {
+                [_deadSprites addObject:sprite];
             }
-            [self deactiveSpirit:spirit];
-            [_activeSpirits removeObjectAtIndex:i--];
+            [self deactiveSprite:sprite];
+            [_activeSprites removeObjectAtIndex:i--];
         }
     }
     
     NSDate * date = [NSDate date];
     static NSTimeInterval const timeWindow = 0.1f; //时间窗口, 这个值可能会影响到自动调节刷新频率的效果
-    for (NSInteger i = 0; i < _waitingSpirits.count; i++) { // 等待队列
-        BarrageSpirit * spirit = [_waitingSpirits objectAtIndex:i];
-        NSTimeInterval overtime = [date timeIntervalSinceDate:_startTime] - pausedDuration - spirit.delay;
+    for (NSInteger i = 0; i < _waitingSprites.count; i++) { // 等待队列
+        BarrageSprite * sprite = [_waitingSprites objectAtIndex:i];
+        NSTimeInterval overtime = [date timeIntervalSinceDate:_startTime] - pausedDuration - sprite.delay;
         if (overtime >= 0) {
             if (overtime < timeWindow) {
-                if ([self shouldActiveSpirit:spirit]) {
-                    [self activeSpirit:spirit];
-                    [_activeSpirits addObject:spirit];
+                if ([self shouldActiveSprite:sprite]) {
+                    [self activeSprite:sprite];
+                    [_activeSprites addObject:sprite];
                 }
             }
             else
-            {// 需要将过期的精灵直接放到_deadSpirits中;
-                if (_cacheDeadSpirits) {
-                    [_deadSpirits addObject:spirit];
+            {// 需要将过期的精灵直接放到_deadSprites中;
+                if (_cacheDeadSprites) {
+                    [_deadSprites addObject:sprite];
                 }
             }
-            [_waitingSpirits removeObjectAtIndex:i--];
+            [_waitingSprites removeObjectAtIndex:i--];
         }
     }
 }
 
 /// 是否可以激活精灵
-- (BOOL)shouldActiveSpirit:(BarrageSpirit *)spirit
+- (BOOL)shouldActiveSprite:(BarrageSprite *)sprite
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(shouldActiveSpirit:)]) {
-        return [self.delegate shouldActiveSpirit:spirit];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shouldActiveSprite:)]) {
+        return [self.delegate shouldActiveSprite:sprite];
     }
     return YES;
 }
 
 /// 激活精灵
-- (void)activeSpirit:(BarrageSpirit *)spirit
+- (void)activeSprite:(BarrageSprite *)sprite
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(willActiveSpirit:)]) {
-        [self.delegate willActiveSpirit:spirit];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willActiveSprite:)]) {
+        [self.delegate willActiveSprite:sprite];
     }
 }
 
 /// 精灵失活
-- (void)deactiveSpirit:(BarrageSpirit *)spirit
+- (void)deactiveSprite:(BarrageSprite *)sprite
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(willDeactiveSpirit:)]) {
-        [self.delegate willDeactiveSpirit:spirit];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willDeactiveSprite:)]) {
+        [self.delegate willDeactiveSprite:sprite];
     }
 }
 
