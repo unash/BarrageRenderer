@@ -89,11 +89,12 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     if (!_startTime) { // 如果没有启动,则抛弃接收弹幕
         return;
     }
-    [self convertDelayTime:descriptor];
-    BarrageSprite * sprite = [BarrageSpriteFactory createSpriteWithDescriptor:descriptor];
+    BarrageDescriptor * copyDescriptor = [descriptor copy];
+    [self convertDelayTime:copyDescriptor];
+    BarrageSprite * sprite = [BarrageSpriteFactory createSpriteWithDescriptor:copyDescriptor];
     [_dispatcher addSprite:sprite];
     if (_recording) {
-        [self recordDescriptor:descriptor];
+        [self recordDescriptor:copyDescriptor];
     }
 }
 
@@ -194,7 +195,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         }
     }];
     if(!exists){
-        [_records addObject:[descriptor copy]];
+        [_records addObject:descriptor];
     }
 }
 
