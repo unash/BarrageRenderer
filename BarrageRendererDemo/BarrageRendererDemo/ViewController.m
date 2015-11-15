@@ -42,7 +42,7 @@
 {
     [super viewDidAppear:animated];
     NSSafeObject * safeObj = [[NSSafeObject alloc]initWithObject:self withSelector:@selector(autoSendBarrage)];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillLayoutSubviews
@@ -99,6 +99,7 @@
     [_renderer receive:[self walkTextSpriteDescriptorWithDirection:1]];
     [_renderer receive:[self floatImageSpriteDescriptorWithDirection:1]];
     [_renderer receive:[self walkImageSpriteDescriptorWithDirection:2]];
+    [_renderer receive:[self walkImageTextSpriteDescriptorWithDirection:1]];
     [_renderer receive:[self defaultSpriteDescriptor]];
 }
 
@@ -132,6 +133,19 @@
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spriteName = @"BarrageWalkTextSprite";
     [descriptor.params setObject:[NSString stringWithFormat:@"过场弹幕:%ld",(long)_index++] forKey:@"text"];
+    [descriptor.params setObject:@(20.0f) forKey:@"fontSize"];
+    [descriptor.params setObject:[UIColor blueColor] forKey:@"textColor"];
+    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
+    [descriptor.params setObject:@(direction) forKey:@"direction"];
+    return descriptor;
+}
+
+/// 图文混排精灵弹幕
+- (BarrageDescriptor *)walkImageTextSpriteDescriptorWithDirection:(NSInteger)direction
+{
+    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+    descriptor.spriteName = @"BarrageWalkImageTextSprite";//这个控制样式
+    [descriptor.params setObject:[NSString stringWithFormat:@"图文混排/::B过场弹幕:%ld",(long)_index++] forKey:@"text"];
     [descriptor.params setObject:@(20.0f) forKey:@"fontSize"];
     [descriptor.params setObject:[UIColor blueColor] forKey:@"textColor"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
