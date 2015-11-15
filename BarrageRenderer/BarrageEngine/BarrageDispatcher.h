@@ -27,7 +27,7 @@
 #import <Foundation/Foundation.h>
 
 @class BarrageSprite;
-@protocol BarrageDispatchDelegate <NSObject>
+@protocol BarrageDispatcherDelegate <NSObject>
 @optional
 - (BOOL)shouldActiveSprite:(BarrageSprite *)sprite;
 @required
@@ -56,6 +56,6 @@
 /// 停止当前被激活的精灵
 - (void)deactiveAllSprites;
 
-@property (nonatomic,weak)id<BarrageDispatchDelegate> delegate; //
+@property (nonatomic,weak)id<BarrageDispatcherDelegate> delegate; //
 
 @end

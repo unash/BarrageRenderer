@@ -36,7 +36,7 @@ NSString * const kBarrageRendererContextCanvasBounds = @"kBarrageRendererContext
 NSString * const kBarrageRendererContextRelatedSpirts = @"kBarrageRendererContextRelatedSpirts"; // 相关精灵
 NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTimestamp";         // 时间戳
 
-@interface BarrageRenderer()<BarrageDispatchDelegate>
+@interface BarrageRenderer()<BarrageDispatcherDelegate>
 {
     BarrageDispatcher * _dispatcher; //调度器
     BarrageCanvas * _canvas; // 画布
