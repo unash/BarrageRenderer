@@ -164,6 +164,24 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     [descriptor.params setObject:@(delay) forKey:@"delay"];
 }
 
+- (NSInteger)spritesNumberWithName:(NSString *)spriteName
+{
+    NSInteger number = 0;
+    if (spriteName) {
+        Class class = NSClassFromString(spriteName);
+        if (class) {
+            for (BarrageSprite * sprite in _dispatcher.activeSprites) {
+                number += [sprite class] == class;
+            }
+        }
+    }
+    else
+    {
+        number = _dispatcher.activeSprites.count;
+    }
+    return number;
+}
+
 #pragma mark - record
 /// 此方法会修改desriptor的值
 - (void)recordDescriptor:(BarrageDescriptor *)descriptor
@@ -176,7 +194,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         }
     }];
     if(!exists){
-        [_records addObject:descriptor];
+        [_records addObject:[descriptor copy]];
     }
 }
 

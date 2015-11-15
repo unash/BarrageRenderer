@@ -27,17 +27,6 @@
 #import "BarrageWalkSprite.h"
 
 /// 移动文字精灵
-@interface BarrageWalkTextSprite : BarrageWalkSprite
-
-@property(nonatomic,strong)NSString * text;
-
-@property(nonatomic,strong)UIColor * backgroundColor;
-
-@property(nonatomic,strong)UIColor * textColor; // 字体颜色
-@property(nonatomic,assign)CGFloat fontSize;
-
-@property(nonatomic,assign)CGFloat borderWidth;
-@property(nonatomic,strong)UIColor * borderColor;
-@property(nonatomic,assign)CGFloat cornerRadius; // 圆角,此属性十分影响绘制性能,谨慎使用
+@interface BarrageWalkTextSprite : BarrageWalkSprite<BarrageTextProtocol>
 
 @end

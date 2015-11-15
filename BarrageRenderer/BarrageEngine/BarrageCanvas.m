@@ -28,21 +28,24 @@
 
 @implementation BarrageCanvas
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.userInteractionEnabled = NO;
+        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.frame = self.superview.bounds;
-    self.userInteractionEnabled = NO;
-    self.backgroundColor = [UIColor clearColor];
+    if (self.superview && !CGRectEqualToRect(self.frame, self.superview.bounds)) {
+        self.frame = self.superview.bounds;
+    }
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview
-{
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-}
-
-- (void)willMoveToWindow:(UIWindow *)newWindow
+- (void)didMoveToSuperview
 {
     [self setNeedsLayout];
     [self layoutIfNeeded];

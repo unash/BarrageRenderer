@@ -28,13 +28,12 @@
 
 @implementation BarrageWalkImageSprite
 
+@synthesize image = _image;
+
 - (instancetype)init
 {
     if (self = [super init]) {
-        _backgroundColor = [UIColor clearColor];
-        _borderWidth = 0.0f;
-        _borderColor = [UIColor clearColor];
-        _cornerRadius = 0.0f;
+        
     }
     return self;
 }
@@ -45,13 +44,6 @@
 {
     UIImageView * imageView = [[UIImageView alloc]init];
     imageView.image = _image;
-    if (self.cornerRadius > 0) {
-        imageView.layer.cornerRadius = self.cornerRadius;
-        imageView.clipsToBounds = YES;
-    }
-    imageView.layer.borderColor = self.borderColor.CGColor;
-    imageView.layer.borderWidth = self.borderWidth;
-    imageView.backgroundColor = self.backgroundColor;
     return imageView;
 }
 

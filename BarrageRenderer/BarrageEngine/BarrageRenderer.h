@@ -58,6 +58,9 @@
 /// 返回给外部的view
 @property(nonatomic,weak)UIView * view;
 
+/// 获取当前屏幕弹幕数量,spriteName表示弹幕类名,如果传入nil,则计算屏幕所有弹幕数量
+- (NSInteger)spritesNumberWithName:(NSString *)spriteName;
+
 #pragma mark - z-index
 
 /// 是否开启z-index功能,开启之后,性能会稍有降低,绘图会按照z_index进行,值越大,越靠上;默认关闭.

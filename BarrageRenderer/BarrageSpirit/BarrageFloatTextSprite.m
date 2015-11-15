@@ -27,15 +27,21 @@
 #import "BarrageFloatTextSprite.h"
 
 @implementation BarrageFloatTextSprite
+
+@synthesize fontSize = _fontSize;
+@synthesize textColor = _textColor;
+@synthesize text = _text;
+@synthesize fontFamily = _fontFamily;
+@synthesize shadowColor = _shadowColor;
+@synthesize shadowOffset = _shadowOffset;
+
 - (instancetype)init
 {
     if (self = [super init]) {
-        _backgroundColor = [UIColor clearColor];
         _textColor = [UIColor blackColor];
-        _borderWidth = 0.0f;
-        _borderColor = [UIColor clearColor];
         _fontSize = 16.0f;
-        _cornerRadius = 0.0f;
+        _shadowColor = nil;
+        _shadowOffset = CGSizeMake(0, -1);
     }
     return self;
 }
@@ -47,14 +53,15 @@
     UILabel * label = [[UILabel alloc]init];
     label.text = self.text;
     label.textColor = self.textColor;
-    label.font = [UIFont systemFontOfSize:self.fontSize];
-    if (self.cornerRadius > 0) {
-        label.layer.cornerRadius = self.cornerRadius;
-        label.clipsToBounds = YES;
+    label.shadowColor = _shadowColor;
+    label.shadowOffset = _shadowOffset;
+    if (self.fontFamily) {
+        label.font = [UIFont fontWithName:self.fontFamily size:self.fontSize];
     }
-    label.layer.borderColor = self.borderColor.CGColor;
-    label.layer.borderWidth = self.borderWidth;
-    label.backgroundColor = self.backgroundColor;
+    else
+    {
+        label.font = [UIFont systemFontOfSize:self.fontSize];
+    }
     return label;
 }
 

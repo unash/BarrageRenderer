@@ -26,17 +26,24 @@
 
 #import <Foundation/Foundation.h>
 #import "BarrageSpriteUtility.h"
+#import "BarrageSpriteProtocol.h"
 
 extern NSString * const kBarrageRendererContextCanvasBounds;  // 画布大小
 extern NSString * const kBarrageRendererContextRelatedSpirts; // 相关精灵
 extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 
 /// 精灵基类
-@interface BarrageSprite : NSObject
+@interface BarrageSprite : NSObject<BarrageViewProtocol>
 {
     CGPoint _origin;
     BOOL _valid;
     UIView * _view;
+    
+    UIColor * _backgroundColor;
+    CGFloat _borderWidth;
+    UIColor * _borderColor;
+    CGFloat _cornerRadius;
+    CGSize _mandatorySize;
 }
 
 /// 延时, 这个是相对于rendered的绝对时间/秒

@@ -27,7 +27,7 @@
 #import <Foundation/Foundation.h>
 
 /// 统一的持久化层
-@interface BarrageDescriptor : NSObject
+@interface BarrageDescriptor : NSObject<NSCopying>
 
 - (instancetype)initWithString:(NSString *)xml; //TODO: 待实现
 

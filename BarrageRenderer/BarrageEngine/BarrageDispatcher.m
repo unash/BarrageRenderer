@@ -33,6 +33,7 @@
     NSMutableArray * _waitingSprites;
     NSMutableArray * _deadSprites;
     NSDate * _startTime;
+    NSTimeInterval _previousTime;
 }
 @end
 
@@ -46,6 +47,7 @@
         _deadSprites = [[NSMutableArray alloc]init];
         _cacheDeadSprites = NO;
         _startTime = startTime;
+        _previousTime = [[NSDate date]timeIntervalSinceDate:_startTime];
     }
     return self;
 }
@@ -73,7 +75,7 @@
 /// 派发精灵
 - (void)dispatchSpritesWithPausedDuration:(NSTimeInterval)pausedDuration
 {
-    for (NSInteger i = 0; i < _activeSprites.count; i ++) { // 活跃精灵队列
+    for (NSInteger i = 0; i < _activeSprites.count; i ++) {
         BarrageSprite * sprite = [_activeSprites objectAtIndex:i];
         if (!sprite.isValid) {
             if (_cacheDeadSprites) {
@@ -84,11 +86,11 @@
         }
     }
     
-    NSDate * date = [NSDate date];
-    static NSTimeInterval const timeWindow = 0.1f; //时间窗口, 这个值可能会影响到自动调节刷新频率的效果
-    for (NSInteger i = 0; i < _waitingSprites.count; i++) { // 等待队列
+    NSTimeInterval currentTime = [[NSDate date]timeIntervalSinceDate:_startTime];
+    NSTimeInterval timeWindow = currentTime - _previousTime;
+    for (NSInteger i = 0; i < _waitingSprites.count; i++) {
         BarrageSprite * sprite = [_waitingSprites objectAtIndex:i];
-        NSTimeInterval overtime = [date timeIntervalSinceDate:_startTime] - pausedDuration - sprite.delay;
+        NSTimeInterval overtime = currentTime - pausedDuration - sprite.delay;
         if (overtime >= 0) {
             if (overtime < timeWindow) {
                 if ([self shouldActiveSprite:sprite]) {
@@ -97,7 +99,7 @@
                 }
             }
             else
-            {// 需要将过期的精灵直接放到_deadSprites中;
+            {
                 if (_cacheDeadSprites) {
                     [_deadSprites addObject:sprite];
                 }
@@ -105,6 +107,7 @@
             [_waitingSprites removeObjectAtIndex:i--];
         }
     }
+    _previousTime = currentTime;
 }
 
 /// 是否可以激活精灵

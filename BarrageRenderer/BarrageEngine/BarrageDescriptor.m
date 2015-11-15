@@ -53,4 +53,13 @@
     return self;
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    BarrageDescriptor * copy = [BarrageDescriptor allocWithZone:zone];
+    copy->_params = [self.params mutableCopy];
+    copy->_spriteName = self.spriteName;
+    copy->_identifier = [[NSProcessInfo processInfo]globallyUniqueString];
+    return copy;
+}
+
 @end

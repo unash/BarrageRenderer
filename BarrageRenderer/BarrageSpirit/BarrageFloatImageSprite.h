@@ -27,15 +27,6 @@
 #import "BarrageFloatSprite.h"
 
 /// 悬浮文字精灵
-@interface BarrageFloatImageSprite : BarrageFloatSprite
-
-@property(nonatomic,strong)UIImage * image;
-
-@property(nonatomic,strong)UIColor * backgroundColor;
-
-@property(nonatomic,assign)CGFloat borderWidth;
-@property(nonatomic,strong)UIColor * borderColor;
-@property(nonatomic,assign)CGFloat cornerRadius; // 圆角,此属性十分影响绘制性能,谨慎使用
-
+@interface BarrageFloatImageSprite : BarrageFloatSprite<BarrageImageProtocol>
 
 @end

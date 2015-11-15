@@ -43,12 +43,6 @@
     [super viewDidAppear:animated];
     NSSafeObject * safeObj = [[NSSafeObject alloc]initWithObject:self withSelector:@selector(autoSendBarrage)];
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
-    [self performSelector:@selector(viewChanged) withObject:nil afterDelay:10.0f];
-}
-
-- (void)viewChanged
-{
-    [_renderer setSpeed:2.0f];
 }
 
 - (void)viewWillLayoutSubviews
@@ -105,6 +99,7 @@
     [_renderer receive:[self walkTextSpriteDescriptorWithDirection:1]];
     [_renderer receive:[self floatImageSpriteDescriptorWithDirection:1]];
     [_renderer receive:[self walkImageSpriteDescriptorWithDirection:2]];
+    [_renderer receive:[self defaultSpriteDescriptor]];
 }
 
 - (void)manualSendBarrage
@@ -119,6 +114,16 @@
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
     [descriptor.params setObject:@(3) forKey:@"direction"];
     [_renderer receive:descriptor];
+}
+
+- (BarrageDescriptor *)defaultSpriteDescriptor
+{
+    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+    descriptor.spriteName = @"BarrageSprite";
+    [descriptor.params setObject:[UIColor blueColor] forKey:@"backgroundColor"];
+    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
+    [descriptor.params setObject:[NSValue valueWithCGSize:CGSizeMake(50, 30)] forKey:@"mandatorySize"];
+    return descriptor;
 }
 
 /// 生成精灵描述

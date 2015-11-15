@@ -32,6 +32,12 @@
 
 @implementation BarrageSprite
 
+@synthesize backgroundColor = _backgroundColor;
+@synthesize borderWidth = _borderWidth;
+@synthesize borderColor = _borderColor;
+@synthesize cornerRadius = _cornerRadius;
+@synthesize mandatorySize = _mandatorySize;
+
 @synthesize origin = _origin;
 @synthesize valid = _valid;
 @synthesize view = _view;
@@ -44,6 +50,12 @@
         _valid = YES;
         _origin.x = _origin.y = MAXFLOAT;
         _z_index = 0;
+        
+        _backgroundColor = [UIColor clearColor];
+        _borderWidth = 0.0f;
+        _borderColor = [UIColor clearColor];
+        _cornerRadius = 0.0f;
+        _mandatorySize = CGSizeZero;
     }
     return self;
 }
@@ -75,9 +87,24 @@
     NSTimeInterval timestamp = [[context objectForKey:kBarrageRendererContextTimestamp]doubleValue];
     _timestamp = timestamp;
     _view = [self bindingView];
+    [self configView];
     [_view sizeToFit];
+    if (!CGSizeEqualToSize(_mandatorySize, CGSizeZero)) {
+        _view.frame = CGRectMake(0, 0, _mandatorySize.width, _mandatorySize.height);
+    }
     _origin = [self originInBounds:rect withSprites:sprites];
     _view.frame = CGRectMake(_origin.x, _origin.y, self.size.width, self.size.height);
+}
+
+- (void)configView
+{
+    if (self.cornerRadius > 0) {
+        _view.layer.cornerRadius = self.cornerRadius;
+        _view.clipsToBounds = YES;
+    }
+    _view.layer.borderColor = self.borderColor.CGColor;
+    _view.layer.borderWidth = self.borderWidth;
+    _view.backgroundColor = self.backgroundColor;
 }
 
 /// 返回绑定的view
