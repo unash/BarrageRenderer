@@ -19,18 +19,16 @@
 
 ## 使用方式
 1. 直接下载demo就可以运行; 并尝试修改ViewController中的相关参数以了解如何使用;
-2. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', '1.1.0'*  并在工程目录下的命令行中运行 pod update
+2. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', '1.3.0'*  并在工程目录下的命令行中运行 pod update
 3. 或者将代码下载下来, 将BarrageRenderer/目录添加到您的工程当中.
 4. 在需要使用弹幕渲染功能的地方 #import "BarrageHeader.h".
 5. 相关的一篇博文: http://blog.exbye.com/2015/07/an-open-source-ios-barrage-renderer/
 
 ## 改进方向
-* 引入UIView对象池,以减少创建弹幕view的cpu消耗.
+* 引入UIView重用机制,以减少创建弹幕view的cpu消耗.
 * 完善批量加载弹幕,XML文件格式制定，弹幕持久化支持;或支持其他格式xml文件.
 * 支持设定一屏显示的弹幕的最大长度,支持控制弹幕的流速.
 * 添加图文混排弹幕,或其他特色弹幕.
-* 暴露弹幕参数接口,模拟bilibili等界面的可调弹幕参数.
-* 	**欢迎帮助改进代码质量,欢迎补充其他的弹幕动画.**
 
 ## 支持与联系
 * 项目伊始,定然存在很多不足:
