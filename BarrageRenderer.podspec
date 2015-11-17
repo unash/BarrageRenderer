@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "BarrageRenderer"
-  s.version      = "1.3.0"
+  s.version      = "0.0.1"
   s.summary      = "With BarrageRenderer, You can easily create barrage or danmaku in your apps."
   s.homepage     = "https://github.com/unash/BarrageRenderer.git"
   s.license      = { :type => 'MIT License', :file => 'LICENSE' }
