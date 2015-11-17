@@ -50,6 +50,7 @@
 @property(nonatomic,strong)NSString * fontFamily;
 @property(nonatomic,retain)UIColor * shadowColor;
 @property(nonatomic)CGSize shadowOffset;
+@property(nonatomic,strong)NSAttributedString * attributedText;
 
 @end
 

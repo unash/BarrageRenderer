@@ -34,6 +34,7 @@
 @synthesize fontFamily = _fontFamily;
 @synthesize shadowColor = _shadowColor;
 @synthesize shadowOffset = _shadowOffset;
+@synthesize attributedText = _attributedText;
 
 - (instancetype)init
 {
@@ -52,6 +53,9 @@
 {
     UILabel * label = [[UILabel alloc]init];
     label.text = self.text;
+    if (self.attributedText) {
+        label.attributedText = self.attributedText;
+    }
     label.textColor = self.textColor;
     label.shadowColor = _shadowColor;
     label.shadowOffset = _shadowOffset;

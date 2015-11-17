@@ -117,7 +117,8 @@
 //    [_renderer receive:[self walkTextSpriteDescriptorWithDirection:1]];
 //    [_renderer receive:[self floatImageSpriteDescriptorWithDirection:1]];
 //    [_renderer receive:[self walkImageSpriteDescriptorWithDirection:2]];
-    [_renderer receive:[self walkImageTextSpriteDescriptorWithDirection:1]];
+//    [_renderer receive:[self walkImageTextSpriteDescriptorWithDirection:1]];
+    [_renderer receive:[self walkCustomedImageTextSpriteDescriptorWithDirection:2]];
 //    [_renderer receive:[self defaultSpriteDescriptor]];
 }
 
@@ -221,6 +222,25 @@
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spriteName = @"BarrageWalkImageTextSprite";//这个控制样式
     [descriptor.params setObject:[NSString stringWithFormat:@"图文混排/::B过场弹幕:%ld",(long)_index++] forKey:@"text"];
+    [descriptor.params setObject:@(20.0f) forKey:@"fontSize"];
+    [descriptor.params setObject:[UIColor greenColor] forKey:@"textColor"];
+    [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
+    [descriptor.params setObject:@(direction) forKey:@"direction"];
+    return descriptor;
+}
+
+/// 图文混排精灵弹幕 - 自定义图文弹幕
+- (BarrageDescriptor *)walkCustomedImageTextSpriteDescriptorWithDirection:(NSInteger)direction
+{
+    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+    descriptor.spriteName = @"BarrageWalkTextSprite";//这个控制样式
+    
+    NSTextAttachment * attachment = [[NSTextAttachment alloc]init];
+    attachment.image = [[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(25.0f, 25.0f)];
+    NSMutableAttributedString * attributed = [[NSMutableAttributedString alloc]initWithString:@"图文"];
+    [attributed insertAttributedString:[NSAttributedString attributedStringWithAttachment:attachment] atIndex:1];
+    
+    [descriptor.params setObject:attributed forKey:@"attributedText"];
     [descriptor.params setObject:@(20.0f) forKey:@"fontSize"];
     [descriptor.params setObject:[UIColor greenColor] forKey:@"textColor"];
     [descriptor.params setObject:@(100 * (double)random()/RAND_MAX+50) forKey:@"speed"];
