@@ -27,9 +27,11 @@
 #import <Foundation/Foundation.h>
 
 @class BarrageSprite;
+@class BarrageDispatcher;
 @protocol BarrageDispatcherDelegate <NSObject>
 @optional
 - (BOOL)shouldActiveSprite:(BarrageSprite *)sprite;
+- (NSTimeInterval)timeForBarrageDispatcher:(BarrageDispatcher *)dispatcher;
 @required
 - (void)willActiveSprite:(BarrageSprite *)sprite;
 - (void)willDeactiveSprite:(BarrageSprite *)sprite;
@@ -38,13 +40,11 @@
 /// 弹幕调度器,主要完成负载均衡的工作
 @interface BarrageDispatcher : NSObject
 
-- (instancetype)initWithStartTime:(NSDate *)startTime;
-
 /// 添加精灵
 - (void)addSprite:(BarrageSprite *)sprite;
 
 /// 派发精灵,如果有变化,则返回YES; 否则返回NO
-- (void)dispatchSpritesWithPausedDuration:(NSTimeInterval)pausedDuration;
+- (void)dispatchSprites;
 
 /// 是否开启过期精灵缓存功能,默认关闭,所以 deadSprites.count = 0
 @property (nonatomic,assign)BOOL cacheDeadSprites;

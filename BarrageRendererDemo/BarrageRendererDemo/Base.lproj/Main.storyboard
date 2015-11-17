@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRi-RB-7dS">
-                                <rect key="frame" x="101.5" y="560" width="75.5" height="30"/>
+                                <rect key="frame" x="101" y="560" width="75.5" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="暂停">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -40,7 +40,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dt8-CZ-hTT">
-                                <rect key="frame" x="262.5" y="560" width="75" height="30"/>
+                                <rect key="frame" x="262" y="560" width="75" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="停止">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -51,7 +51,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTN-NO-nCv">
-                                <rect key="frame" x="342.5" y="560" width="75.5" height="30"/>
+                                <rect key="frame" x="342" y="560" width="75.5" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="发送">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -64,23 +64,23 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybS-P6-UJA">
                                 <rect key="frame" x="423" y="560" width="75.5" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="加速">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="faster:" destination="vXZ-lx-hvc" eventType="touchDown" id="snd-eV-BjV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcU-eX-tKm">
-                                <rect key="frame" x="503.5" y="560" width="75.5" height="30"/>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="减速">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="slower:" destination="vXZ-lx-hvc" eventType="touchDown" id="IwB-DX-8T8"/>
+                                    <action selector="slower:" destination="vXZ-lx-hvc" eventType="touchDown" id="xjV-dr-3D5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcU-eX-tKm">
+                                <rect key="frame" x="503" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="加速">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="faster:" destination="vXZ-lx-hvc" eventType="touchDown" id="1Hx-Wc-vLP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKP-P3-DE5">
@@ -94,13 +94,38 @@
                                     <action selector="start:" destination="vXZ-lx-hvc" eventType="touchDown" id="xkg-du-H7p"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e6-Km-FN8">
+                                <rect key="frame" x="423" y="522" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="快退5s">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backward:" destination="vXZ-lx-hvc" eventType="touchDown" id="cbL-xv-PWk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1V-g0-vWy">
+                                <rect key="frame" x="503" y="522" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="快进5s">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="forward:" destination="vXZ-lx-hvc" eventType="touchDown" id="bWb-SK-fub"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ybS-P6-UJA" secondAttribute="bottom" constant="10" id="1hu-3W-2EP"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="rRi-RB-7dS" secondAttribute="height" id="5r1-C2-hFa"/>
                             <constraint firstItem="TcU-eX-tKm" firstAttribute="leading" secondItem="ybS-P6-UJA" secondAttribute="trailing" constant="5" id="7wg-sS-poc"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="leading" secondItem="5e6-Km-FN8" secondAttribute="leading" id="8Fj-dp-hHy"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="GKP-P3-DE5" secondAttribute="height" id="APB-8Z-NHQ"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="5e6-Km-FN8" secondAttribute="height" id="I2t-zF-yO6"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="TcU-eX-tKm" secondAttribute="width" id="JSK-gG-mUD"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="leading" secondItem="NTN-NO-nCv" secondAttribute="trailing" constant="5" id="JcZ-JW-oSB"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="rRi-RB-7dS" secondAttribute="width" id="LKy-45-xKv"/>
@@ -113,17 +138,23 @@
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="C05-I6-CZs" secondAttribute="width" id="Z2D-G1-qD3"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="rRi-RB-7dS" secondAttribute="bottom" constant="10" id="bvi-MC-auE"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="GKP-P3-DE5" secondAttribute="width" id="cKo-kQ-SbS"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="l1V-g0-vWy" secondAttribute="height" id="cRH-Yv-gla"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="top" secondItem="5e6-Km-FN8" secondAttribute="bottom" constant="5" id="cpM-AC-nST"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="NTN-NO-nCv" secondAttribute="bottom" constant="10" id="dDR-Pe-Qhr"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="GKP-P3-DE5" secondAttribute="bottom" constant="10" id="dlN-VB-mbe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TcU-eX-tKm" secondAttribute="trailing" constant="5" id="ePS-ai-VEu"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="5e6-Km-FN8" secondAttribute="width" id="eUY-Rn-ArX"/>
                             <constraint firstItem="C05-I6-CZs" firstAttribute="leading" secondItem="rRi-RB-7dS" secondAttribute="trailing" constant="5" id="gUW-F0-sgF"/>
                             <constraint firstItem="rRi-RB-7dS" firstAttribute="leading" secondItem="GKP-P3-DE5" secondAttribute="trailing" constant="5" id="gXO-Hm-D8d"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="TcU-eX-tKm" secondAttribute="bottom" constant="10" id="glf-cb-zym"/>
+                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="l1V-g0-vWy" secondAttribute="width" id="ha3-Xd-yRc"/>
                             <constraint firstItem="GKP-P3-DE5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="5" id="iF9-Vh-JzH"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="C05-I6-CZs" secondAttribute="bottom" constant="10" id="jhI-wj-1CK"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="TcU-eX-tKm" secondAttribute="height" id="lZA-O5-XKZ"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="NTN-NO-nCv" secondAttribute="height" id="naF-wJ-2Gj"/>
                             <constraint firstItem="Dt8-CZ-hTT" firstAttribute="leading" secondItem="C05-I6-CZs" secondAttribute="trailing" constant="5" id="p3M-PR-iXD"/>
+                            <constraint firstItem="l1V-g0-vWy" firstAttribute="leading" secondItem="TcU-eX-tKm" secondAttribute="leading" id="u6V-jF-bMw"/>
+                            <constraint firstItem="TcU-eX-tKm" firstAttribute="top" secondItem="l1V-g0-vWy" secondAttribute="bottom" constant="5" id="uUC-wT-oSL"/>
                         </constraints>
                     </view>
                 </viewController>

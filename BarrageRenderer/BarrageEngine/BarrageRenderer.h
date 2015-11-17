@@ -26,8 +26,15 @@
 
 #import <Foundation/Foundation.h>
 @class BarrageDescriptor;
+@class BarrageRenderer;
 
-//TODO: 添加对弹幕隐藏功能的支持
+@protocol BarrageRendererDelegate <NSObject>
+
+@optional
+/// 通过外部渠道获取当前时间,用于内部时间系统; 当依附的视频具有快进快退功能时,必须实现这个
+- (NSTimeInterval)timeForBarrageRenderer:(BarrageRenderer *)renderer;
+
+@end
 
 /// 弹幕渲染器
 @interface BarrageRenderer : NSObject
@@ -52,14 +59,27 @@
 /// 接收弹幕消息
 - (void)receive:(BarrageDescriptor *)descriptor;
 
+#pragma mark - config
+
 /// 调整弹幕反应,需要>0,否则会被抛弃
 @property(nonatomic,assign)CGFloat speed;
+
+/// 如果倒退了, 弹幕能不能重新显示
+@property(nonatomic,assign)BOOL redisplay;
+
+/// 获取外部时间的代理
+@property(nonatomic,weak)id<BarrageRendererDelegate> delegate;
+
+#pragma mark - output
 
 /// 返回给外部的view
 @property(nonatomic,weak)UIView * view;
 
 /// 获取当前屏幕弹幕数量,spriteName表示弹幕类名,如果传入nil,则计算屏幕所有弹幕数量
 - (NSInteger)spritesNumberWithName:(NSString *)spriteName;
+
+/// 逻辑时间
+@property(nonatomic,assign,readonly)NSTimeInterval time;
 
 #pragma mark - z-index
 

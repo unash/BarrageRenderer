@@ -45,6 +45,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     __block NSTimeInterval _time;
     NSMutableDictionary * _context; // 渲染器上下文
     
+    NSMutableArray * _preloadedDescriptors; //预加载的弹幕
     NSMutableArray * _records;//记录数组
     NSDate * _startTime; //如果是nil,表示弹幕渲染不在运行中; 否则,表示开始的时间
     NSTimeInterval _pausedDuration; // 暂停持续时间
@@ -66,6 +67,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         _recording = NO;
         _startTime = nil; // 尚未开始
         _pausedTime = nil;
+        _redisplay = NO;
         self.pausedDuration = 0;
         [self initClock];
     }
@@ -89,12 +91,12 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     if (!_startTime) { // 如果没有启动,则抛弃接收弹幕
         return;
     }
-    BarrageDescriptor * copyDescriptor = [descriptor copy];
-    [self convertDelayTime:copyDescriptor];
-    BarrageSprite * sprite = [BarrageSpriteFactory createSpriteWithDescriptor:copyDescriptor];
+    BarrageDescriptor * descriptorCopy = [descriptor copy];
+    [self convertDelayTime:descriptorCopy];
+    BarrageSprite * sprite = [BarrageSpriteFactory createSpriteWithDescriptor:descriptorCopy];
     [_dispatcher addSprite:sprite];
     if (_recording) {
-        [self recordDescriptor:copyDescriptor];
+        [self recordDescriptor:descriptorCopy];
     }
 }
 
@@ -103,7 +105,8 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     if (!_startTime) { // 尚未启动,则初始化时间系统
         _startTime = [NSDate date];
         _records = [[NSMutableArray alloc]init];
-        _dispatcher = [[BarrageDispatcher alloc]initWithStartTime:_startTime];
+        _dispatcher = [[BarrageDispatcher alloc]init];
+        _dispatcher.cacheDeadSprites = self.redisplay;
         _dispatcher.delegate = self;
     }
     else if(_pausedTime)
@@ -112,6 +115,11 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     }
     _pausedTime = nil;
     [_clock start];
+    if (_preloadedDescriptors.count) {
+        for (BarrageDescriptor * descriptor in _preloadedDescriptors) {
+            [self receive:descriptor];
+        }
+    }
 }
 
 - (void)pause
@@ -149,16 +157,38 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     return _clock.speed;
 }
 
+- (void)setRedisplay:(BOOL)redisplay
+{
+    _redisplay = redisplay;
+    if (_dispatcher) {
+        _dispatcher.cacheDeadSprites = _redisplay;
+    }
+}
+
 - (NSTimeInterval)pausedDuration
 {
     return _pausedDuration + (_pausedTime?[[NSDate date]timeIntervalSinceDate:_pausedTime]:0); // 当前处于暂停当中
+}
+
+/// 获取当前时间
+- (NSTimeInterval)currentTime
+{
+    NSTimeInterval currentTime = 0.0f;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timeForBarrageRenderer:)]) {
+        currentTime = [self.delegate timeForBarrageRenderer:self];
+    }
+    else
+    {
+        currentTime = [[NSDate date]timeIntervalSinceDate:_startTime]-self.pausedDuration;
+    }
+    return currentTime;
 }
 
 /// 转换descriptor的delay时间(相对于start), 如果delay<0, 则将delay置为0
 - (void)convertDelayTime:(BarrageDescriptor *)descriptor
 {
     NSTimeInterval delay = [[descriptor.params objectForKey:@"delay"]doubleValue];
-    delay += [[NSDate date]timeIntervalSinceDate:_startTime]-self.pausedDuration;
+    delay += [self currentTime];
     if (delay < 0) {
         delay = 0;
     }
@@ -206,22 +236,34 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 
 - (void)load:(NSArray *)descriptors
 {
-    for (BarrageDescriptor * descriptor in descriptors) {
-        [self receive:descriptor];
+    if (_startTime) {
+        for (BarrageDescriptor * descriptor in descriptors) {
+            [self receive:descriptor];
+        }
     }
+    else
+    {
+        if (!_preloadedDescriptors) {
+            _preloadedDescriptors = [[NSMutableArray alloc]init];
+        }
+        for (BarrageDescriptor * descriptor in descriptors) {
+            [_preloadedDescriptors addObject:[descriptor copy]];
+        }
+    }
+
 }
 
 #pragma mark - update
 /// 每个刷新周期执行一次
 - (void)update
 {
-    [_dispatcher dispatchSpritesWithPausedDuration:self.pausedDuration]; // 分发精灵
+    [_dispatcher dispatchSprites]; // 分发精灵
     for (BarrageSprite * sprite in _dispatcher.activeSprites) {
         [sprite updateWithTime:_time];
     }
 }
 
-#pragma mark - BarrageDispatchDelegate
+#pragma mark - BarrageDispatcherDelegate
 
 - (BOOL)shouldActiveSprite:(BarrageSprite *)sprite
 {
@@ -267,6 +309,14 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     [self indexRemoveSprite:sprite];
     [sprite.view removeFromSuperview];
+}
+
+- (NSTimeInterval)timeForBarrageDispatcher:(BarrageDispatcher *)dispatcher
+{
+    if ([dispatcher isEqual:_dispatcher]) {
+        return [self currentTime];
+    }
+    return 0.0f; // 错误情况
 }
 
 #pragma mark - indexing className-sprites

@@ -32,24 +32,36 @@
     NSMutableArray * _activeSprites;
     NSMutableArray * _waitingSprites;
     NSMutableArray * _deadSprites;
-    NSDate * _startTime;
     NSTimeInterval _previousTime;
 }
 @end
 
 @implementation BarrageDispatcher
 
-- (instancetype)initWithStartTime:(NSDate *)startTime
+- (instancetype)init
 {
     if (self = [super init]) {
         _activeSprites = [[NSMutableArray alloc]init];
         _waitingSprites = [[NSMutableArray alloc]init];
         _deadSprites = [[NSMutableArray alloc]init];
         _cacheDeadSprites = NO;
-        _startTime = startTime;
-        _previousTime = [[NSDate date]timeIntervalSinceDate:_startTime];
+        _previousTime = 0.0f;
     }
     return self;
+}
+
+- (void)setDelegate:(id<BarrageDispatcherDelegate>)delegate
+{
+    _delegate = delegate;
+    _previousTime = [self currentTime];
+}
+
+- (NSTimeInterval)currentTime
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timeForBarrageDispatcher:)]) {
+        return [self.delegate timeForBarrageDispatcher:self];
+    }
+    return 0.0f; // 错误情况
 }
 
 - (void)addSprite:(BarrageSprite *)sprite
@@ -73,7 +85,7 @@
 }
 
 /// 派发精灵
-- (void)dispatchSpritesWithPausedDuration:(NSTimeInterval)pausedDuration
+- (void)dispatchSprites
 {
     for (NSInteger i = 0; i < _activeSprites.count; i ++) {
         BarrageSprite * sprite = [_activeSprites objectAtIndex:i];
@@ -85,28 +97,51 @@
             [_activeSprites removeObjectAtIndex:i--];
         }
     }
-    
-    NSTimeInterval currentTime = [[NSDate date]timeIntervalSinceDate:_startTime];
-    NSTimeInterval timeWindow = currentTime - _previousTime;
-    for (NSInteger i = 0; i < _waitingSprites.count; i++) {
-        BarrageSprite * sprite = [_waitingSprites objectAtIndex:i];
-        NSTimeInterval overtime = currentTime - pausedDuration - sprite.delay;
-        if (overtime >= 0) {
-            if (overtime < timeWindow) {
+    static NSTimeInterval const MAX_EXPIRED_SPRITE_RESERVED_TIME = 0.5f; // 弹幕最大保留时间
+    NSTimeInterval currentTime = [self currentTime];
+    NSTimeInterval timeWindow = currentTime - _previousTime; // 有可能为正,也有可能为负(如果倒退的话)
+//    NSLog(@"内部时间:%f -- 变化时间:%f",currentTime,timeWindow);
+    //如果是正, 可能是正常时钟,也可能是快进
+    if (timeWindow >= 0) {
+        for (NSInteger i = 0; i < _waitingSprites.count; i++) {
+            BarrageSprite * sprite = [_waitingSprites objectAtIndex:i];
+            NSTimeInterval overtime = currentTime - sprite.delay;
+            if (overtime >= 0) {
+                if (overtime < timeWindow && overtime <= MAX_EXPIRED_SPRITE_RESERVED_TIME) {
+                    if ([self shouldActiveSprite:sprite]) {
+                        [self activeSprite:sprite];
+                        [_activeSprites addObject:sprite];
+                    }
+                }
+                else
+                {
+                    if (_cacheDeadSprites) {
+                        [_deadSprites addObject:sprite];
+                    }
+                }
+                [_waitingSprites removeObjectAtIndex:i--];
+            }
+        }
+    }
+    else // 倒退,需要起死回生
+    {
+        for (NSInteger i = 0; i < _deadSprites.count; i++) { // 活跃精灵队列
+            BarrageSprite * sprite = [_deadSprites objectAtIndex:i];
+            if (sprite.delay > currentTime) {
+                [_waitingSprites addObject:sprite];
+                [_deadSprites removeObjectAtIndex:i--];
+            }
+            else if (sprite.delay == currentTime)
+            {
                 if ([self shouldActiveSprite:sprite]) {
                     [self activeSprite:sprite];
                     [_activeSprites addObject:sprite];
+                    [_deadSprites removeObjectAtIndex:i--];
                 }
             }
-            else
-            {
-                if (_cacheDeadSprites) {
-                    [_deadSprites addObject:sprite];
-                }
-            }
-            [_waitingSprites removeObjectAtIndex:i--];
         }
     }
+
     _previousTime = currentTime;
 }
 
