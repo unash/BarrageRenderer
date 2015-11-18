@@ -1,5 +1,5 @@
 PODS:
-  - BarrageRenderer (1.3.0)
+  - BarrageRenderer (0.0.1)
   - MLEmojiLabel (1.0.0):
     - TTTAttributedLabel (~> 1.13.4)
   - TTTAttributedLabel (1.13.4)
@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  BarrageRenderer: f64a7b1e8d9fcb31b7c593f1c9f71bbf57d36ff0
+  BarrageRenderer: 2bc97f02bff831291c6ce50dbb4b1881d41659dc
   MLEmojiLabel: ceeab17d10d296cc00636bf201c8da597fdede10
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
