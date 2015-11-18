@@ -119,6 +119,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         for (BarrageDescriptor * descriptor in _preloadedDescriptors) {
             [self receive:descriptor];
         }
+        [_preloadedDescriptors removeAllObjects];
     }
 }
 
