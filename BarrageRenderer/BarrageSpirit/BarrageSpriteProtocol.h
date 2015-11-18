@@ -26,7 +26,7 @@
 
 #import <Foundation/Foundation.h>
 
-/// view 弹幕协议
+/// UIView 弹幕协议
 @protocol BarrageViewProtocol <NSObject>
 
 @required
@@ -40,7 +40,7 @@
 
 @end
 
-/// 文本弹幕协议
+/// UILabel 弹幕协议
 @protocol BarrageTextProtocol <BarrageViewProtocol>
 
 @required
@@ -54,7 +54,7 @@
 
 @end
 
-/// 图片弹幕协议
+/// UIImageView 弹幕协议
 @protocol BarrageImageProtocol <BarrageViewProtocol>
 
 @required

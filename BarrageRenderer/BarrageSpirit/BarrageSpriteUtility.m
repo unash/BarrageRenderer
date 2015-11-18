@@ -28,7 +28,6 @@
 
 @implementation BarrageSpriteUtility
 
-
 /// 一维线段分割函数
 /// 如果返回YES,通过[from,to]输出最大剪枝; 如果返回NO, 不存在有效剪枝
 /// 左右分支相等,优先使用左边的;

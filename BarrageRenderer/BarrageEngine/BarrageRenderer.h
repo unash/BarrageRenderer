@@ -43,28 +43,28 @@
 
 #pragma mark - control
 
-/// 启动弹幕, 内部时钟从0开始
-/// 若是stop之后的start,则start函数内部会清空records.
-/// 视频开始的时候需要同时运行此方法
+/// 启动弹幕, 内部时钟从0开始;
+/// 若是stop之后的start,则start函数内部会清空records;
+/// 视频开始的时候需要同时运行此方法.
 - (void)start;
 
-/// 暂定, 已经渲染上去的保持不变, 此时发送弹幕无效, 内部时钟暂停
-/// 视频暂停的时候需要同时运行此方法
+/// 暂停, 已经渲染上去的保持不变, 此时发送弹幕无效, 内部时钟暂停;
+/// 视频暂停的时候需要同时运行此方法.
 - (void)pause;
 
-/// 停止弹幕渲染, 会清空所有; 再发弹幕就无效了; 一切都会停止
-/// 此方法在不再需要弹幕的时候必须调用,否则可能造成内存泄露
+/// 停止弹幕渲染, 会清空所有; 再发弹幕就无效了; 一切都会停止;
+/// 此方法在不再需要弹幕的时候必须调用,否则可能造成内存泄露.
 - (void)stop;
 
-/// 接收弹幕消息
+/// 接收弹幕消息, 如果尚未start, 则调用无效.
 - (void)receive:(BarrageDescriptor *)descriptor;
 
 #pragma mark - config
 
-/// 调整弹幕反应,需要>0,否则会被抛弃
+/// 调整弹幕整体速度, 需要>0, 否则会被抛弃.
 @property(nonatomic,assign)CGFloat speed;
 
-/// 如果倒退了, 弹幕能不能重新显示
+/// 如果时光倒流, 弹幕能不能重新显示.
 @property(nonatomic,assign)BOOL redisplay;
 
 /// 获取外部时间的代理
@@ -75,7 +75,7 @@
 /// 返回给外部的view
 @property(nonatomic,weak)UIView * view;
 
-/// 获取当前屏幕弹幕数量,spriteName表示弹幕类名,如果传入nil,则计算屏幕所有弹幕数量
+/// 获取当前屏幕弹幕数量,spriteName表示弹幕类名,如果传入nil,则计算屏幕显示出的所有弹幕数量.
 - (NSInteger)spritesNumberWithName:(NSString *)spriteName;
 
 /// 逻辑时间
@@ -88,15 +88,14 @@
 
 #pragma mark - record
 
-/// 如需要记录,需要在运行start之后立即运行此函数,内部会通过时间差计算delay.
-/// 记录弹幕,可能会序列化到本地; 默认为NO
+/// 如需要记录,需要在运行start之后立即运行此函数,内部会通过时间差计算delay;
+/// 记录弹幕,可能会序列化到本地; 默认为NO.
 @property(nonatomic,assign)BOOL recording;
 
-/// 加载已经存在的弹幕,应该在start运行之后立刻就把已有的弹幕描述数组加载进来
-/// 什么时期开始录制的弹幕,就要什么时期加载.
+/// 加载已经存在的弹幕,如果已经start, 会立刻被调用receive; 否则, 会等到start的时候再调用receive.
 - (void)load:(NSArray *)descriptors;
 
-/// 弹幕记录文件
+/// 弹幕记录数组.
 - (NSArray *)records;
 
 @end

@@ -25,10 +25,13 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+
 @class BarrageSprite;
 @class BarrageDescriptor;
 
 @interface BarrageSpriteFactory : NSObject
+
 /// 通过描述符创建精灵
 + (BarrageSprite *)createSpriteWithDescriptor:(BarrageDescriptor *)descriptor;
+
 @end

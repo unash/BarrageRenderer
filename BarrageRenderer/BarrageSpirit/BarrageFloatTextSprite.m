@@ -53,19 +53,11 @@
 {
     UILabel * label = [[UILabel alloc]init];
     label.text = self.text;
-    if (self.attributedText) {
-        label.attributedText = self.attributedText;
-    }
+    label.attributedText = self.attributedText?:nil;
     label.textColor = self.textColor;
     label.shadowColor = _shadowColor;
     label.shadowOffset = _shadowOffset;
-    if (self.fontFamily) {
-        label.font = [UIFont fontWithName:self.fontFamily size:self.fontSize];
-    }
-    else
-    {
-        label.font = [UIFont systemFontOfSize:self.fontSize];
-    }
+    label.font = self.fontFamily?[UIFont fontWithName:self.fontFamily size:self.fontSize]:[UIFont systemFontOfSize:self.fontSize];
     return label;
 }
 

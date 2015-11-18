@@ -61,7 +61,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(timeForBarrageDispatcher:)]) {
         return [self.delegate timeForBarrageDispatcher:self];
     }
-    return 0.0f; // 错误情况
+    return 0.0f;
 }
 
 - (void)addSprite:(BarrageSprite *)sprite
@@ -141,7 +141,7 @@
             }
         }
     }
-
+    
     _previousTime = currentTime;
 }
 

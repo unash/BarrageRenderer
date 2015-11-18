@@ -29,11 +29,14 @@
 /// 统一的持久化层
 @interface BarrageDescriptor : NSObject<NSCopying>
 
-- (instancetype)initWithString:(NSString *)xml; //TODO: 待实现
+//TODO: 待实现
+- (instancetype)initWithString:(NSString *)xml;
 
-@property(nonatomic,strong)NSString * spriteName; //类名
+/// 类名,支持的类名参照BarrageSprite子类
+@property(nonatomic,strong)NSString * spriteName;
 
-@property(nonatomic,strong,readonly)NSMutableDictionary * params; // 属性字典
+/// 属性字典
+@property(nonatomic,strong,readonly)NSMutableDictionary * params;
 
 /// 弹幕标识符,用于防止弹幕重复,内部一次性生成
 @property(nonatomic,strong,readonly)NSString * identifier;

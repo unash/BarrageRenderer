@@ -33,7 +33,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        
+        _image = nil;
     }
     return self;
 }

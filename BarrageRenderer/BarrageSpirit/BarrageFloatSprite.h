@@ -28,7 +28,7 @@
 
 typedef NS_ENUM(NSUInteger, BarrageFloatDirection) {
     BarrageFloatDirectionT2B = 1,     // 上往下
-    BarrageFloatDirectionB2T      // 下往上
+    BarrageFloatDirectionB2T = 2      // 下往上
 };
 
 /// 悬浮文字精灵

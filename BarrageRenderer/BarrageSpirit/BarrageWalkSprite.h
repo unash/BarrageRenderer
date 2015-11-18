@@ -27,10 +27,10 @@
 #import "BarrageSprite.h"
 
 typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
-    BarrageWalkDirectionR2L = 1, // 右向左
-    BarrageWalkDirectionL2R,     // 左向右
-    BarrageWalkDirectionT2B,     // 上往下
-    BarrageWalkDirectionB2T      // 下往上
+    BarrageWalkDirectionR2L = 1,  // 右向左
+    BarrageWalkDirectionL2R = 2,  // 左向右
+    BarrageWalkDirectionT2B = 3,  // 上往下
+    BarrageWalkDirectionB2T = 4   // 下往上
 };
 
 /// 移动文字精灵

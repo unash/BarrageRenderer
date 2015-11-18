@@ -29,9 +29,4 @@
 /// 悬浮文字精灵
 @interface BarrageFloatTextSprite : BarrageFloatSprite<BarrageTextProtocol>
 
-@property(nonatomic,strong)NSString * text;
-
-@property(nonatomic,strong)UIColor * textColor; // 字体颜色
-@property(nonatomic,assign)CGFloat fontSize;
-
 @end
