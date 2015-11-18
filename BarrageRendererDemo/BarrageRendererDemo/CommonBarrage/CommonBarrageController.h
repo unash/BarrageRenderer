@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface ViewController:UIViewController
+@interface CommonBarrageController:UIViewController
 
 - (IBAction)start:(id)sender;
 - (IBAction)stop:(id)sender;
 - (IBAction)pause:(id)sender;
 - (IBAction)resume:(id)sender;
-- (IBAction)send:(id)sender;
 - (IBAction)faster:(id)sender;
 - (IBAction)slower:(id)sender;
 

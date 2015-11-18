@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Common Barrage Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="CommonBarrageController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -52,35 +52,35 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTN-NO-nCv">
                                 <rect key="frame" x="342" y="560" width="75.5" height="30"/>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="发送">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="send:" destination="vXZ-lx-hvc" eventType="touchDown" id="CsS-vN-MP3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybS-P6-UJA">
-                                <rect key="frame" x="423" y="560" width="75.5" height="30"/>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="减速">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="slower:" destination="vXZ-lx-hvc" eventType="touchDown" id="xjV-dr-3D5"/>
+                                    <action selector="slower:" destination="vXZ-lx-hvc" eventType="touchDown" id="aSO-Z6-2gd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcU-eX-tKm">
-                                <rect key="frame" x="503" y="560" width="75.5" height="30"/>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybS-P6-UJA">
+                                <rect key="frame" x="423" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="加速">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="faster:" destination="vXZ-lx-hvc" eventType="touchDown" id="1Hx-Wc-vLP"/>
+                                    <action selector="faster:" destination="vXZ-lx-hvc" eventType="touchDown" id="FVy-Rd-Plv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcU-eX-tKm">
+                                <rect key="frame" x="503" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.095386867371250683" green="0.16461313222301799" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="高级">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="eCx-Jy-KNd" kind="presentation" id="3G3-mS-HaW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKP-P3-DE5">
@@ -94,38 +94,13 @@
                                     <action selector="start:" destination="vXZ-lx-hvc" eventType="touchDown" id="xkg-du-H7p"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e6-Km-FN8">
-                                <rect key="frame" x="423" y="522" width="75.5" height="30"/>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <state key="normal" title="快退5s">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="backward:" destination="vXZ-lx-hvc" eventType="touchDown" id="cbL-xv-PWk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1V-g0-vWy">
-                                <rect key="frame" x="503" y="522" width="75.5" height="30"/>
-                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <state key="normal" title="快进5s">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="forward:" destination="vXZ-lx-hvc" eventType="touchDown" id="bWb-SK-fub"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ybS-P6-UJA" secondAttribute="bottom" constant="10" id="1hu-3W-2EP"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="rRi-RB-7dS" secondAttribute="height" id="5r1-C2-hFa"/>
                             <constraint firstItem="TcU-eX-tKm" firstAttribute="leading" secondItem="ybS-P6-UJA" secondAttribute="trailing" constant="5" id="7wg-sS-poc"/>
-                            <constraint firstItem="ybS-P6-UJA" firstAttribute="leading" secondItem="5e6-Km-FN8" secondAttribute="leading" id="8Fj-dp-hHy"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="GKP-P3-DE5" secondAttribute="height" id="APB-8Z-NHQ"/>
-                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="5e6-Km-FN8" secondAttribute="height" id="I2t-zF-yO6"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="TcU-eX-tKm" secondAttribute="width" id="JSK-gG-mUD"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="leading" secondItem="NTN-NO-nCv" secondAttribute="trailing" constant="5" id="JcZ-JW-oSB"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="rRi-RB-7dS" secondAttribute="width" id="LKy-45-xKv"/>
@@ -138,28 +113,156 @@
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="C05-I6-CZs" secondAttribute="width" id="Z2D-G1-qD3"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="rRi-RB-7dS" secondAttribute="bottom" constant="10" id="bvi-MC-auE"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="GKP-P3-DE5" secondAttribute="width" id="cKo-kQ-SbS"/>
-                            <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="l1V-g0-vWy" secondAttribute="height" id="cRH-Yv-gla"/>
-                            <constraint firstItem="ybS-P6-UJA" firstAttribute="top" secondItem="5e6-Km-FN8" secondAttribute="bottom" constant="5" id="cpM-AC-nST"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="NTN-NO-nCv" secondAttribute="bottom" constant="10" id="dDR-Pe-Qhr"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="GKP-P3-DE5" secondAttribute="bottom" constant="10" id="dlN-VB-mbe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TcU-eX-tKm" secondAttribute="trailing" constant="5" id="ePS-ai-VEu"/>
-                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="5e6-Km-FN8" secondAttribute="width" id="eUY-Rn-ArX"/>
                             <constraint firstItem="C05-I6-CZs" firstAttribute="leading" secondItem="rRi-RB-7dS" secondAttribute="trailing" constant="5" id="gUW-F0-sgF"/>
                             <constraint firstItem="rRi-RB-7dS" firstAttribute="leading" secondItem="GKP-P3-DE5" secondAttribute="trailing" constant="5" id="gXO-Hm-D8d"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="TcU-eX-tKm" secondAttribute="bottom" constant="10" id="glf-cb-zym"/>
-                            <constraint firstItem="ybS-P6-UJA" firstAttribute="width" secondItem="l1V-g0-vWy" secondAttribute="width" id="ha3-Xd-yRc"/>
                             <constraint firstItem="GKP-P3-DE5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="5" id="iF9-Vh-JzH"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="C05-I6-CZs" secondAttribute="bottom" constant="10" id="jhI-wj-1CK"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="TcU-eX-tKm" secondAttribute="height" id="lZA-O5-XKZ"/>
                             <constraint firstItem="ybS-P6-UJA" firstAttribute="height" secondItem="NTN-NO-nCv" secondAttribute="height" id="naF-wJ-2Gj"/>
                             <constraint firstItem="Dt8-CZ-hTT" firstAttribute="leading" secondItem="C05-I6-CZs" secondAttribute="trailing" constant="5" id="p3M-PR-iXD"/>
-                            <constraint firstItem="l1V-g0-vWy" firstAttribute="leading" secondItem="TcU-eX-tKm" secondAttribute="leading" id="u6V-jF-bMw"/>
-                            <constraint firstItem="TcU-eX-tKm" firstAttribute="top" secondItem="l1V-g0-vWy" secondAttribute="bottom" constant="5" id="uUC-wT-oSL"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32" y="319"/>
+        </scene>
+        <!--Advanced Barrage Controller-->
+        <scene sceneID="4JM-P8-qhO">
+            <objects>
+                <viewController id="eCx-Jy-KNd" customClass="AdvancedBarrageController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jIj-MB-7gV"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xfx-PF-D2d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h1M-m6-ixE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tv7-LH-YlI">
+                                <rect key="frame" x="101" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="加载">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="load:" destination="eCx-Jy-KNd" eventType="touchDown" id="SKJ-1A-YUY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Lk-Xc-MSu">
+                                <rect key="frame" x="182" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="混排A">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hybirdA:" destination="eCx-Jy-KNd" eventType="touchDown" id="K3n-7x-uEy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krM-US-R8H">
+                                <rect key="frame" x="262" y="560" width="75" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="混排B">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hybirdB:" destination="eCx-Jy-KNd" eventType="touchDown" id="Hfo-kh-JSH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKF-ah-GqY">
+                                <rect key="frame" x="342" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="快退5s">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backward:" destination="eCx-Jy-KNd" eventType="touchDown" id="dpT-q8-wV9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYN-Gn-HPJ">
+                                <rect key="frame" x="423" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="快进5s">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="foreward:" destination="eCx-Jy-KNd" eventType="touchDown" id="MOw-dG-b4z"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIw-9h-bxg">
+                                <rect key="frame" x="503" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="普通">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="popoverPresentation" popoverAnchorView="oIw-9h-bxg" id="6Yl-Yj-54x">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWt-Ff-9Ap">
+                                <rect key="frame" x="21" y="560" width="75.5" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="开始">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="start:" destination="eCx-Jy-KNd" eventType="touchDown" id="BPP-mg-OBC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7Lk-Xc-MSu" firstAttribute="leading" secondItem="Tv7-LH-YlI" secondAttribute="trailing" constant="5" id="0xf-Ka-ypD"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="height" secondItem="FWt-Ff-9Ap" secondAttribute="height" id="5e5-zW-Z3f"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="width" secondItem="XKF-ah-GqY" secondAttribute="width" id="9Tw-7H-1bj"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="height" secondItem="XKF-ah-GqY" secondAttribute="height" id="9qP-eW-fFQ"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="width" secondItem="Tv7-LH-YlI" secondAttribute="width" id="ADM-vr-pnh"/>
+                            <constraint firstItem="Xfx-PF-D2d" firstAttribute="top" secondItem="XKF-ah-GqY" secondAttribute="bottom" constant="10" id="BFs-BT-Dt4"/>
+                            <constraint firstItem="Xfx-PF-D2d" firstAttribute="top" secondItem="oIw-9h-bxg" secondAttribute="bottom" constant="10" id="CTc-Ot-Rk3"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="width" secondItem="FWt-Ff-9Ap" secondAttribute="width" id="Cvf-Ac-fAi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oIw-9h-bxg" secondAttribute="trailing" constant="5" id="EFN-Yg-1T1"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="height" secondItem="7Lk-Xc-MSu" secondAttribute="height" id="Gvg-LX-64l"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="leading" secondItem="XKF-ah-GqY" secondAttribute="trailing" constant="5" id="Ja3-pD-sKx"/>
+                            <constraint firstItem="Tv7-LH-YlI" firstAttribute="leading" secondItem="FWt-Ff-9Ap" secondAttribute="trailing" constant="5" id="QYC-bC-ES3"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="width" secondItem="krM-US-R8H" secondAttribute="width" id="WHf-cQ-g0R"/>
+                            <constraint firstItem="FWt-Ff-9Ap" firstAttribute="leading" secondItem="h1M-m6-ixE" secondAttribute="leadingMargin" constant="5" id="Zm3-Wi-mrN"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="height" secondItem="Tv7-LH-YlI" secondAttribute="height" id="bBi-zB-joZ"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="height" secondItem="krM-US-R8H" secondAttribute="height" id="c0P-1x-Z2X"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="width" secondItem="oIw-9h-bxg" secondAttribute="width" id="dzm-uW-IaF"/>
+                            <constraint firstItem="XKF-ah-GqY" firstAttribute="leading" secondItem="krM-US-R8H" secondAttribute="trailing" constant="5" id="fNt-lP-nHH"/>
+                            <constraint firstItem="Xfx-PF-D2d" firstAttribute="top" secondItem="VYN-Gn-HPJ" secondAttribute="bottom" constant="10" id="kAD-qx-PEG"/>
+                            <constraint firstItem="Xfx-PF-D2d" firstAttribute="top" secondItem="Tv7-LH-YlI" secondAttribute="bottom" constant="10" id="m5s-Dh-BQJ"/>
+                            <constraint firstItem="Xfx-PF-D2d" firstAttribute="top" secondItem="krM-US-R8H" secondAttribute="bottom" constant="10" id="qLb-8m-p8Q"/>
+                            <constraint firstItem="oIw-9h-bxg" firstAttribute="leading" secondItem="VYN-Gn-HPJ" secondAttribute="trailing" constant="5" id="rb0-Jk-exb"/>
+                            <constraint firstItem="krM-US-R8H" firstAttribute="leading" secondItem="7Lk-Xc-MSu" secondAttribute="trailing" constant="5" id="rgF-BD-9F9"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="width" secondItem="7Lk-Xc-MSu" secondAttribute="width" id="tLq-uK-yQ4"/>
+                            <constraint firstItem="Xfx-PF-D2d" firstAttribute="top" secondItem="FWt-Ff-9Ap" secondAttribute="bottom" constant="10" id="ud9-vd-0nB"/>
+                            <constraint firstItem="Xfx-PF-D2d" firstAttribute="top" secondItem="7Lk-Xc-MSu" secondAttribute="bottom" constant="10" id="v07-Jc-LRI"/>
+                            <constraint firstItem="VYN-Gn-HPJ" firstAttribute="height" secondItem="oIw-9h-bxg" secondAttribute="height" id="wvk-pD-0Mw"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bXm-38-ZqV" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="705" y="319"/>
         </scene>
     </scenes>
 </document>

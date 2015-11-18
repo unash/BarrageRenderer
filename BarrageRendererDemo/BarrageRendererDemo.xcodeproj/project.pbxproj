@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		6D55A75E9E6287C3EC838B09 /* libPods-BarrageRendererDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */; };
-		CC5383C81BF8D4C20062CAF6 /* BarrageWalkImageTextSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5383C71BF8D4C20062CAF6 /* BarrageWalkImageTextSprite.m */; };
+		CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */; };
+		CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E121BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m */; };
+		CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E151BFCBE6A000C1FEC /* CommonBarrageController.m */; };
 		CCC0B4A21B6549C40088CFDE /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = CCC0B4A11B6549C40088CFDE /* avatar.png */; };
 		CCC0B4A51B654DD50088CFDE /* UIImage+Barrage.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC0B4A41B654DD50088CFDE /* UIImage+Barrage.m */; };
 		CCECEDCB1B5662F500098E7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CCECEDCA1B5662F500098E7A /* main.m */; };
 		CCECEDCE1B5662F500098E7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCECEDCD1B5662F500098E7A /* AppDelegate.m */; };
-		CCECEDD11B5662F500098E7A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCECEDD01B5662F500098E7A /* ViewController.m */; };
 		CCECEDD41B5662F500098E7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCECEDD21B5662F500098E7A /* Main.storyboard */; };
 		CCECEDD61B5662F500098E7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCECEDD51B5662F500098E7A /* Images.xcassets */; };
 		CCECEDD91B5662F500098E7A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCECEDD71B5662F500098E7A /* LaunchScreen.xib */; };
@@ -24,8 +25,12 @@
 		1C26C0B8A6A60E09DB1FAC28 /* Pods-BarrageRendererDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.release.xcconfig"; sourceTree = "<group>"; };
 		5C13A3B15DEEFF78D2777351 /* Pods-BarrageRendererDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarrageRendererDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC5383C61BF8D4C20062CAF6 /* BarrageWalkImageTextSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageWalkImageTextSprite.h; sourceTree = "<group>"; };
-		CC5383C71BF8D4C20062CAF6 /* BarrageWalkImageTextSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageWalkImageTextSprite.m; sourceTree = "<group>"; };
+		CC853E0F1BFCBE6A000C1FEC /* AdvancedBarrageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedBarrageController.h; sourceTree = "<group>"; };
+		CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedBarrageController.m; sourceTree = "<group>"; };
+		CC853E111BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageWalkImageTextSprite.h; sourceTree = "<group>"; };
+		CC853E121BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageWalkImageTextSprite.m; sourceTree = "<group>"; };
+		CC853E141BFCBE6A000C1FEC /* CommonBarrageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonBarrageController.h; sourceTree = "<group>"; };
+		CC853E151BFCBE6A000C1FEC /* CommonBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonBarrageController.m; sourceTree = "<group>"; };
 		CCC0B4A11B6549C40088CFDE /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 		CCC0B4A31B654DD50088CFDE /* UIImage+Barrage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Barrage.h"; sourceTree = "<group>"; };
 		CCC0B4A41B654DD50088CFDE /* UIImage+Barrage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Barrage.m"; sourceTree = "<group>"; };
@@ -34,8 +39,6 @@
 		CCECEDCA1B5662F500098E7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CCECEDCC1B5662F500098E7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CCECEDCD1B5662F500098E7A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CCECEDCF1B5662F500098E7A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CCECEDD01B5662F500098E7A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CCECEDD31B5662F500098E7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CCECEDD51B5662F500098E7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CCECEDD81B5662F500098E7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -63,6 +66,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CC853E0E1BFCBE6A000C1FEC /* AdvancedBarrage */ = {
+			isa = PBXGroup;
+			children = (
+				CC853E0F1BFCBE6A000C1FEC /* AdvancedBarrageController.h */,
+				CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */,
+				CC853E111BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.h */,
+				CC853E121BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m */,
+			);
+			path = AdvancedBarrage;
+			sourceTree = "<group>";
+		};
+		CC853E131BFCBE6A000C1FEC /* CommonBarrage */ = {
+			isa = PBXGroup;
+			children = (
+				CC853E141BFCBE6A000C1FEC /* CommonBarrageController.h */,
+				CC853E151BFCBE6A000C1FEC /* CommonBarrageController.m */,
+			);
+			path = CommonBarrage;
+			sourceTree = "<group>";
+		};
 		CCECEDBC1B5662F500098E7A = {
 			isa = PBXGroup;
 			children = (
@@ -84,13 +107,11 @@
 		CCECEDC71B5662F500098E7A /* BarrageRendererDemo */ = {
 			isa = PBXGroup;
 			children = (
+				CC853E0E1BFCBE6A000C1FEC /* AdvancedBarrage */,
+				CC853E131BFCBE6A000C1FEC /* CommonBarrage */,
 				CCECEDEE1B56673E00098E7A /* SafeObject */,
 				CCECEDCC1B5662F500098E7A /* AppDelegate.h */,
 				CCECEDCD1B5662F500098E7A /* AppDelegate.m */,
-				CC5383C61BF8D4C20062CAF6 /* BarrageWalkImageTextSprite.h */,
-				CC5383C71BF8D4C20062CAF6 /* BarrageWalkImageTextSprite.m */,
-				CCECEDCF1B5662F500098E7A /* ViewController.h */,
-				CCECEDD01B5662F500098E7A /* ViewController.m */,
 				CCC0B4A31B654DD50088CFDE /* UIImage+Barrage.h */,
 				CCC0B4A41B654DD50088CFDE /* UIImage+Barrage.m */,
 				CCC0B4A11B6549C40088CFDE /* avatar.png */,
@@ -236,11 +257,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCECEDF11B56673E00098E7A /* NSSafeObject.m in Sources */,
-				CCECEDD11B5662F500098E7A /* ViewController.m in Sources */,
+				CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */,
 				CCC0B4A51B654DD50088CFDE /* UIImage+Barrage.m in Sources */,
 				CCECEDCE1B5662F500098E7A /* AppDelegate.m in Sources */,
+				CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */,
 				CCECEDCB1B5662F500098E7A /* main.m in Sources */,
-				CC5383C81BF8D4C20062CAF6 /* BarrageWalkImageTextSprite.m in Sources */,
+				CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
