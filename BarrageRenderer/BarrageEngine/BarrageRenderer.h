@@ -31,7 +31,7 @@
 @protocol BarrageRendererDelegate <NSObject>
 
 @optional
-/// 通过外部渠道获取当前时间,用于内部时间系统; 当依附的视频具有快进快退功能时,必须实现这个
+/// 通过外部渠道获取当前时间,用于内部时间系统; 当依附的视频具有快进快退功能时,必须实现这个函数,并返回时间轴上的当前时刻,即已经播放的时间.
 - (NSTimeInterval)timeForBarrageRenderer:(BarrageRenderer *)renderer;
 
 @end
@@ -64,10 +64,10 @@
 /// 调整弹幕整体速度, 需要>0, 否则会被抛弃.
 @property(nonatomic,assign)CGFloat speed;
 
-/// 如果时光倒流, 弹幕能不能重新显示.
+/// 如果时光倒流, 弹幕能不能重新显示. 若设置为YES, 则当执行后退8s->5s时,会显示6s时刻上的弹幕.
 @property(nonatomic,assign)BOOL redisplay;
 
-/// 获取外部时间的代理
+/// 获取外部时间的代理,若需将弹幕固定到时间点上,则需设置此代理
 @property(nonatomic,weak)id<BarrageRendererDelegate> delegate;
 
 #pragma mark - output
@@ -78,7 +78,7 @@
 /// 获取当前屏幕弹幕数量,spriteName表示弹幕类名,如果传入nil,则计算屏幕显示出的所有弹幕数量.
 - (NSInteger)spritesNumberWithName:(NSString *)spriteName;
 
-/// 逻辑时间
+/// 逻辑时间,露出参考.
 @property(nonatomic,assign,readonly)NSTimeInterval time;
 
 #pragma mark - z-index

@@ -163,7 +163,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="hybirdA:" destination="eCx-Jy-KNd" eventType="touchDown" id="K3n-7x-uEy"/>
+                                    <action selector="hybridA:" destination="eCx-Jy-KNd" eventType="touchDown" id="E78-gt-RJL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krM-US-R8H">
@@ -175,7 +175,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="hybirdB:" destination="eCx-Jy-KNd" eventType="touchDown" id="Hfo-kh-JSH"/>
+                                    <action selector="hybridB:" destination="eCx-Jy-KNd" eventType="touchDown" id="iEN-Pm-u4H"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKF-ah-GqY">
@@ -206,7 +206,7 @@
                                 <rect key="frame" x="503" y="560" width="75.5" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="普通">
+                                <state key="normal" title="基本">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

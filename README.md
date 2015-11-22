@@ -17,7 +17,6 @@
 *  因为作者记性比较差,所以在很多紧要处添加了注释,理解代码更容易.
 *  效果动画如下图所示:
 	![效果动画](./BarrageRendererDemo.gif)
-	
 	视频演示地址: http://v.youku.com/v_show/id_XMTI5NDM4ODk3Ng==.html
 
 ## 使用方式
@@ -25,16 +24,12 @@
 2. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', '1.6.0'*  并在工程目录下的命令行中运行 pod update
 3. 或者将代码下载下来, 将BarrageRenderer/目录添加到您的工程当中
 4. 在需要使用弹幕渲染功能的地方 #import "BarrageHeader.h".
-5. 创建BarrageRenderer,添加BarrageRenderer.view, 执行start方法, 通过receive方法输入弹幕描述符descriptor, 即可以显示弹幕. 详见demo
-6. 相关的一篇博文: http://blog.exbye.com/2015/07/an-open-source-ios-barrage-renderer/
+5. 创建BarrageRenderer,添加BarrageRenderer.view, 执行start方法, 通过receive方法输入弹幕描述符descriptor, 即可以显示弹幕. 详见demo.
+6. demo的基本功能演示了: 如何在view上增加一条弹幕, 如何启动、停止、暂停、恢复弹幕播放, 如何减速弹幕的运动速度.
+7. demo的高级功能演示了: 如何使用自定义方式添加图文混排弹幕,如何支持录播中在固定时间点显示固定弹幕的逻辑.
+8. 相关的一篇博文: http://blog.exbye.com/2015/07/an-open-source-ios-barrage-renderer/
 
-## 改进方向
-* 引入UIView重用机制,以减少创建弹幕view的cpu消耗.
-* 完善批量加载弹幕,XML文件格式制定，弹幕持久化支持;或支持其他格式xml文件.
-* 支持设定一屏显示的弹幕的最大长度,支持控制弹幕的流速.
 
 ## 支持与联系
-* 可以在github上提出相关的issue;
-* 也可以通过unash@exbye.com邮件我;
-* 或加入qq群:325298378(但消息不一定能及时回复);
-* 或关注我的博客: http://blog.exbye.com.
+* 欢迎加入qq群讨论:325298378;
+* 欢迎在GitHub上提出相关的issue.

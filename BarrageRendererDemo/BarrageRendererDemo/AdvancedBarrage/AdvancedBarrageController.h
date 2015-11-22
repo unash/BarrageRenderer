@@ -12,8 +12,8 @@
 
 - (IBAction)start:(id)sender;
 - (IBAction)load:(id)sender;
-- (IBAction)hybirdA:(id)sender;
-- (IBAction)hybirdB:(id)sender;
+- (IBAction)hybridA:(id)sender;
+- (IBAction)hybridB:(id)sender;
 - (IBAction)backward:(id)sender;
 - (IBAction)foreward:(id)sender;
 

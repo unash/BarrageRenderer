@@ -64,12 +64,12 @@
     [_renderer load:descriptors];
 }
 
-- (IBAction)hybirdA:(id)sender
+- (IBAction)hybridA:(id)sender
 {
     [_renderer receive:[self walkImageTextSpriteDescriptorAWithDirection:BarrageWalkDirectionR2L]];
 }
 
-- (IBAction)hybirdB:(id)sender
+- (IBAction)hybridB:(id)sender
 {
     [_renderer receive:[self walkImageTextSpriteDescriptorBWithDirection:BarrageWalkDirectionL2R]];
 }
