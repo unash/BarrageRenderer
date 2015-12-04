@@ -16,8 +16,10 @@
 *  概念较清晰,可以为任意UIView绑定弹幕,当然弹幕内容需要创建控件输入.
 *  因为作者记性比较差,所以在很多紧要处添加了注释,理解代码更容易.
 *  效果动画如下图所示:
-	![效果动画](./BarrageRendererDemo.gif)
-	视频演示地址: http://v.youku.com/v_show/id_XMTI5NDM4ODk3Ng==.html
+
+![效果动画](./BarrageRendererDemo.gif)
+
+视频演示地址: http://v.youku.com/v_show/id_XMTI5NDM4ODk3Ng==.html
 
 ## 使用方式
 1. 下载版本库,进入BarrageRendererDemo目录. 运行pod update拉取相关库, 即可以运行BarrageRendererDemo.xcworkspace
