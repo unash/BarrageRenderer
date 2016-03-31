@@ -32,6 +32,8 @@ extern NSString * const kBarrageRendererContextCanvasBounds;  // 画布大小
 extern NSString * const kBarrageRendererContextRelatedSpirts; // 相关精灵
 extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 
+typedef void(^BarrageClickAction)(void);
+
 /// 精灵基类
 @interface BarrageSprite : NSObject<BarrageViewProtocol>
 {
@@ -73,6 +75,9 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 
 /// 输出的view,这样就不必自己再绘制图形了,并且可以使用硬件加速
 @property(nonatomic,strong,readonly)UIView * view;
+
+/// 注入点击行为
+@property(nonatomic,strong)BarrageClickAction clickAction;
 
 #pragma mark - called
 

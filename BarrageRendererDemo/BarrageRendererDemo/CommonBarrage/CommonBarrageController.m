@@ -34,6 +34,8 @@
 {
     _renderer = [[BarrageRenderer alloc]init];
     [self.view addSubview:_renderer.view];
+    // 若想为弹幕增加点击功能, 请添加此句话, 并在Descriptor中注入行为
+    _renderer.view.userInteractionEnabled = YES;
     [self.view sendSubviewToBack:_renderer.view];
 }
 
@@ -103,6 +105,10 @@
     descriptor.params[@"textColor"] = [UIColor blueColor];
     descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);
     descriptor.params[@"direction"] = @(direction);
+    descriptor.params[@"clickAction"] = ^{
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"弹幕被点击" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+        [alertView show];
+    };
     return descriptor;
 }
 

@@ -37,6 +37,7 @@
 @synthesize borderColor = _borderColor;
 @synthesize cornerRadius = _cornerRadius;
 @synthesize mandatorySize = _mandatorySize;
+@synthesize clickAction = _clickAction;
 
 @synthesize origin = _origin;
 @synthesize valid = _valid;
@@ -105,6 +106,16 @@
     _view.layer.borderColor = self.borderColor.CGColor;
     _view.layer.borderWidth = self.borderWidth;
     _view.backgroundColor = self.backgroundColor;
+    if (self.clickAction) {
+        _view.userInteractionEnabled = YES;
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickSpriteView)];
+        [_view addGestureRecognizer:gesture];
+    }
+}
+
+- (void)clickSpriteView
+{
+    if (self.clickAction) self.clickAction();
 }
 
 /// 返回绑定的view
@@ -122,6 +133,11 @@
 }
 
 #pragma mark - attributes
+
+- (void)setClickAction:(BarrageClickAction)clickAction
+{
+    _clickAction = [clickAction copy];
+}
 
 - (CGPoint)position
 {
