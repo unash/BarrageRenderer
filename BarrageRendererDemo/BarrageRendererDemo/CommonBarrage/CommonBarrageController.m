@@ -132,6 +132,7 @@
     descriptor.params[@"image"] = [[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(20.0f, 20.0f)];
     descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);
     descriptor.params[@"direction"] = @(direction);
+    descriptor.params[@"trackNumber"] = @5; // 轨道数量
     return descriptor;
 }
 

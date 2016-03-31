@@ -48,4 +48,7 @@ typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
 /// 需要在originInBounds:withSprites: 方法中修改 _destination的值以表示运动的终点
 @property(nonatomic,assign,readonly)CGPoint destination;
 
+/// 轨道数量
+@property(nonatomic,assign)NSUInteger trackNumber;
+
 @end

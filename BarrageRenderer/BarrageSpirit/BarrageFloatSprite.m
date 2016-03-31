@@ -26,6 +26,8 @@
 
 #import "BarrageFloatSprite.h"
 
+static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
+
 @interface BarrageFloatSprite()
 {
     NSTimeInterval _leftActiveTime;
@@ -38,6 +40,7 @@
 {
     if (self = [super init]) {
         _direction = BarrageFloatDirectionT2B;
+        _trackNumber = STRIP_NUM;
         self.duration = 1.0f;
     }
     return self;
@@ -78,17 +81,17 @@
     BOOL down = self.direction == BarrageFloatDirectionT2B; // 是否是朝下方向
     
     static BOOL const AVAERAGE_STRATEGY = NO; // YES:条纹平均精灵策略; NO:最快时间策略(体验会好一些)
-    static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
     NSTimeInterval stripMaxActiveTimes[STRIP_NUM]={0}; // 每一条网格 已有精灵中最后退出屏幕的时间
     NSUInteger stripSpriteNumbers[STRIP_NUM]={0}; // 每一条网格 包含精灵的数目
-    CGFloat stripHeight = rect.size.height/STRIP_NUM; // 水平条高度
+    NSUInteger stripNum = MIN(STRIP_NUM, MAX(self.trackNumber, 1)); // between (1,STRIP_NUM)
+    CGFloat stripHeight = rect.size.height/stripNum; // 水平条高度
     
     NSUInteger overlandStripNum = (NSUInteger)ceil((double)self.size.height/stripHeight); // 横跨网格条数目
     NSUInteger availableFrom = 0;
     NSUInteger leastActiveTimeStrip = 0; // 最小时间的行
     NSUInteger leastActiveSpriteStrip = 0; // 最小网格精灵的行
     
-    for (NSUInteger i = 0; i < STRIP_NUM; i++) {
+    for (NSUInteger i = 0; i < stripNum; i++) {
         //寻找当前行里包含的sprites
         CGFloat stripFrom = down?(i * stripHeight+rect.origin.y):(rect.origin.y+rect.size.height - i * stripHeight);
         CGFloat stripTo = down?(stripFrom + stripHeight):(stripFrom-stripHeight);
@@ -110,7 +113,7 @@
         else if (i - availableFrom >= overlandStripNum - 1){
             break; // eureka!
         }
-        if (i <= STRIP_NUM - overlandStripNum) {
+        if (i <= stripNum - overlandStripNum) {
             if (stripMaxActiveTimes[i] < stripMaxActiveTimes[leastActiveTimeStrip]) {
                 leastActiveTimeStrip = i;
             }
@@ -119,7 +122,7 @@
             }
         }
     }
-    if (availableFrom > STRIP_NUM - overlandStripNum) { // 那就是没有找到喽
+    if (availableFrom > stripNum - overlandStripNum) { // 那就是没有找到喽
         availableFrom = AVAERAGE_STRATEGY?leastActiveSpriteStrip:leastActiveTimeStrip; // 使用最小个数 or 使用最短时间
     }
     

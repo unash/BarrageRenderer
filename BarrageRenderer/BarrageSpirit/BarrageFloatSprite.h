@@ -40,4 +40,7 @@ typedef NS_ENUM(NSUInteger, BarrageFloatDirection) {
 /// 方向
 @property(nonatomic,assign)BarrageFloatDirection direction;
 
+/// 轨道数量
+@property(nonatomic,assign)NSUInteger trackNumber;
+
 @end
