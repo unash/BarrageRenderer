@@ -16,5 +16,5 @@
 - (IBAction)hybridB:(id)sender;
 - (IBAction)backward:(id)sender;
 - (IBAction)foreward:(id)sender;
-
+@property(nonatomic, strong)IBOutlet UILabel *infoLabel;
 @end

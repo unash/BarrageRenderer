@@ -15,5 +15,5 @@
 - (IBAction)resume:(id)sender;
 - (IBAction)faster:(id)sender;
 - (IBAction)slower:(id)sender;
-
+@property(nonatomic, strong)IBOutlet UILabel *infoLabel;
 @end

@@ -89,6 +89,7 @@
 - (void)autoSendBarrage
 {
     NSInteger spriteNumber = [_renderer spritesNumberWithName:nil];
+    self.infoLabel.text = [NSString stringWithFormat:@"当前屏幕弹幕数量: %ld",(long)spriteNumber];
     if (spriteNumber <= 50) { // 用来演示如何限制屏幕上的弹幕量
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L]];
         [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionB2T]];
