@@ -36,7 +36,10 @@
 - (void)excute
 {
     if (_object && _sel && [_object respondsToSelector:_sel]) {
-        [_object performSelector:_sel withObject:nil]; //TODO: 消除warning.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [_object performSelector:_sel withObject:nil];
+#pragma clang diagnostic pop
     }
 }
 
