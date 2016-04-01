@@ -27,6 +27,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef void(^BarrageClickAction)(void);
+
 /// UIView 弹幕协议
 @protocol BarrageViewProtocol <NSObject>
 
@@ -38,6 +40,14 @@
 @property(nonatomic,assign)CGFloat cornerRadius;
 /// 强制性大小,默认为CGSizeZero,大小自适应; 否则使用mandatorySize的值来设置view大小
 @property(nonatomic,assign)CGSize mandatorySize;
+
+@end
+
+/// Action 弹幕协议
+@protocol BarrageActionProtocol <NSObject>
+
+/// 注入点击行为
+@property(nonatomic,strong)BarrageClickAction clickAction;
 
 @end
 

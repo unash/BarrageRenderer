@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 ExBye Inc. All rights reserved.
 //
 
-#import "BarrageWalkTextSprite.h"
+#import <BarrageRenderer/BarrageWalkTextSprite.h>
 
 @interface BarrageWalkImageTextSprite : BarrageWalkTextSprite
 

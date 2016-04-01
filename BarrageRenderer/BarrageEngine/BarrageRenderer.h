@@ -25,6 +25,9 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+
+#import "BarrageHeader.h"
+
 @class BarrageDescriptor;
 @class BarrageRenderer;
 

@@ -7,9 +7,8 @@
 //
 
 #import "CommonBarrageController.h"
-#import "BarrageHeader.h"
+#import <BarrageRenderer/BarrageRenderer.h>
 #import "NSSafeObject.h"
-#import "BarrageSpriteUtility.h"
 #import "UIImage+Barrage.h"
 
 @interface CommonBarrageController()
