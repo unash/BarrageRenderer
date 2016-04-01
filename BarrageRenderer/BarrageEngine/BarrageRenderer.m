@@ -88,16 +88,18 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 #pragma mark - control
 - (void)receive:(BarrageDescriptor *)descriptor
 {
-    if (!_startTime) { // 如果没有启动,则抛弃接收弹幕
-        return;
-    }
-    BarrageDescriptor * descriptorCopy = [descriptor copy];
-    [self convertDelayTime:descriptorCopy];
-    BarrageSprite * sprite = [BarrageSpriteFactory createSpriteWithDescriptor:descriptorCopy];
-    [_dispatcher addSprite:sprite];
-    if (_recording) {
-        [self recordDescriptor:descriptorCopy];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!_startTime) { // 如果没有启动,则抛弃接收弹幕
+            return;
+        }
+        BarrageDescriptor * descriptorCopy = [descriptor copy];
+        [self convertDelayTime:descriptorCopy];
+        BarrageSprite * sprite = [BarrageSpriteFactory createSpriteWithDescriptor:descriptorCopy];
+        [_dispatcher addSprite:sprite];
+        if (_recording) {
+            [self recordDescriptor:descriptorCopy];
+        }
+    });
 }
 
 - (void)start
