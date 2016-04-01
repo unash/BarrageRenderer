@@ -40,7 +40,7 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
 {
     if (self = [super init]) {
         _direction = BarrageFloatDirectionT2B;
-        _trackNumber = STRIP_NUM;
+        _trackNumber = 40;
         self.duration = 1.0f;
     }
     return self;

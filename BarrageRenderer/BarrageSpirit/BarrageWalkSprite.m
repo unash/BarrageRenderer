@@ -43,7 +43,7 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
     if (self = [super init]) {
         _direction = BarrageWalkDirectionR2L;
         _speed = 30.0f; // 默认值
-        _trackNumber = STRIP_NUM;
+        _trackNumber = 40;
     }
     return self;
 }
