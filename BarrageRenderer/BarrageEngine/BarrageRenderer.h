@@ -64,6 +64,9 @@
 
 #pragma mark - config
 
+/// 画布的边距
+@property(nonatomic,assign)UIEdgeInsets canvasMargin;
+
 /// 调整弹幕整体速度, 需要>0, 否则会被抛弃.
 @property(nonatomic,assign)CGFloat speed;
 

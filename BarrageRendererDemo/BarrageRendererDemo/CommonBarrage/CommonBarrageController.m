@@ -33,6 +33,7 @@
 {
     _renderer = [[BarrageRenderer alloc]init];
     [self.view addSubview:_renderer.view];
+    _renderer.canvasMargin = UIEdgeInsetsMake(10, 10, 10, 10);
     // 若想为弹幕增加点击功能, 请添加此句话, 并在Descriptor中注入行为
     _renderer.view.userInteractionEnabled = YES;
     [self.view sendSubviewToBack:_renderer.view];

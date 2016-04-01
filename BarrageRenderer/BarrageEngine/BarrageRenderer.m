@@ -354,4 +354,9 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     return _canvas;
 }
 
+- (void)setCanvasMargin:(UIEdgeInsets)canvasMargin
+{
+    _canvas.margin = canvasMargin;
+}
+
 @end

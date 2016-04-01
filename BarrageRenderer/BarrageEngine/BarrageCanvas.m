@@ -33,6 +33,8 @@
     if (self = [super init]) {
         self.userInteractionEnabled = NO;
         self.backgroundColor = [UIColor clearColor];
+        self.clipsToBounds = YES;
+        _margin = UIEdgeInsetsZero;
     }
     return self;
 }
@@ -41,7 +43,16 @@
 {
     [super layoutSubviews];
     if (self.superview && !CGRectEqualToRect(self.frame, self.superview.bounds)) {
-        self.frame = self.superview.bounds;
+        self.frame = UIEdgeInsetsInsetRect(self.superview.bounds, self.margin);
+    }
+}
+
+- (void)setMargin:(UIEdgeInsets)margin
+{
+    if(!UIEdgeInsetsEqualToEdgeInsets(margin, _margin))
+    {
+        _margin = margin;
+        [self setNeedsLayout];
     }
 }
 

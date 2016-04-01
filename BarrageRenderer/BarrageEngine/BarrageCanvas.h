@@ -27,5 +27,5 @@
 #import <UIKit/UIKit.h>
 
 @interface BarrageCanvas : UIView
-
+@property(nonatomic, assign)UIEdgeInsets margin;
 @end
