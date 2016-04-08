@@ -40,7 +40,7 @@
 弹幕支持的属性可参照 ``` BarrageSpriteProtocol.h ``` 文件. 以及在 BarrageSprite 族的属性
 
 #### 图文混排弹幕
-最简单的弹幕只是文本, 但有时候你可能需要添加emoji表情或者图片上去。emoji表情是UTF字符集原生支持的，对待他和其他的文本字符没有区别；对于图片，你有两种方式可以添加图片弹幕, 一种是使用 attributedText 设置属性文本，一种是自定义 view. 自定义 view 可以参考 BarrageWalkImageTextSprite。 
+最简单的弹幕只是文本, 但有时候你可能需要添加emoji表情或者图片上去。emoji表情是UTF字符集原生支持的，对待他和其他的文本字符没有区别；对于图片，你有两种方式可以添加图片弹幕, 一种是使用 attributedText 设置属性文本，一种是自定义 view. 自定义 view 可以参考 BarrageWalkImageTextSprite。 需要注意的是，如果 ``` - (UIView *)bindingView ``` 方法返回的是你自定义的 view，你需要覆盖你自定义 view 的 ``` - (void)sizeToFit ``` 方法，返回正确的 view 大小。
 
 #### 如何调节轨道数量
 
