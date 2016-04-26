@@ -26,15 +26,25 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BarrageLoader : NSObject
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol BarrageLoader <NSObject>
 
 /// 通过文件批量获取描述符
-+ (NSArray *)readDescriptorsWithFile:(NSString *)file;
++ (nullable NSArray *)readDescriptorsWithFile:(NSString *)file;
+
+@optional
 
 /// 将描述符批量写入文件; additional表示是否要追加,默认是NO:覆盖.
 + (void)writeDescriptors:(NSArray *)descriptors toFile:(NSString *)file additional:(BOOL)additional;
 
 /// 支持damaku的文件格式
-+ (NSArray *)readDescriptorsWithDamakuFile:(NSString *)file;
++ (nullable NSArray *)readDescriptorsWithDamakuFile:(NSString *)file;
 
 @end
+
+@interface BarrageLoader : NSObject <BarrageLoader>
+
+@end
+
+NS_ASSUME_NONNULL_END
