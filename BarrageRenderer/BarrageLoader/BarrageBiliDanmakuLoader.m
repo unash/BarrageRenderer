@@ -1,12 +1,12 @@
 //
-//  BarrageBiliDamankuLoader.m
+//  BarrageBiliDanmakuLoader.m
 //  Pods
 //
 //  Created by Yifei Zhou on 4/25/16.
 //
 //
 
-#import "BarrageBiliDamankuLoader.h"
+#import "BarrageBiliDanmakuLoader.h"
 
 // https://github.com/Bilibili/DanmakuFlameMaster/wiki/常见问题
 
@@ -20,7 +20,7 @@
 // 6:用户hash
 // 7:弹幕id
 
-@implementation BarrageBiliDamankuLoader
+@implementation BarrageBiliDanmakuLoader
 
 + (NSArray *)readDescriptorsWithFile:(NSString *)file
 {
@@ -71,16 +71,16 @@
     
     NSArray *components = [parameters componentsSeparatedByString:@","];
     
-    NSAssert(components.count == 8, @"Malformed bilibili damanku format!");
+    NSAssert(components.count == 8, @"Malformed bilibili Danmaku format!");
 
     NSNumber *beginTime = [NSNumber brg_numberWithString:components[0]];
-    NSNumber *damankuType = [NSNumber brg_numberWithString:components[1]];
+    NSNumber *DanmakuType = [NSNumber brg_numberWithString:components[1]];
     NSNumber *fontSize = [NSNumber brg_numberWithString:components[2]];
     NSString *fontColorDecString = [components[3] copy];
     NSNumber *timestamp = [NSNumber brg_numberWithString:components[4]];
-    NSNumber *damankuPoolID = [NSNumber brg_numberWithString:components[5]];
+    NSNumber *DanmakuPoolID = [NSNumber brg_numberWithString:components[5]];
     NSString *userHash = [components[6] copy];
-    NSNumber *damankuID = [NSNumber brg_numberWithString:components[7]];
+    NSNumber *DanmakuID = [NSNumber brg_numberWithString:components[7]];
 
     BarrageDescriptor *descriptor = [[BarrageDescriptor alloc] init];
     descriptor.params[@"text"] = text;
@@ -102,16 +102,16 @@
      };
     */
     
-    if ([damankuType unsignedIntegerValue] == 1) {
+    if ([DanmakuType unsignedIntegerValue] == 1) {
         descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
         descriptor.params[@"direction"] = @(BarrageWalkDirectionR2L);
-    } else if ([damankuType unsignedIntegerValue] == 6) {
+    } else if ([DanmakuType unsignedIntegerValue] == 6) {
         descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
         descriptor.params[@"direction"] = @(BarrageWalkDirectionL2R);
-    } else if ([damankuType unsignedIntegerValue] == 5) {
+    } else if ([DanmakuType unsignedIntegerValue] == 5) {
         descriptor.spriteName = NSStringFromClass([BarrageFloatTextSprite class]);
         descriptor.params[@"direction"] = @(BarrageWalkDirectionT2B);
-    } else if ([damankuType unsignedIntegerValue] == 4) {
+    } else if ([DanmakuType unsignedIntegerValue] == 4) {
         descriptor.spriteName = NSStringFromClass([BarrageFloatTextSprite class]);
         descriptor.params[@"direction"] = @(BarrageWalkDirectionB2T);
     }

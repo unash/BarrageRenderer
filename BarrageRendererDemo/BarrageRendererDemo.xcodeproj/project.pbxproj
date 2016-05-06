@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6D55A75E9E6287C3EC838B09 /* libPods-BarrageRendererDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */; };
+		8FC5F6DE1CDC6CA000420836 /* Bilibili - 7064760.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8FC5F6DD1CDC6CA000420836 /* Bilibili - 7064760.xml */; };
+		8FC5F6E11CDC6FD300420836 /* LoadedSpritesBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5F6E01CDC6FD300420836 /* LoadedSpritesBarrageController.m */; };
 		CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */; };
 		CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E121BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m */; };
 		CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E151BFCBE6A000C1FEC /* CommonBarrageController.m */; };
@@ -24,6 +26,9 @@
 /* Begin PBXFileReference section */
 		1C26C0B8A6A60E09DB1FAC28 /* Pods-BarrageRendererDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.release.xcconfig"; sourceTree = "<group>"; };
 		5C13A3B15DEEFF78D2777351 /* Pods-BarrageRendererDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		8FC5F6DD1CDC6CA000420836 /* Bilibili - 7064760.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Bilibili - 7064760.xml"; path = "LoadedSpritesBarrage/Bilibili - 7064760.xml"; sourceTree = "<group>"; };
+		8FC5F6DF1CDC6FD300420836 /* LoadedSpritesBarrageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadedSpritesBarrageController.h; path = LoadedSpritesBarrage/LoadedSpritesBarrageController.h; sourceTree = "<group>"; };
+		8FC5F6E01CDC6FD300420836 /* LoadedSpritesBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadedSpritesBarrageController.m; path = LoadedSpritesBarrage/LoadedSpritesBarrageController.m; sourceTree = "<group>"; };
 		A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarrageRendererDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC853E0F1BFCBE6A000C1FEC /* AdvancedBarrageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedBarrageController.h; sourceTree = "<group>"; };
 		CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedBarrageController.m; sourceTree = "<group>"; };
@@ -58,6 +63,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8FC5F6DC1CDC6C8300420836 /* LoadedSpritesBarrage */ = {
+			isa = PBXGroup;
+			children = (
+				8FC5F6DD1CDC6CA000420836 /* Bilibili - 7064760.xml */,
+				8FC5F6DF1CDC6FD300420836 /* LoadedSpritesBarrageController.h */,
+				8FC5F6E01CDC6FD300420836 /* LoadedSpritesBarrageController.m */,
+			);
+			name = LoadedSpritesBarrage;
+			sourceTree = "<group>";
+		};
 		BCAB4A02DE79583900493392 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +122,7 @@
 		CCECEDC71B5662F500098E7A /* BarrageRendererDemo */ = {
 			isa = PBXGroup;
 			children = (
+				8FC5F6DC1CDC6C8300420836 /* LoadedSpritesBarrage */,
 				CC853E0E1BFCBE6A000C1FEC /* AdvancedBarrage */,
 				CC853E131BFCBE6A000C1FEC /* CommonBarrage */,
 				CCECEDEE1B56673E00098E7A /* SafeObject */,
@@ -162,6 +178,7 @@
 				CCECEDC21B5662F500098E7A /* Frameworks */,
 				CCECEDC31B5662F500098E7A /* Resources */,
 				EF2CDBDC4FC3AE77A059CD3C /* Copy Pods Resources */,
+				21C5F93076A3C36DCCBFF37B /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -212,6 +229,7 @@
 				CCC0B4A21B6549C40088CFDE /* avatar.png in Resources */,
 				CCECEDD41B5662F500098E7A /* Main.storyboard in Resources */,
 				CCECEDD91B5662F500098E7A /* LaunchScreen.xib in Resources */,
+				8FC5F6DE1CDC6CA000420836 /* Bilibili - 7064760.xml in Resources */,
 				CCECEDD61B5662F500098E7A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,6 +237,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		21C5F93076A3C36DCCBFF37B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3C3AD3B41A9212AF94F222A9 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -260,6 +293,7 @@
 				CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */,
 				CCC0B4A51B654DD50088CFDE /* UIImage+Barrage.m in Sources */,
 				CCECEDCE1B5662F500098E7A /* AppDelegate.m in Sources */,
+				8FC5F6E11CDC6FD300420836 /* LoadedSpritesBarrageController.m in Sources */,
 				CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */,
 				CCECEDCB1B5662F500098E7A /* main.m in Sources */,
 				CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */,

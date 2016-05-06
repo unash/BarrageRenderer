@@ -10,11 +10,11 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   BarrageRenderer:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  BarrageRenderer: 2bc97f02bff831291c6ce50dbb4b1881d41659dc
+  BarrageRenderer: 1c4204aa4242ec066e5e65191e504356570f94d1
   MLEmojiLabel: ceeab17d10d296cc00636bf201c8da597fdede10
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.39.0
