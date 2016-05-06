@@ -8,6 +8,6 @@
 
 #import <BarrageRenderer/BarrageRenderer.h>
 
-@interface BarrageBiliDanmakuLoader : BarrageLoader
+@interface BarrageBiliDanmakuLoader : NSObject <BarrageLoader>
 
 @end

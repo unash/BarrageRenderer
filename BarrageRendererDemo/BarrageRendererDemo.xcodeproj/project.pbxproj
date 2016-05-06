@@ -10,6 +10,7 @@
 		6D55A75E9E6287C3EC838B09 /* libPods-BarrageRendererDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */; };
 		8FC5F6DE1CDC6CA000420836 /* Bilibili - 7064760.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8FC5F6DD1CDC6CA000420836 /* Bilibili - 7064760.xml */; };
 		8FC5F6E11CDC6FD300420836 /* LoadedSpritesBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5F6E01CDC6FD300420836 /* LoadedSpritesBarrageController.m */; };
+		8FC5F6FA1CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5F6F91CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m */; };
 		CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */; };
 		CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E121BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m */; };
 		CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E151BFCBE6A000C1FEC /* CommonBarrageController.m */; };
@@ -29,6 +30,8 @@
 		8FC5F6DD1CDC6CA000420836 /* Bilibili - 7064760.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Bilibili - 7064760.xml"; path = "LoadedSpritesBarrage/Bilibili - 7064760.xml"; sourceTree = "<group>"; };
 		8FC5F6DF1CDC6FD300420836 /* LoadedSpritesBarrageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadedSpritesBarrageController.h; path = LoadedSpritesBarrage/LoadedSpritesBarrageController.h; sourceTree = "<group>"; };
 		8FC5F6E01CDC6FD300420836 /* LoadedSpritesBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadedSpritesBarrageController.m; path = LoadedSpritesBarrage/LoadedSpritesBarrageController.m; sourceTree = "<group>"; };
+		8FC5F6F81CDC8ADD00420836 /* BarrageBiliDanmakuLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarrageBiliDanmakuLoader.h; path = LoadedSpritesBarrage/BarrageBiliDanmakuLoader.h; sourceTree = "<group>"; };
+		8FC5F6F91CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarrageBiliDanmakuLoader.m; path = LoadedSpritesBarrage/BarrageBiliDanmakuLoader.m; sourceTree = "<group>"; };
 		A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarrageRendererDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC853E0F1BFCBE6A000C1FEC /* AdvancedBarrageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedBarrageController.h; sourceTree = "<group>"; };
 		CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedBarrageController.m; sourceTree = "<group>"; };
@@ -69,6 +72,8 @@
 				8FC5F6DD1CDC6CA000420836 /* Bilibili - 7064760.xml */,
 				8FC5F6DF1CDC6FD300420836 /* LoadedSpritesBarrageController.h */,
 				8FC5F6E01CDC6FD300420836 /* LoadedSpritesBarrageController.m */,
+				8FC5F6F81CDC8ADD00420836 /* BarrageBiliDanmakuLoader.h */,
+				8FC5F6F91CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m */,
 			);
 			name = LoadedSpritesBarrage;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FC5F6FA1CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m in Sources */,
 				CCECEDF11B56673E00098E7A /* NSSafeObject.m in Sources */,
 				CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */,
 				CCC0B4A51B654DD50088CFDE /* UIImage+Barrage.m in Sources */,

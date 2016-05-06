@@ -8,7 +8,7 @@
 
 #import "LoadedSpritesBarrageController.h"
 #import <BarrageRenderer/BarrageRenderer.h>
-#import <BarrageRenderer/BarrageBiliDanmakuLoader.h>
+#import "BarrageBiliDanmakuLoader.h"
 
 @interface LoadedSpritesBarrageController ()
 {
@@ -40,9 +40,13 @@
 {
     [super viewDidAppear:animated];
     _renderer.redisplay = YES;
-    
-    NSArray <BarrageDescriptor *> *damankus = [BarrageBiliDanmakuLoader readDescriptorsWithFile:[[NSBundle mainBundle] pathForResource:@"Bilibili - 7064760" ofType:@"xml"]];
-    [_renderer load:damankus];
+
+    BarrageBiliDanmakuLoader *loader = [[BarrageBiliDanmakuLoader alloc]
+                                        initWithContentsOfFile:[[NSBundle mainBundle]
+                                                                pathForResource:@"Bilibili - 7064760"
+                                                                ofType:@"xml"]
+                                        options:kNilOptions];
+    [_renderer registerModules:@[loader]];
 }
 
 - (void)dealloc

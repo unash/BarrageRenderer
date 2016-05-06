@@ -20,25 +20,42 @@
 // 6:用户hash
 // 7:弹幕id
 
+@interface BarrageBiliDanmakuLoader ()
+{
+    NSDataReadingOptions _options;
+}
+@end
+
 @implementation BarrageBiliDanmakuLoader
 
-+ (NSArray *)readDescriptorsWithFile:(NSString *)file
+@synthesize filePath = _filePath;
+@synthesize descriptors = _descriptors;
+
+- (instancetype)initWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)options
 {
-    return [self readDescriptorsWithFile:file options:kNilOptions];
+    self = [super init];
+    if (self) {
+        _filePath = path;
+        _options = options;
+        [self _commonInit];
+    }
+    return self;
 }
 
-+ (NSArray *)readDescriptorsWithFile:(NSString *)file options:(NSDataReadingOptions)options
+- (BOOL)_commonInit
 {
-    if (!file || [file isEqualToString:@""])
-        return nil;
+    if (!_filePath) {
+        return NO;
+    }
     
     NSFileManager *fileMgr = [NSFileManager defaultManager];
-    if (![fileMgr fileExistsAtPath:file])
-        return nil;
     
-    NSData *data = [NSData dataWithContentsOfFile:file options:options error:nil];
+    if (![fileMgr fileExistsAtPath:_filePath])
+        return NO;
+    
+    NSData *data = [NSData dataWithContentsOfFile:_filePath options:_options error:nil];
     if (!data) {
-        return nil;
+        return NO;
     }
     
     NSString *danmakuContent = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -58,13 +75,20 @@
         NSString *parameters = [obj substringWithRange:[match rangeAtIndex:1]];
         NSString *text = [obj substringWithRange:[match rangeAtIndex:2]];
         
-        [descriptors addObject:[self createDescriptorWithParameters:parameters text:text]];
+        [descriptors addObject:[[self class] _createDescriptorWithParameters:parameters text:text]];
     }];
     
-    return [NSArray arrayWithArray:descriptors];
+    _descriptors = [NSArray arrayWithArray:descriptors];
+    
+    return _descriptors != nil;
 }
 
-+ (nonnull BarrageDescriptor *)createDescriptorWithParameters:(NSString *)parameters text:(NSString *)text
+- (BOOL)reloadData;
+{
+    return [self _commonInit];
+}
+
++ (nonnull BarrageDescriptor *)_createDescriptorWithParameters:(NSString *)parameters text:(NSString *)text
 {
     NSParameterAssert(parameters != nil);
     NSParameterAssert(text != nil);
@@ -73,6 +97,8 @@
     
     NSAssert(components.count == 8, @"Malformed bilibili Danmaku format!");
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
     NSNumber *beginTime = [NSNumber brg_numberWithString:components[0]];
     NSNumber *DanmakuType = [NSNumber brg_numberWithString:components[1]];
     NSNumber *fontSize = [NSNumber brg_numberWithString:components[2]];
@@ -81,6 +107,7 @@
     NSNumber *DanmakuPoolID = [NSNumber brg_numberWithString:components[5]];
     NSString *userHash = [components[6] copy];
     NSNumber *DanmakuID = [NSNumber brg_numberWithString:components[7]];
+#pragma clang diagnostic pop
 
     BarrageDescriptor *descriptor = [[BarrageDescriptor alloc] init];
     descriptor.params[@"text"] = text;

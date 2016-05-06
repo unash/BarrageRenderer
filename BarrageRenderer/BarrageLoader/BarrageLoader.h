@@ -30,20 +30,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol BarrageLoader <NSObject>
 
-/// 通过文件批量获取描述符
-+ (nullable NSArray *)readDescriptorsWithFile:(NSString *)file;
+- (instancetype)initWithContentsOfFile:(NSString *)path options:(NSDataReadingOptions)options;
+
+@property (readonly, nonatomic) NSString *filePath;
+
+@property (readonly, nonatomic, nullable) NSArray *descriptors;
+
+- (BOOL)reloadData;
+
+@optional
+@end
+
+@protocol BarragePersistentor <NSObject>
+
+- (instancetype)initWithContentsOfFile:(NSString *)path options:(NSDataWritingOptions)options;
+
+@property (readonly, nonatomic) NSString *filePath;
+
+- (BOOL)setDescriptors:(NSArray *)descriptors atomically:(BOOL)atomically;
 
 @optional
 
-/// 将描述符批量写入文件; additional表示是否要追加,默认是NO:覆盖.
-+ (void)writeDescriptors:(NSArray *)descriptors toFile:(NSString *)file additional:(BOOL)additional;
+- (BOOL)appendDescriptors:(NSArray *)descriptors atomically:(BOOL)atomically;
 
-/// 支持damaku的文件格式
-+ (nullable NSArray *)readDescriptorsWithDamakuFile:(NSString *)file;
-
-@end
-
-@interface BarrageLoader : NSObject <BarrageLoader>
+- (BOOL)removeAllDescriptors;
 
 @end
 

@@ -50,6 +50,10 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     NSDate * _startTime; //如果是nil,表示弹幕渲染不在运行中; 否则,表示开始的时间
     NSTimeInterval _pausedDuration; // 暂停持续时间
     NSDate * _pausedTime; // 上次暂停时间; 如果为nil, 说明当前没有暂停
+    
+    id<BarragePersistentor> _persistentor; // 持久化模块
+    NSMutableArray * _descriptors; // 已读取的描述符
+    BOOL _firstLoaded;
 }
 @property(nonatomic,assign)NSTimeInterval pausedDuration; // 暂停时间
 @end
@@ -68,6 +72,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         _startTime = nil; // 尚未开始
         _pausedTime = nil;
         _redisplay = NO;
+        _firstLoaded = YES;
         self.pausedDuration = 0;
         [self initClock];
     }
@@ -100,6 +105,14 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
             [self recordDescriptor:descriptorCopy];
         }
     });
+    
+    if (!_firstLoaded) { // 跳过从模块加载的情况
+        if ([_persistentor respondsToSelector:@selector(appendDescriptors:atomically:)]) {
+            [_persistentor appendDescriptors:@[descriptor] atomically:YES];
+        } else {
+            [_persistentor setDescriptors:[_descriptors arrayByAddingObject:descriptor] atomically:YES];
+        }
+    }
 }
 
 - (void)start
@@ -123,6 +136,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         }
         [_preloadedDescriptors removeAllObjects];
     }
+    _firstLoaded = NO;
 }
 
 - (void)pause
@@ -243,6 +257,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         for (BarrageDescriptor * descriptor in descriptors) {
             [self receive:descriptor];
         }
+        _firstLoaded = NO;
     }
     else
     {
@@ -254,6 +269,22 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         }
     }
 
+}
+
+- (void)registerModules:(NSArray *)modules
+{
+    NSMutableArray *descriptors = [@[] mutableCopy];
+    for (id module in modules) {
+        if ([module conformsToProtocol:@protocol(BarrageLoader)]) {
+            id<BarrageLoader> loader = (id<BarrageLoader>)module;
+            loader.descriptors ? [descriptors addObjectsFromArray:loader.descriptors] : nil;
+        }
+        if ([module conformsToProtocol:@protocol(BarragePersistentor)]) {
+            _persistentor = module; // 只支持一个持久化对象
+        }
+    }
+    _firstLoaded = YES;
+    [self load:descriptors];
 }
 
 #pragma mark - update
