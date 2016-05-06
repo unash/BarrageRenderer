@@ -36,4 +36,10 @@
 #import "BarrageWalkImageSprite.h"
 #import "BarrageFloatImageSprite.h"
 
+#pragma mark - Categories
+
+#import "NSNumber+BarrageRenderer.h"
+#import "NSString+BarrageRenderer.h"
+#import "UIColor+BarrageRenderer.h"
+
 #endif

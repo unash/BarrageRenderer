@@ -7,7 +7,6 @@
 //
 
 #import "BarrageBiliDamankuLoader.h"
-#import <ALDKit/ALDKit.h>
 
 // https://github.com/Bilibili/DanmakuFlameMaster/wiki/常见问题
 
@@ -74,18 +73,18 @@
     
     NSAssert(components.count == 8, @"Malformed bilibili damanku format!");
 
-    NSNumber *beginTime = [NSNumber numberWithString:components[0]];
-    NSNumber *damankuType = [NSNumber numberWithString:components[1]];
-    NSNumber *fontSize = [NSNumber numberWithString:components[2]];
+    NSNumber *beginTime = [NSNumber brg_numberWithString:components[0]];
+    NSNumber *damankuType = [NSNumber brg_numberWithString:components[1]];
+    NSNumber *fontSize = [NSNumber brg_numberWithString:components[2]];
     NSString *fontColorDecString = [components[3] copy];
-    NSNumber *timestamp = [NSNumber numberWithString:components[4]];
-    NSNumber *damankuPoolID = [NSNumber numberWithString:components[5]];
+    NSNumber *timestamp = [NSNumber brg_numberWithString:components[4]];
+    NSNumber *damankuPoolID = [NSNumber brg_numberWithString:components[5]];
     NSString *userHash = [components[6] copy];
-    NSNumber *damankuID = [NSNumber numberWithString:components[7]];
+    NSNumber *damankuID = [NSNumber brg_numberWithString:components[7]];
 
     BarrageDescriptor *descriptor = [[BarrageDescriptor alloc] init];
     descriptor.params[@"text"] = text;
-    descriptor.params[@"textColor"] = [UIColor colorWithHexString:[NSString hexStringWithDecimalString:fontColorDecString]];
+    descriptor.params[@"textColor"] = [UIColor brg_colorWithHexString:[NSString brg_hexStringWithDecimalString:fontColorDecString]];
     descriptor.params[@"fontSize"] = fontSize;
     descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);
     descriptor.params[@"delay"] = @([beginTime floatValue]);
