@@ -284,6 +284,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         }
     }
     _firstLoaded = YES;
+    _descriptors = [descriptors copy];  
     [self load:descriptors];
 }
 

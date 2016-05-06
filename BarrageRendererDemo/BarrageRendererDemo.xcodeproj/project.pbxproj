@@ -11,6 +11,9 @@
 		8FC5F6DE1CDC6CA000420836 /* Bilibili - 7064760.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8FC5F6DD1CDC6CA000420836 /* Bilibili - 7064760.xml */; };
 		8FC5F6E11CDC6FD300420836 /* LoadedSpritesBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5F6E01CDC6FD300420836 /* LoadedSpritesBarrageController.m */; };
 		8FC5F6FA1CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5F6F91CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m */; };
+		8FC5F7051CDC99D200420836 /* NSNumber+BarrageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5F7001CDC99D200420836 /* NSNumber+BarrageRenderer.m */; };
+		8FC5F7061CDC99D200420836 /* NSString+BarrageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5F7021CDC99D200420836 /* NSString+BarrageRenderer.m */; };
+		8FC5F7071CDC99D200420836 /* UIColor+BarrageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5F7041CDC99D200420836 /* UIColor+BarrageRenderer.m */; };
 		CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */; };
 		CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E121BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m */; };
 		CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E151BFCBE6A000C1FEC /* CommonBarrageController.m */; };
@@ -32,6 +35,12 @@
 		8FC5F6E01CDC6FD300420836 /* LoadedSpritesBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadedSpritesBarrageController.m; path = LoadedSpritesBarrage/LoadedSpritesBarrageController.m; sourceTree = "<group>"; };
 		8FC5F6F81CDC8ADD00420836 /* BarrageBiliDanmakuLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarrageBiliDanmakuLoader.h; path = LoadedSpritesBarrage/BarrageBiliDanmakuLoader.h; sourceTree = "<group>"; };
 		8FC5F6F91CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarrageBiliDanmakuLoader.m; path = LoadedSpritesBarrage/BarrageBiliDanmakuLoader.m; sourceTree = "<group>"; };
+		8FC5F6FF1CDC99D200420836 /* NSNumber+BarrageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+BarrageRenderer.h"; sourceTree = "<group>"; };
+		8FC5F7001CDC99D200420836 /* NSNumber+BarrageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+BarrageRenderer.m"; sourceTree = "<group>"; };
+		8FC5F7011CDC99D200420836 /* NSString+BarrageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+BarrageRenderer.h"; sourceTree = "<group>"; };
+		8FC5F7021CDC99D200420836 /* NSString+BarrageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+BarrageRenderer.m"; sourceTree = "<group>"; };
+		8FC5F7031CDC99D200420836 /* UIColor+BarrageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BarrageRenderer.h"; sourceTree = "<group>"; };
+		8FC5F7041CDC99D200420836 /* UIColor+BarrageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BarrageRenderer.m"; sourceTree = "<group>"; };
 		A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarrageRendererDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC853E0F1BFCBE6A000C1FEC /* AdvancedBarrageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedBarrageController.h; sourceTree = "<group>"; };
 		CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedBarrageController.m; sourceTree = "<group>"; };
@@ -69,6 +78,7 @@
 		8FC5F6DC1CDC6C8300420836 /* LoadedSpritesBarrage */ = {
 			isa = PBXGroup;
 			children = (
+				8FC5F6FE1CDC99D200420836 /* Categories */,
 				8FC5F6DD1CDC6CA000420836 /* Bilibili - 7064760.xml */,
 				8FC5F6DF1CDC6FD300420836 /* LoadedSpritesBarrageController.h */,
 				8FC5F6E01CDC6FD300420836 /* LoadedSpritesBarrageController.m */,
@@ -76,6 +86,20 @@
 				8FC5F6F91CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m */,
 			);
 			name = LoadedSpritesBarrage;
+			sourceTree = "<group>";
+		};
+		8FC5F6FE1CDC99D200420836 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8FC5F6FF1CDC99D200420836 /* NSNumber+BarrageRenderer.h */,
+				8FC5F7001CDC99D200420836 /* NSNumber+BarrageRenderer.m */,
+				8FC5F7011CDC99D200420836 /* NSString+BarrageRenderer.h */,
+				8FC5F7021CDC99D200420836 /* NSString+BarrageRenderer.m */,
+				8FC5F7031CDC99D200420836 /* UIColor+BarrageRenderer.h */,
+				8FC5F7041CDC99D200420836 /* UIColor+BarrageRenderer.m */,
+			);
+			name = Categories;
+			path = LoadedSpritesBarrage/Categories;
 			sourceTree = "<group>";
 		};
 		BCAB4A02DE79583900493392 /* Frameworks */ = {
@@ -297,10 +321,13 @@
 				8FC5F6FA1CDC8ADD00420836 /* BarrageBiliDanmakuLoader.m in Sources */,
 				CCECEDF11B56673E00098E7A /* NSSafeObject.m in Sources */,
 				CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */,
+				8FC5F7061CDC99D200420836 /* NSString+BarrageRenderer.m in Sources */,
 				CCC0B4A51B654DD50088CFDE /* UIImage+Barrage.m in Sources */,
 				CCECEDCE1B5662F500098E7A /* AppDelegate.m in Sources */,
 				8FC5F6E11CDC6FD300420836 /* LoadedSpritesBarrageController.m in Sources */,
+				8FC5F7071CDC99D200420836 /* UIColor+BarrageRenderer.m in Sources */,
 				CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */,
+				8FC5F7051CDC99D200420836 /* NSNumber+BarrageRenderer.m in Sources */,
 				CCECEDCB1B5662F500098E7A /* main.m in Sources */,
 				CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */,
 			);

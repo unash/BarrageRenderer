@@ -7,6 +7,9 @@
 //
 
 #import "BarrageBiliDanmakuLoader.h"
+#import "NSNumber+BarrageRenderer.h"
+#import "NSString+BarrageRenderer.h"
+#import "UIColor+BarrageRenderer.h"
 
 // https://github.com/Bilibili/DanmakuFlameMaster/wiki/常见问题
 
