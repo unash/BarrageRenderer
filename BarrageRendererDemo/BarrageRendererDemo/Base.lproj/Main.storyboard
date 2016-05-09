@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="K7z-FW-NLX">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRi-RB-7dS">
-                                <rect key="frame" x="104" y="560" width="74" height="30"/>
+                                <rect key="frame" x="104" y="560" width="75" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="暂停">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -30,7 +30,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C05-I6-CZs">
-                                <rect key="frame" x="183" y="560" width="74.5" height="30"/>
+                                <rect key="frame" x="184" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="恢复">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dt8-CZ-hTT">
-                                <rect key="frame" x="262.5" y="560" width="74" height="30"/>
+                                <rect key="frame" x="263" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="停止">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -52,7 +52,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTN-NO-nCv">
-                                <rect key="frame" x="341.5" y="560" width="74.5" height="30"/>
+                                <rect key="frame" x="342" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="减速">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -63,7 +63,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybS-P6-UJA">
-                                <rect key="frame" x="421.5" y="560" width="74" height="30"/>
+                                <rect key="frame" x="421" y="560" width="75" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="加速">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -74,7 +74,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcU-eX-tKm">
-                                <rect key="frame" x="500.5" y="560" width="74.5" height="30"/>
+                                <rect key="frame" x="501" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="0.095386867371250683" green="0.16461313222301799" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="高级">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -85,7 +85,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKP-P3-DE5">
-                                <rect key="frame" x="25" y="560" width="74.5" height="30"/>
+                                <rect key="frame" x="25" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021613611276" blue="0.098817023882805291" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="开始">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -145,6 +145,99 @@
             </objects>
             <point key="canvasLocation" x="32" y="319"/>
         </scene>
+        <!--Loaded Sprites Barrage Controller-->
+        <scene sceneID="KuN-wu-2lF">
+            <objects>
+                <viewController id="K7z-FW-NLX" customClass="LoadedSpritesBarrageController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DmI-22-LED"/>
+                        <viewControllerLayoutGuide type="bottom" id="V5Q-Iq-N5O"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="14v-ef-cVg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQz-dS-fVU">
+                                <rect key="frame" x="164" y="560" width="134" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="暂停">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pause:" destination="vXZ-lx-hvc" eventType="touchDown" id="BLp-Ha-tFW"/>
+                                    <action selector="pause:" destination="K7z-FW-NLX" eventType="touchUpInside" id="IjI-4s-DSw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jb8-xJ-Njw">
+                                <rect key="frame" x="303" y="560" width="133" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="恢复">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resume:" destination="vXZ-lx-hvc" eventType="touchDown" id="Abt-6g-GaA"/>
+                                    <action selector="resume:" destination="K7z-FW-NLX" eventType="touchUpInside" id="VKt-on-h2J"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qP6-PR-jFh">
+                                <rect key="frame" x="441" y="560" width="134" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="停止">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stop:" destination="vXZ-lx-hvc" eventType="touchDown" id="DeQ-Ht-nRK"/>
+                                    <action selector="stop:" destination="K7z-FW-NLX" eventType="touchUpInside" id="Vci-09-QyO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="US4-ff-Vg6">
+                                <rect key="frame" x="25" y="560" width="134" height="30"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="开始">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="start:" destination="vXZ-lx-hvc" eventType="touchDown" id="hAl-ic-I66"/>
+                                    <action selector="start:" destination="K7z-FW-NLX" eventType="touchUpInside" id="v88-Kt-J8q"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7F-hh-3NC">
+                                <rect key="frame" x="20" y="20" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="US4-ff-Vg6" firstAttribute="leading" secondItem="14v-ef-cVg" secondAttribute="leadingMargin" constant="5" id="4TP-qV-IoQ"/>
+                            <constraint firstItem="V5Q-Iq-N5O" firstAttribute="top" secondItem="jb8-xJ-Njw" secondAttribute="bottom" constant="10" id="4iS-4S-ga5"/>
+                            <constraint firstItem="V5Q-Iq-N5O" firstAttribute="top" secondItem="QQz-dS-fVU" secondAttribute="bottom" constant="10" id="6Gj-wa-24K"/>
+                            <constraint firstItem="V5Q-Iq-N5O" firstAttribute="top" secondItem="US4-ff-Vg6" secondAttribute="bottom" constant="10" id="B5v-IT-LjX"/>
+                            <constraint firstItem="QQz-dS-fVU" firstAttribute="leading" secondItem="US4-ff-Vg6" secondAttribute="trailing" constant="5" id="F3N-ty-fW3"/>
+                            <constraint firstItem="qP6-PR-jFh" firstAttribute="leading" secondItem="jb8-xJ-Njw" secondAttribute="trailing" constant="5" id="MIb-Nk-bYA"/>
+                            <constraint firstItem="jb8-xJ-Njw" firstAttribute="width" secondItem="qP6-PR-jFh" secondAttribute="width" id="Ob4-9j-tAL"/>
+                            <constraint firstItem="V5Q-Iq-N5O" firstAttribute="top" secondItem="qP6-PR-jFh" secondAttribute="bottom" constant="10" id="XR2-U4-RMd"/>
+                            <constraint firstItem="N7F-hh-3NC" firstAttribute="top" secondItem="DmI-22-LED" secondAttribute="bottom" id="eHf-oz-zLN"/>
+                            <constraint firstItem="N7F-hh-3NC" firstAttribute="leading" secondItem="14v-ef-cVg" secondAttribute="leadingMargin" id="gsa-tu-PNT"/>
+                            <constraint firstItem="QQz-dS-fVU" firstAttribute="width" secondItem="jb8-xJ-Njw" secondAttribute="width" id="i15-3w-Tzo"/>
+                            <constraint firstItem="jb8-xJ-Njw" firstAttribute="leading" secondItem="QQz-dS-fVU" secondAttribute="trailing" constant="5" id="m0W-mz-tkx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qP6-PR-jFh" secondAttribute="trailing" constant="5" id="vLr-ze-21T"/>
+                            <constraint firstItem="US4-ff-Vg6" firstAttribute="width" secondItem="QQz-dS-fVU" secondAttribute="width" id="yjD-qd-ehz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="infoLabel" destination="N7F-hh-3NC" id="6cp-l0-pbK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nPw-LS-zA2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32" y="987"/>
+        </scene>
         <!--Advanced Barrage Controller-->
         <scene sceneID="4JM-P8-qhO">
             <objects>
@@ -158,7 +251,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tv7-LH-YlI">
-                                <rect key="frame" x="104" y="560" width="74" height="30"/>
+                                <rect key="frame" x="104" y="560" width="75" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="加载">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -169,7 +262,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Lk-Xc-MSu">
-                                <rect key="frame" x="183" y="560" width="74.5" height="30"/>
+                                <rect key="frame" x="184" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="混排A">
@@ -181,7 +274,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krM-US-R8H">
-                                <rect key="frame" x="262.5" y="560" width="74" height="30"/>
+                                <rect key="frame" x="263" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="混排B">
@@ -193,7 +286,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKF-ah-GqY">
-                                <rect key="frame" x="341.5" y="560" width="74.5" height="30"/>
+                                <rect key="frame" x="342" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="快退5s">
@@ -205,7 +298,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYN-Gn-HPJ">
-                                <rect key="frame" x="421.5" y="560" width="74" height="30"/>
+                                <rect key="frame" x="421" y="560" width="75" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="快进5s">
@@ -217,7 +310,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIw-9h-bxg">
-                                <rect key="frame" x="500.5" y="560" width="74.5" height="30"/>
+                                <rect key="frame" x="501" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="基本">
@@ -229,7 +322,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWt-Ff-9Ap">
-                                <rect key="frame" x="25" y="560" width="74.5" height="30"/>
+                                <rect key="frame" x="25" y="560" width="74" height="30"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.061897021609999998" blue="0.098817023879999993" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="开始">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

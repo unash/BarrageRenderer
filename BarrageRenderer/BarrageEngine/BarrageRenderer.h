@@ -101,6 +101,9 @@
 /// 加载已经存在的弹幕,如果已经start, 会立刻被调用receive; 否则, 会等到start的时候再调用receive.
 - (void)load:(NSArray *)descriptors;
 
+/// 注册BarrageLoader模块，注册后自动读取Loader所解析的描述符
+- (void)registerModules:(NSArray *)loaders;
+
 /// 弹幕记录数组.
 - (NSArray *)records;
 
