@@ -42,7 +42,6 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     BarrageCanvas * _canvas; // 画布
     BarrageClock * _clock;
     NSMutableDictionary * _spriteClassMap;
-    __block NSTimeInterval _time;
     NSMutableDictionary * _context; // 渲染器上下文
     
     NSMutableArray * _preloadedDescriptors; //预加载的弹幕
@@ -56,10 +55,12 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     BOOL _firstLoaded;
 }
 @property(nonatomic,assign)NSTimeInterval pausedDuration; // 暂停时间
+@property(nonatomic,assign)NSTimeInterval time;
 @end
 
 @implementation BarrageRenderer
 @synthesize pausedDuration = _pausedDuration;
+@synthesize time = _time;
 #pragma mark - init
 - (instancetype)init
 {
@@ -85,7 +86,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     __weak id weakSelf = self;
     _clock = [BarrageClock clockWithHandler:^(NSTimeInterval time){
         BarrageRenderer * strongSelf = weakSelf;
-        _time = time;
+        strongSelf.time = time;
         [strongSelf update];
     }];
 }
