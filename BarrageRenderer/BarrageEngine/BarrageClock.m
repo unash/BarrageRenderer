@@ -29,7 +29,7 @@
 {
     void (^_block)(NSTimeInterval time);
     CADisplayLink * _displayLink; // 周期
-    NSDate * _previousDate; // 上一次更新时间
+    CFTimeInterval _previousDate; // 上一次更新时间
     CGFloat _pausedSpeed; // 暂停之前的时间流速
 }
 ///是否处于启动状态
@@ -76,7 +76,7 @@
     }
     else
     {
-        _previousDate = [NSDate date];
+        _previousDate = CACurrentMediaTime();
         [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
         self.launched = YES;
     }
@@ -106,8 +106,8 @@
 /// 更新逻辑时间系统
 - (void)updateTime
 {
-    NSDate * currentDate = [NSDate date];
-    self.time += [currentDate timeIntervalSinceDate:_previousDate] * self.speed;
+    CFTimeInterval currentDate = CACurrentMediaTime();
+    self.time += (currentDate - _previousDate) * self.speed;
     _previousDate = currentDate;
 }
 
