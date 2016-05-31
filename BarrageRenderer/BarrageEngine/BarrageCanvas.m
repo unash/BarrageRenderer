@@ -35,6 +35,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
         _margin = UIEdgeInsetsZero;
+        _masked = YES;
     }
     return self;
 }
@@ -60,6 +61,16 @@
 {
     [self setNeedsLayout];
     [self layoutIfNeeded];
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    if (self.masked) return [super hitTest:point withEvent:event];
+    for (UIView *view in self.subviews) {
+        UIView *responder = [view hitTest:[view convertPoint:point fromView:self] withEvent:event];
+        if (responder) return responder;
+    }
+    return nil;
 }
 
 @end

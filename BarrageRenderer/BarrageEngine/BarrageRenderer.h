@@ -66,6 +66,8 @@
 
 /// 画布的边距
 @property(nonatomic,assign)UIEdgeInsets canvasMargin;
+/// 画布是否拦截事件
+@property(nonatomic,assign)BOOL masked;
 
 /// 调整弹幕整体速度, 需要>0, 否则会被抛弃.
 @property(nonatomic,assign)CGFloat speed;

@@ -28,4 +28,5 @@
 
 @interface BarrageCanvas : UIView
 @property(nonatomic, assign)UIEdgeInsets margin;
+@property(nonatomic, assign)BOOL masked; // canvas是否拦截事件, 默认 YES.
 @end

@@ -362,4 +362,8 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     _canvas.margin = canvasMargin;
 }
 
+- (void)setMasked:(BOOL)masked
+{
+    _canvas.masked = masked;
+}
 @end
