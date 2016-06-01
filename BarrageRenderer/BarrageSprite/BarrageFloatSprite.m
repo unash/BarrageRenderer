@@ -41,6 +41,8 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
     if (self = [super init]) {
         _direction = BarrageFloatDirectionT2B;
         _trackNumber = 40;
+        _fadeInTime = 0.0f;
+        _fadeOutTime = 0.0f;
         self.duration = 1.0f;
     }
     return self;
@@ -56,6 +58,13 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
 {
     [super updateWithTime:time];
     _leftActiveTime = self.duration - (time - self.timestamp);
+    NSTimeInterval existingTime = time - self.timestamp;
+    if (_fadeOutTime > 0 && _leftActiveTime < _fadeOutTime) {
+        self.view.alpha = _leftActiveTime/_fadeOutTime;
+    }
+    if (_fadeInTime > 0 && existingTime < _fadeInTime) {
+        self.view.alpha = existingTime/_fadeOutTime;
+    }
 }
 
 - (NSTimeInterval)estimateActiveTime

@@ -43,4 +43,10 @@ typedef NS_ENUM(NSUInteger, BarrageFloatDirection) {
 /// 轨道数量
 @property(nonatomic,assign)NSUInteger trackNumber;
 
+/// 隐入时间, 默认0
+@property(nonatomic,assign)NSTimeInterval fadeInTime;
+
+/// 隐出时间, 默认0
+@property(nonatomic,assign)NSTimeInterval fadeOutTime;
+
 @end

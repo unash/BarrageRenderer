@@ -124,6 +124,8 @@
     descriptor.params[@"text"] = [NSString stringWithFormat:@"悬浮文字弹幕:%ld",(long)_index++];
     descriptor.params[@"textColor"] = [UIColor purpleColor];
     descriptor.params[@"duration"] = @(3);
+    descriptor.params[@"fadeInTime"] = @(1);
+    descriptor.params[@"fadeOutTime"] = @(1);
     descriptor.params[@"direction"] = @(direction);
     return descriptor;
 }
