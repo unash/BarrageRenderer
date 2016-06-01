@@ -50,7 +50,6 @@
 {
     if (self = [super init]) {
         _block = block;
-        [self reset];
     }
     return self;
 }
@@ -71,11 +70,10 @@
 
 - (void)start
 {
+    [self reset];
     if (self.launched) {
         _speed = _pausedSpeed;
-    }
-    else
-    {
+    } else {
         _previousDate = [NSDate date];
         [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
         self.launched = YES;
@@ -100,7 +98,7 @@
 - (void)stop
 {
     [_displayLink invalidate];
-    [self reset];
+    _displayLink = nil;
 }
 
 /// 更新逻辑时间系统
