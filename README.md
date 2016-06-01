@@ -40,7 +40,10 @@
 弹幕支持的属性可参照 ``` BarrageSpriteProtocol.h ``` 文件. 以及在 BarrageSprite 族的属性
 
 #### 图文混排弹幕
-最简单的弹幕只是文本, 但有时候你可能需要添加emoji表情或者图片上去。emoji表情是UTF字符集原生支持的，对待他和其他的文本字符没有区别；对于图片，你有两种方式可以添加图片弹幕, 一种是使用 attributedText 设置属性文本，一种是自定义 view. 自定义 view 可以参考 BarrageWalkImageTextSprite。 需要注意的是，如果 ``` - (UIView *)bindingView ``` 方法返回的是你自定义的 view，你需要覆盖你自定义 view 的 ``` - (void)sizeToFit ``` 方法，返回正确的 view 大小。
+最简单的弹幕只是文本, 但有时候你可能需要添加emoji表情或者图片上去。emoji表情是UTF字符集原生支持的，对待他和其他的文本字符没有区别；对于图片，你有两种方式可以添加图片弹幕, 一种是使用 attributedText 设置属性文本，一种是自定义 view. 自定义 view 可以参考 BarrageWalkImageTextSprite。 需要注意的是，如果 ``` - (UIView *)bindingView ``` 方法返回的是你自定义的 view，你需要覆盖你自定义 view 的 ``` - (CGSize)sizeThatFits ``` 方法，返回正确的 view 大小。
+
+#### 直接在 Sprite 子类中布局元素
+你可能在方法 ``` - (UIView *)bindingView ``` 中创建了许多视图元素，而并非返回一个自定义 view，因此，这时候你并不方便自定义 view 的 ``` - (CGSize)sizeThatFits ``` 方法，为此你可以选择覆盖 BarrageSprite 的 size 属性的 ``` - (CGSize)size ``` 方法，在此方法中返回你的弹幕 view 的大小。当然，在 ``` - (UIView *)bindingView ``` 里你要设置各个子 view 的位置，以及处理一些可变大小元素比如 UILabel 的布局问题。
 
 #### 如何调节轨道数量
 
@@ -67,11 +70,17 @@
 
 #### 如何设置弹幕速率与文本长度正相关
 一些弹幕组件的速度会与文本长度成正比，这在 BarrageRenderer 中实现起来也十分容易。在创建弹幕描述符 BarrageDescriptor 的时候，根据文本长度设置 BarrageSprite 的速度值即可。
+
 #### 为弹幕添加点击操作
 BarrageRenderer 默认关闭了交互行为的，但如果需要，你可以启用，只需两步：
 
 1. BarrageRenderer.view.userInteractionEnabled = YES;
 2. 为 descriptor.params[@"clickAction"] 添加参数
+
+#### 如何使事件透传到底层(业务)view
+开启 BarrageRenderer.view.userInteractionEnabled 之后，所有的事件都会被 BarrageRenderer 拦截掉而到不了你的业务 view，这时候你如果在你的业务 View 上添加一个 Button，而 BarrageRenerer.view 又在 Button 之上的话，那么点击这个 Button 是无效的。你可以设置只拦截弹幕上的事件，而将 BarrageRenderer.view 上的事件透传。通过设置属性：
+
+* BarrageRenderer.masked = NO; // 默认为YES
 
 #### 如何对弹幕进行限流
 通过 ``` - (NSInteger)spritesNumberWithName:(NSString *)spriteName; ``` 方法可以获取屏幕上当前的弹幕数量，你可以在调用 BarrageRenderer 的 receive 方法之前，获取屏幕上的弹幕数量，然后根据一定的规则决定要不要添加这条弹幕。
