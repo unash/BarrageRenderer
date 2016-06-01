@@ -45,6 +45,13 @@
 #### 直接在 Sprite 子类中布局元素
 你可能在方法 ``` - (UIView *)bindingView ``` 中创建了许多视图元素，而并非返回一个自定义 view，因此，这时候你并不方便自定义 view 的 ``` - (CGSize)sizeThatFits ``` 方法，为此你可以选择覆盖 BarrageSprite 的 size 属性的 ``` - (CGSize)size ``` 方法，在此方法中返回你的弹幕 view 的大小。当然，在 ``` - (UIView *)bindingView ``` 里你要设置各个子 view 的位置，以及处理一些可变大小元素比如 UILabel 的布局问题。
 
+### 外部设置弹幕元素的大小
+你也可以在创建弹幕描述符的时候强制指定弹幕元素的大小。通过设置：
+
+``` BarrageDescriptor.params[@"mandatorySize"] ```
+
+设置此属性之后，你自定义的弹幕 view 的 ``` - (CGSize)sizeThatFits ``` 将不再起作用，但是覆盖的 ``` - (CGSize)size ``` 方法仍然是有效的，因为它的优先级比较高。
+
 #### 如何调节轨道数量
 
 继承自 BarrageFloatSprite 与 BarrageWalkSprite 的弹幕都有 trackNumber 属性，你可以用它来设置弹幕轨道数量。在宏 STRIP_NUM 中规定了最大的轨道数量。需要注意的是，BarrageRenderer 中的轨道概念比其他一些弹幕库的轨道概念更复杂，用它可以比较精确地进行冲突检测。当你的弹幕 view 拥有不同大小的时候，你会意识到他的威力。
