@@ -23,7 +23,7 @@
 
 ## 使用方式
 1. 下载版本库,进入BarrageRendererDemo目录. 运行pod update拉取相关库, 即可以运行BarrageRendererDemo.xcworkspace
-2. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', '1.8.0'*  并在工程目录下的命令行中运行 pod update
+2. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', '1.8.1'*  并在工程目录下的命令行中运行 pod update
 3. 或者将代码下载下来, 将BarrageRenderer/目录添加到您的工程当中
 4. 在需要使用弹幕渲染功能的地方 ``` #import <BarrageRenderer/BarrageRenderer.h> ```
 5. 创建BarrageRenderer,添加BarrageRenderer.view, 执行start方法, 通过receive方法输入弹幕描述符descriptor, 即可以显示弹幕. 详见demo.
