@@ -39,6 +39,17 @@
 
 弹幕支持的属性可参照 ``` BarrageSpriteProtocol.h ``` 文件. 以及在 BarrageSprite 族的属性
 
+#### 设置靠边位置
+1.9.0 版本支持为过场弹幕与悬浮弹幕设置"靠边"属性。对于过场弹幕，可设置side(BarrageWalkSide)属性；对于悬浮弹幕，可设置side(BarrageFloatSide)属性。代码表现为：
+
+```
+descriptor.params[@"side"] = @(BarrageWalkSideRight); // 过场弹幕中，靠右侧行驶
+```
+```
+descriptor.params[@"side"] = @(BarrageFloatSideLeft); // 悬浮弹幕中，靠屏幕左侧堆叠
+```
+具体，可参考代码注释，以及demo中的使用范例。
+
 #### 设置隐入隐出
 1.8.0 版本新增属性，仅对悬浮弹幕有效，设置如下：
 
