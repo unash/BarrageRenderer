@@ -33,10 +33,11 @@ typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
     BarrageWalkDirectionB2T = 4   // 下往上
 };
 
+///注: 此处侧边的含义与悬浮弹幕(BarrageFloatSide)并不相同!
 typedef NS_ENUM(NSUInteger, BarrageWalkSide) {
     BarrageWalkSideDefault = 0,   // 默认,根据选择的方向而定
-    BarrageWalkSideRight   = 1,   // 靠右侧行驶
-    BarrageWalkSideLeft    = 2    // 靠左侧行驶
+    BarrageWalkSideRight   = 1,   // 靠右侧行驶,运动方向的右手法则
+    BarrageWalkSideLeft    = 2    // 靠左侧行驶,运动方向的左手法则
 };
 
 /// 移动文字精灵

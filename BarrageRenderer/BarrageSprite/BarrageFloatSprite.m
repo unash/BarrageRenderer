@@ -43,6 +43,7 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
         _trackNumber = 40;
         _fadeInTime = 0.0f;
         _fadeOutTime = 0.0f;
+        _side = BarrageFloatSideCenter;
         self.duration = 1.0f;
     }
     return self;
@@ -82,7 +83,7 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
     // 获取同方向精灵
     NSMutableArray * synclasticSprites = [[NSMutableArray alloc]initWithCapacity:sprites.count];
     for (BarrageFloatSprite * sprite in sprites) {
-        if (sprite.direction == _direction) {
+        if (sprite.direction == _direction && sprite.side == self.side) {
             [synclasticSprites addObject:sprite];
         }
     }
@@ -137,6 +138,13 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
     
     CGPoint origin = CGPointZero;
     origin.x = (rect.origin.x+rect.size.width-self.size.width)/2;
+    if (self.side == BarrageFloatSideRight) {
+        origin.x = rect.origin.x+rect.size.width-self.size.width;
+    }
+    else if (self.side == BarrageFloatSideLeft)
+    {
+        origin.x = rect.origin.x;
+    }
     origin.y = down?(stripHeight * availableFrom+rect.origin.y):(rect.origin.y+rect.size.height-stripHeight * availableFrom - self.size.height);
     return origin;
 }

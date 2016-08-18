@@ -93,10 +93,15 @@
     if (spriteNumber <= 500) { // 用来演示如何限制屏幕上的弹幕量
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideLeft]];
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
+        
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideLeft]];
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideRight]];
+        
+        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionB2T side:BarrageFloatSideCenter]];
+        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionT2B side:BarrageFloatSideLeft]];
+        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionT2B side:BarrageFloatSideRight]];
+        
         [_renderer receive:[self walkImageSpriteDescriptorWithDirection:BarrageWalkDirectionL2R]];
-        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionB2T]];
         [_renderer receive:[self walkImageSpriteDescriptorWithDirection:BarrageWalkDirectionL2R]];
         [_renderer receive:[self floatImageSpriteDescriptorWithDirection:BarrageFloatDirectionT2B]];
     }
@@ -130,6 +135,12 @@
 /// 生成精灵描述 - 浮动文字弹幕
 - (BarrageDescriptor *)floatTextSpriteDescriptorWithDirection:(NSInteger)direction
 {
+    return [self floatTextSpriteDescriptorWithDirection:direction side:BarrageFloatSideCenter];
+}
+
+/// 生成精灵描述 - 浮动文字弹幕
+- (BarrageDescriptor *)floatTextSpriteDescriptorWithDirection:(NSInteger)direction side:(BarrageFloatSide)side
+{
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spriteName = NSStringFromClass([BarrageFloatTextSprite class]);
     descriptor.params[@"text"] = [NSString stringWithFormat:@"悬浮文字弹幕:%ld",(long)_index++];
@@ -138,6 +149,7 @@
     descriptor.params[@"fadeInTime"] = @(1);
     descriptor.params[@"fadeOutTime"] = @(1);
     descriptor.params[@"direction"] = @(direction);
+    descriptor.params[@"side"] = @(side);
     return descriptor;
 }
 

@@ -31,6 +31,13 @@ typedef NS_ENUM(NSUInteger, BarrageFloatDirection) {
     BarrageFloatDirectionB2T = 2      // 下往上
 };
 
+///注: 此处侧边的含义与过场弹幕(BarrageWalkSide)并不相同!
+typedef NS_ENUM(NSUInteger, BarrageFloatSide) {
+    BarrageFloatSideCenter = 0,     // 居中,默认值
+    BarrageFloatSideRight  = 1,     // 靠右侧,屏幕右侧
+    BarrageFloatSideLeft   = 2      // 靠左侧,屏幕左侧
+};
+
 /// 悬浮文字精灵
 @interface BarrageFloatSprite : BarrageSprite
 
@@ -39,6 +46,9 @@ typedef NS_ENUM(NSUInteger, BarrageFloatDirection) {
 
 /// 方向
 @property(nonatomic,assign)BarrageFloatDirection direction;
+
+/// 运动侧边
+@property(nonatomic,assign)BarrageFloatSide side;
 
 /// 轨道数量
 @property(nonatomic,assign)NSUInteger trackNumber;
