@@ -90,8 +90,12 @@
 {
     NSInteger spriteNumber = [_renderer spritesNumberWithName:nil];
     self.infoLabel.text = [NSString stringWithFormat:@"当前屏幕弹幕数量: %ld",(long)spriteNumber];
-    if (spriteNumber <= 50) { // 用来演示如何限制屏幕上的弹幕量
-        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L]];
+    if (spriteNumber <= 500) { // 用来演示如何限制屏幕上的弹幕量
+        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideLeft]];
+        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
+        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideLeft]];
+        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideRight]];
+        [_renderer receive:[self walkImageSpriteDescriptorWithDirection:BarrageWalkDirectionL2R]];
         [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionB2T]];
         [_renderer receive:[self walkImageSpriteDescriptorWithDirection:BarrageWalkDirectionL2R]];
         [_renderer receive:[self floatImageSpriteDescriptorWithDirection:BarrageFloatDirectionT2B]];
@@ -101,7 +105,13 @@
 #pragma mark - 弹幕描述符生产方法
 
 /// 生成精灵描述 - 过场文字弹幕
-- (BarrageDescriptor *)walkTextSpriteDescriptorWithDirection:(NSInteger)direction
+- (BarrageDescriptor *)walkTextSpriteDescriptorWithDirection:(BarrageWalkDirection)direction
+{
+    return [self walkTextSpriteDescriptorWithDirection:direction side:BarrageWalkSideDefault];
+}
+
+/// 生成精灵描述 - 过场文字弹幕
+- (BarrageDescriptor *)walkTextSpriteDescriptorWithDirection:(BarrageWalkDirection)direction side:(BarrageWalkSide)side
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
@@ -109,6 +119,7 @@
     descriptor.params[@"textColor"] = [UIColor blueColor];
     descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);
     descriptor.params[@"direction"] = @(direction);
+    descriptor.params[@"side"] = @(side);
     descriptor.params[@"clickAction"] = ^{
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"弹幕被点击" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
         [alertView show];

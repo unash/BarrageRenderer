@@ -42,10 +42,26 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
 {
     if (self = [super init]) {
         _direction = BarrageWalkDirectionR2L;
+        _side = BarrageWalkSideDefault;
         _speed = 30.0f; // 默认值
         _trackNumber = 40;
     }
     return self;
+}
+
+- (BarrageWalkSide)side
+{
+    if (_side != BarrageWalkSideDefault) return _side;
+    return [self defaultSideWithDirection:self.direction];
+}
+
+- (BarrageWalkSide)defaultSideWithDirection:(BarrageWalkDirection)direction
+{
+    if (direction == BarrageWalkDirectionR2L) return BarrageWalkSideRight;
+    else if (direction == BarrageWalkDirectionL2R) return BarrageWalkSideLeft;
+    else if (direction == BarrageWalkDirectionT2B) return BarrageWalkSideRight;
+    else if (direction == BarrageWalkDirectionB2T) return BarrageWalkSideLeft;
+    return BarrageWalkSideRight; // Chinese way
 }
 
 #pragma mark - update
@@ -94,7 +110,7 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
     // 获取同方向精灵
     NSMutableArray * synclasticSprites = [[NSMutableArray alloc]initWithCapacity:sprites.count];
     for (BarrageWalkSprite * sprite in sprites) {
-        if (sprite.direction == _direction) {
+        if (sprite.direction == _direction && sprite.side == self.side) { // 找寻同道中人
             [synclasticSprites addObject:sprite];
         }
     }
@@ -106,6 +122,7 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
     CGFloat stripHeight = rect.size.height/stripNum; // 水平条高度
     CGFloat stripWidth = rect.size.width/stripNum; // 竖直条宽度
     BOOL oritation = _direction == BarrageWalkDirectionL2R || _direction == BarrageWalkDirectionR2L; // 方向, YES代表水平弹幕
+    BOOL rotation = self.side == [self defaultSideWithDirection:_direction];
     /// 计算数据结构,便于应用算法
     NSUInteger overlandStripNum = 1; // 横跨网格条数目
     if (oritation) { // 水平
@@ -125,6 +142,11 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
         //寻找当前行里包含的sprites
         CGFloat stripFrom = i * (oritation?stripHeight:stripWidth);
         CGFloat stripTo = stripFrom + (oritation?stripHeight:stripWidth);
+        if (!rotation) {
+            CGFloat preStripFrom = stripFrom;
+            stripFrom = (oritation?rect.size.height:rect.size.width) - stripTo;
+            stripTo = (oritation?rect.size.height:rect.size.width) - preStripFrom;
+        }
         CGFloat lastDistanceAllOut = YES;
         for (BarrageWalkSprite * sprite in synclasticSprites) {
             CGFloat spriteFrom = oritation?sprite.origin.y:sprite.origin.x;
@@ -160,13 +182,13 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
     
     CGPoint origin = CGPointZero;
     if (oritation) { // 水平
-        _destination.y = origin.y = stripHeight * availableFrom+rect.origin.y;
+        _destination.y = origin.y = (rotation?stripHeight*availableFrom:rect.size.height-stripHeight * availableFrom-self.size.height)+rect.origin.y;
         origin.x = (self.direction == BarrageWalkDirectionL2R)?rect.origin.x - self.size.width:rect.origin.x + rect.size.width;
         _destination.x = (self.direction == BarrageWalkDirectionL2R)?rect.origin.x + rect.size.width:rect.origin.x - self.size.width;
     }
     else
     {
-        _destination.x = origin.x = stripWidth * availableFrom + rect.origin.x;
+        _destination.x = origin.x = (rotation?stripWidth*availableFrom:rect.size.width-stripWidth*availableFrom -self.size.width)+rect.origin.x;
         origin.y = (self.direction == BarrageWalkDirectionT2B)?rect.origin.y - self.size.height:rect.origin.y + rect.size.height;
         _destination.y = (self.direction == BarrageWalkDirectionT2B)?rect.origin.y + rect.size.height:rect.origin.y - self.size.height;
     }
