@@ -43,8 +43,11 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (self.superview && !CGRectEqualToRect(self.frame, self.superview.bounds)) {
-        self.frame = UIEdgeInsetsInsetRect(self.superview.bounds, self.margin);
+    if (self.superview) {
+        CGRect frame = UIEdgeInsetsInsetRect(self.superview.bounds, self.margin);
+        if (!CGRectEqualToRect(self.frame, frame)) {
+            self.frame = frame;
+        }
     }
 }
 
