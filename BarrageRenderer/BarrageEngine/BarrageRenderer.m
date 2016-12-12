@@ -315,6 +315,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     [self indexRemoveSprite:sprite];
     [sprite.view removeFromSuperview];
+    [sprite deactive];
 }
 
 - (NSTimeInterval)timeForBarrageDispatcher:(BarrageDispatcher *)dispatcher

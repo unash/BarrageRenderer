@@ -11,24 +11,12 @@
 
 @implementation BarrageWalkImageTextSprite
 
-- (UIView *)bindingView
+- (instancetype)init
 {
-    MLEmojiLabel * label = [[MLEmojiLabel alloc]initWithFrame:CGRectZero];
-    label.text = self.text;
-    label.textColor = self.textColor;
-    label.font = [UIFont systemFontOfSize:self.fontSize];
-    if (self.cornerRadius > 0) {
-        label.layer.cornerRadius = self.cornerRadius;
-        label.clipsToBounds = YES;
+    if (self = [super init]) {
+        _viewClassName = @"MLEmojiLabel";
     }
-    label.layer.borderColor = self.borderColor.CGColor;
-    label.layer.borderWidth = self.borderWidth;
-    label.backgroundColor = self.backgroundColor;
-    
-    label.backgroundColor = [UIColor clearColor];
-    label.lineBreakMode = NSLineBreakByCharWrapping;
-    label.isNeedAtAndPoundSign = YES;
-    return label;
+    return self;
 }
 
 @end

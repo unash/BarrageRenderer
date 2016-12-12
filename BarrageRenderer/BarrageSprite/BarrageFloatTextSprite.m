@@ -28,39 +28,18 @@
 
 @implementation BarrageFloatTextSprite
 
-@synthesize fontSize = _fontSize;
-@synthesize textColor = _textColor;
-@synthesize text = _text;
-@synthesize fontFamily = _fontFamily;
-@synthesize shadowColor = _shadowColor;
-@synthesize shadowOffset = _shadowOffset;
-@synthesize attributedText = _attributedText;
-
 - (instancetype)init
 {
     if (self = [super init]) {
-        _textColor = [UIColor blackColor];
-        _fontSize = 16.0f;
-        _shadowColor = nil;
-        _shadowOffset = CGSizeMake(0, -1);
+        _viewClassName = NSStringFromClass([UILabel class]);
     }
     return self;
 }
 
-#pragma mark - launch
-
-- (UIView *)bindingView
+- (void)restoreViewState
 {
-    UILabel * label = [[UILabel alloc]init];
-    label.text = self.text;
-    label.textColor = self.textColor;
-    label.shadowColor = _shadowColor;
-    label.shadowOffset = _shadowOffset;
-    label.font = self.fontFamily?[UIFont fontWithName:self.fontFamily size:self.fontSize]:[UIFont systemFontOfSize:self.fontSize];
-    if (self.attributedText) {
-        label.attributedText = self.attributedText;
-    }
-    return label;
+    [super restoreViewState];
+    self.view.alpha = 1.0f;
 }
 
 @end

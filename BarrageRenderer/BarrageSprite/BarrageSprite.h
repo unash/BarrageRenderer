@@ -37,13 +37,8 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 {
     CGPoint _origin;
     BOOL _valid;
-    UIView * _view;
-    
-    UIColor * _backgroundColor;
-    CGFloat _borderWidth;
-    UIColor * _borderColor;
-    CGFloat _cornerRadius;
     CGSize _mandatorySize;
+    NSString *_viewClassName;
 }
 
 /// 延时, 这个是相对于rendered的绝对时间/秒
@@ -71,18 +66,38 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 /// 是否有效,默认YES; 当过了动画时间之后,就会被标记成NO; 永世不得翻身;子类可能需要在 updateWithTime: 中修改 _valid成员变量
 @property(nonatomic,assign,readonly,getter=isValid)BOOL valid;
 
-/// 输出的view,这样就不必自己再绘制图形了,并且可以使用硬件加速
-@property(nonatomic,strong,readonly)UIView * view;
+#pragma mark - reusableView
 
-#pragma mark - called
+/// 输出的view,这样就不必自己再绘制图形了,并且可以使用硬件加速
+@property(nonatomic,strong)UIView<BarrageViewProtocol> * view;
+
+@property(nonatomic,strong,readonly)NSString *viewClassName;
+
+@property(nonatomic,strong)NSDictionary *viewParams;
+
+/// 强制性大小,默认为CGSizeZero,大小自适应; 否则使用mandatorySize的值来设置view大小
+@property(nonatomic,assign)CGSize mandatorySize;
+
+#pragma mark - called, part of lifecycle
 
 /// 结合相关上下文激活精灵; 如要覆盖, 请要先调用super方法
 - (void)activeWithContext:(NSDictionary *)context;
+
+/// 结合相关上下文失活精灵; 如要覆盖, 请要先调用super方法
+- (void)deactive;
 
 /// 用相对时间更新状态; 最好不要覆盖此方法; 如要覆盖, 请要先调用super方法
 - (void)updateWithTime:(NSTimeInterval)time;
 
 #pragma mark - override -
+
+#pragma mark invalid&valid
+
+/// 恢复view状态，将要失效时使用
+- (void)restoreViewState;
+
+/// 初始化view状态
+- (void)initializeViewState;
 
 #pragma mark update
 /// _position, 此时刻的位置
@@ -94,8 +109,5 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 #pragma mark launch
 /// 返回弹幕的初始位置
 - (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites;
-
-/// 绑定的view
-- (UIView *)bindingView;
 
 @end

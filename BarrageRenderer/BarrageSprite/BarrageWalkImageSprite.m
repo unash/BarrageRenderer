@@ -28,23 +28,12 @@
 
 @implementation BarrageWalkImageSprite
 
-@synthesize image = _image;
-
 - (instancetype)init
 {
     if (self = [super init]) {
-        _image = nil;
+        _viewClassName = NSStringFromClass([UIImageView class]);
     }
     return self;
-}
-
-#pragma mark - launch
-
-- (UIView *)bindingView
-{
-    UIImageView * imageView = [[UIImageView alloc]init];
-    imageView.image = _image;
-    return imageView;
 }
 
 @end

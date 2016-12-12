@@ -27,6 +27,6 @@
 #import "BarrageFloatSprite.h"
 
 /// 悬浮文字精灵
-@interface BarrageFloatImageSprite : BarrageFloatSprite<BarrageImageProtocol>
+@interface BarrageFloatImageSprite : BarrageFloatSprite
 
 @end

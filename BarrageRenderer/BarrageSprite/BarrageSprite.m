@@ -25,23 +25,21 @@
 // THE SOFTWARE.
 
 #import "BarrageSprite.h"
+#import "BarrageViewPool.h"
 
 @interface BarrageSprite()
-
+@property(nonatomic,strong)UITapGestureRecognizer *tapGestureRecognizer;
 @end
 
 @implementation BarrageSprite
 
-@synthesize backgroundColor = _backgroundColor;
-@synthesize borderWidth = _borderWidth;
-@synthesize borderColor = _borderColor;
-@synthesize cornerRadius = _cornerRadius;
 @synthesize mandatorySize = _mandatorySize;
 @synthesize clickAction = _clickAction;
 
 @synthesize origin = _origin;
 @synthesize valid = _valid;
 @synthesize view = _view;
+@synthesize viewClassName = _viewClassName;
 
 - (instancetype)init
 {
@@ -52,11 +50,9 @@
         _origin.x = _origin.y = MAXFLOAT;
         _z_index = 0;
         
-        _backgroundColor = [UIColor clearColor];
-        _borderWidth = 0.0f;
-        _borderColor = [UIColor clearColor];
-        _cornerRadius = 0.0f;
         _mandatorySize = CGSizeZero;
+        
+        _viewClassName = NSStringFromClass([UIView class]);
     }
     return self;
 }
@@ -79,7 +75,7 @@
     return YES;
 }
 
-#pragma mark - launch
+#pragma mark - active and deactive
 
 - (void)activeWithContext:(NSDictionary *)context
 {
@@ -87,41 +83,54 @@
     NSArray * sprites = [context objectForKey:kBarrageRendererContextRelatedSpirts];
     NSTimeInterval timestamp = [[context objectForKey:kBarrageRendererContextTimestamp]doubleValue];
     _timestamp = timestamp;
-    _view = [self bindingView];
-    [self configView];
-    [_view sizeToFit];
+    [[BarrageViewPool mainPool]assembleBarrageViewForSprite:self];
+    [self initializeViewState];
+    [self.view sizeToFit];
     if (!CGSizeEqualToSize(_mandatorySize, CGSizeZero)) {
-        _view.frame = CGRectMake(0, 0, _mandatorySize.width, _mandatorySize.height);
+        self.view.frame = CGRectMake(0, 0, _mandatorySize.width, _mandatorySize.height);
     }
     _origin = [self originInBounds:rect withSprites:sprites];
-    _view.frame = CGRectMake(_origin.x, _origin.y, self.size.width, self.size.height);
+    self.view.frame = CGRectMake(_origin.x, _origin.y, self.size.width, self.size.height);
 }
 
-- (void)configView
+- (void)deactive
 {
-    if (self.cornerRadius > 0) {
-        _view.layer.cornerRadius = self.cornerRadius;
-        _view.clipsToBounds = YES;
+    [self restoreViewState];
+    [[BarrageViewPool mainPool]reclaimBarrageViewForSprite:self];
+}
+
+/// 恢复view状态，初始化view时使用
+- (void)restoreViewState
+{
+    if (self.clickAction) {
+        self.view.userInteractionEnabled = NO;
+        [self.view removeGestureRecognizer:self.tapGestureRecognizer];
     }
-    _view.layer.borderColor = self.borderColor.CGColor;
-    _view.layer.borderWidth = self.borderWidth;
-    _view.backgroundColor = self.backgroundColor;
+}
+
+- (void)initializeViewState
+{
+    self.view.frame = CGRectZero;
+    [self.view configureWithParams:self.viewParams];
     if (self.clickAction) {
         _view.userInteractionEnabled = YES;
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickSpriteView)];
-        [_view addGestureRecognizer:gesture];
+        [_view addGestureRecognizer:self.tapGestureRecognizer];
     }
+}
+
+#pragma mark - gesture
+
+- (UIGestureRecognizer *)tapGestureRecognizer
+{
+    if (!_tapGestureRecognizer) {
+        _tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickSpriteView)];
+    }
+    return _tapGestureRecognizer;
 }
 
 - (void)clickSpriteView
 {
     if (self.clickAction) self.clickAction();
-}
-
-/// 返回绑定的view
-- (UIView *)bindingView
-{
-    return [[UIView alloc]init];
 }
 
 ///  区域内的初始位置,只在刚加入渲染器的时候被调用;子类继承需要override.
@@ -152,7 +161,7 @@
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
 #ifdef DEBUG
-    NSLog(@"[Class:%@] hasNo - [Property:%@]; [Value:%@] will be discarded.",NSStringFromClass([self class]),key,value);
+    // NSLog(@"[Class:%@] hasNo - [Property:%@]; [Value:%@] will be discarded.",NSStringFromClass([self class]),key,value);
 #endif
 }
 

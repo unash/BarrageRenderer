@@ -27,6 +27,6 @@
 #import "BarrageWalkSprite.h"
 
 /// 移动文字精灵
-@interface BarrageWalkTextSprite : BarrageWalkSprite<BarrageTextProtocol>
+@interface BarrageWalkTextSprite : BarrageWalkSprite
 
 @end

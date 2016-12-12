@@ -45,6 +45,8 @@
             id value = descriptor.params[key];
             [sprite setValue:value forKey:key];
         }
+        //TODO: 临时这么简单粗暴
+        sprite.viewParams = descriptor.params;
     }
     return sprite;
 }
