@@ -148,6 +148,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     _startTime = nil;
     [_clock stop];
+    _pausedDuration = 0.0f;
     [_dispatcher deactiveAllSprites];
 }
 
