@@ -29,6 +29,7 @@
 
 @interface BarrageSprite()
 @property(nonatomic,strong)UITapGestureRecognizer *tapGestureRecognizer;
+@property(nonatomic,assign)BOOL forcedInvalid;
 @end
 
 @implementation BarrageSprite
@@ -49,7 +50,7 @@
         _valid = YES;
         _origin.x = _origin.y = MAXFLOAT;
         _z_index = 0;
-        
+        _forcedInvalid = NO;
         _mandatorySize = CGSizeZero;
         
         _viewClassName = NSStringFromClass([UIView class]);
@@ -61,7 +62,7 @@
 
 - (void)updateWithTime:(NSTimeInterval)time
 {
-    _valid = [self validWithTime:time];
+    _valid = !self.forcedInvalid && [self validWithTime:time];
     _view.frame = [self rectWithTime:time];
 }
 
@@ -73,6 +74,11 @@
 - (BOOL)validWithTime:(NSTimeInterval)time
 {
     return YES;
+}
+
+- (void)forceInvalid
+{
+    self.forcedInvalid = YES;
 }
 
 #pragma mark - active and deactive
@@ -96,6 +102,7 @@
 - (void)deactive
 {
     [self restoreViewState];
+    self.forcedInvalid = NO;
     [[BarrageViewPool mainPool]reclaimBarrageViewForSprite:self];
 }
 

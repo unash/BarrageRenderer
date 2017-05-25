@@ -86,6 +86,10 @@
 /// 获取当前屏幕弹幕数量,spriteName表示弹幕类名,如果传入nil,则计算屏幕显示出的所有弹幕数量.
 - (NSInteger)spritesNumberWithName:(NSString *)spriteName;
 
+/// 移除当前屏幕上的弹幕; 可在转屏幕的时候调用，以应对位置错乱的情况
+/// spriteName表示弹幕类名,如果传入nil,则计算屏幕显示出的所有弹幕数量.
+- (void)removePresentSpritesWithName:(NSString *)spriteName;
+
 /// 逻辑时间,露出参考.
 @property(nonatomic,assign,readonly)NSTimeInterval time;
 

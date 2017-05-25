@@ -220,6 +220,16 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     return number;
 }
 
+- (void)removePresentSpritesWithName:(NSString *)spriteName
+{
+    Class class = NSClassFromString(spriteName);
+    for (BarrageSprite * sprite in _dispatcher.activeSprites) {
+        if (!class || [sprite class] == class) {
+            [sprite forceInvalid];
+        }
+    }
+}
+
 #pragma mark - record
 /// 此方法会修改desriptor的值
 - (void)recordDescriptor:(BarrageDescriptor *)descriptor

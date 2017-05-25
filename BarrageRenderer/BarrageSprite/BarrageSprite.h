@@ -33,7 +33,7 @@ extern NSString * const kBarrageRendererContextRelatedSpirts; // 相关精灵
 extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 
 /// 精灵基类
-@interface BarrageSprite : NSObject<BarrageViewProtocol, BarrageActionProtocol>
+@interface BarrageSprite : NSObject<BarrageActionProtocol>
 {
     CGPoint _origin;
     BOOL _valid;
@@ -105,6 +105,9 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 
 /// _valid, 此时刻是否还有效
 - (BOOL)validWithTime:(NSTimeInterval)time;
+
+/// 在本次弹幕周期内，强制将弹幕无效
+- (void)forceInvalid;
 
 #pragma mark launch
 /// 返回弹幕的初始位置

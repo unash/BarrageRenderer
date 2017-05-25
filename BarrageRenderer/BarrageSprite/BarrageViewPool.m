@@ -33,8 +33,19 @@
 {
     if (self = [super init]) {
         _reusableViews = [[NSMutableDictionary alloc]init];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(clearReusableSpriteViews) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
     }
     return self;
+}
+
+- (void)clearReusableSpriteViews
+{
+    [_reusableViews removeAllObjects];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 #pragma mark - assistant
