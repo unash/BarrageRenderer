@@ -106,7 +106,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     // 如果之前调整过frame,_canvas的layoutSubviews不会及时调用，于是显示时会出问题
     // 解决bug: https://github.com/unash/BarrageRenderer/issues/16
-    [_canvas layoutSubviews];
+    [_canvas setNeedsLayout];
     if (!_startTime) { // 尚未启动,则初始化时间系统
         _startTime = [NSDate date];
         _records = [[NSMutableArray alloc]init];
