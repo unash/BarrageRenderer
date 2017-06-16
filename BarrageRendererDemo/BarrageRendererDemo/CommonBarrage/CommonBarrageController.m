@@ -178,4 +178,20 @@
     return descriptor;
 }
 
+#pragma mark - rotate
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [_renderer removePresentSpritesWithName:nil];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [_renderer removePresentSpritesWithName:nil];
+}
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [_renderer removePresentSpritesWithName:nil];
+}
+
 @end
