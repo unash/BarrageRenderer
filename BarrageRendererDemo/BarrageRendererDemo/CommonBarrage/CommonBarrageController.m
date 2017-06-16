@@ -32,6 +32,7 @@
 - (void)initBarrageRenderer
 {
     _renderer = [[BarrageRenderer alloc]init];
+    _renderer.smoothness = .2f;
     [self.view addSubview:_renderer.view];
     _renderer.canvasMargin = UIEdgeInsetsMake(10, 10, 10, 10);
     // 若想为弹幕增加点击功能, 请添加此句话, 并在Descriptor中注入行为

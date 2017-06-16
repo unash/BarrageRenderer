@@ -26,14 +26,17 @@
 
 #import "BarrageDispatcher.h"
 #import "BarrageSprite.h"
+#import "BarrageSpriteQueue.h"
 
 @interface BarrageDispatcher()
 {
     NSMutableArray * _activeSprites;
-    NSMutableArray * _waitingSprites;
-    NSMutableArray * _deadSprites;
+    BarrageSpriteQueue *_waitingSpriteQueue; /// 当前等待的精灵队列.
+    NSMutableArray * _deadSprites; /// 当前过期的精灵.
     NSTimeInterval _previousTime;
+    CGFloat _smoothness;
 }
+
 @end
 
 @implementation BarrageDispatcher
@@ -42,7 +45,7 @@
 {
     if (self = [super init]) {
         _activeSprites = [[NSMutableArray alloc]init];
-        _waitingSprites = [[NSMutableArray alloc]init];
+        _waitingSpriteQueue = [[BarrageSpriteQueue alloc]init];
         _deadSprites = [[NSMutableArray alloc]init];
         _cacheDeadSprites = NO;
         _previousTime = 0.0f;
@@ -67,7 +70,7 @@
 - (void)addSprite:(BarrageSprite *)sprite
 {
     if ([sprite isKindOfClass:[BarrageSprite class]]) {
-        [_waitingSprites addObject:sprite];
+        [_waitingSpriteQueue addSprite:sprite];
     }
 }
 
@@ -84,6 +87,16 @@
     }
 }
 
+- (void)setSmoothness:(CGFloat)smoothness
+{
+    if (smoothness<0) {
+        smoothness = 0;
+    } else if (smoothness > 1) {
+        smoothness = 1;
+    }
+    _smoothness = smoothness;
+}
+
 /// 派发精灵
 - (void)dispatchSprites
 {
@@ -97,30 +110,53 @@
             [_activeSprites removeObjectAtIndex:i--];
         }
     }
-    static NSTimeInterval const MAX_EXPIRED_SPRITE_RESERVED_TIME = 0.5f; // 弹幕最大保留时间
+    // 弹幕最大保留时间, 当视频快进时，有可能大于timeWindow
+    static NSTimeInterval const MAX_EXPIRED_SPRITE_RESERVED_TIME = 0.5f; // 经验值
+    static NSTimeInterval const DISPATCHER_SMOOTH_FACTOR = 5.0f; // 经验值
     NSTimeInterval currentTime = [self currentTime];
     NSTimeInterval timeWindow = currentTime - _previousTime; // 有可能为正,也有可能为负(如果倒退的话)
 //    NSLog(@"内部时间:%f -- 变化时间:%f",currentTime,timeWindow);
     //如果是正, 可能是正常时钟,也可能是快进
     if (timeWindow >= 0) {
-        for (NSInteger i = 0; i < _waitingSprites.count; i++) {
-            BarrageSprite * sprite = [_waitingSprites objectAtIndex:i];
+        BarrageSpriteQueue *queue = [_waitingSpriteQueue spriteQueueWithDelayLessThanOrEqualTo:currentTime];
+        NSArray *participants = [queue ascendingSprites];
+        NSMutableArray *candidates = [NSMutableArray arrayWithCapacity:participants.count];
+        
+        for (NSInteger i = 0; i < participants.count; i++) {
+            BarrageSprite * sprite = [participants objectAtIndex:i];
             NSTimeInterval overtime = currentTime - sprite.delay;
-            if (overtime >= 0) {
-                if (overtime < timeWindow && overtime <= MAX_EXPIRED_SPRITE_RESERVED_TIME) {
-                    if ([self shouldActiveSprite:sprite]) {
-                        [self activeSprite:sprite];
-                        [_activeSprites addObject:sprite];
-                    }
+            //NSLog(@"%f",overtime);
+            if ((_smoothness>0.0f || overtime < timeWindow) && overtime <= MAX_EXPIRED_SPRITE_RESERVED_TIME) {
+                if ([self shouldActiveSprite:sprite]) {
+                    [candidates addObject:sprite];
+                } else {
+                    [_waitingSpriteQueue removeSprite:sprite];
                 }
-                else
-                {
-                    if (_cacheDeadSprites) {
-                        [_deadSprites addObject:sprite];
-                    }
-                }
-                [_waitingSprites removeObjectAtIndex:i--];
             }
+            else
+            {
+                if (_cacheDeadSprites) {
+                    [_deadSprites addObject:sprite];
+                }
+                [_waitingSpriteQueue removeSprite:sprite];
+            }
+        }
+        
+        NSInteger count = candidates.count;
+        
+        if (_smoothness>0.0f) { //可以优化掉此判断
+            NSInteger frequence = (NSInteger)floorf(MAX_EXPIRED_SPRITE_RESERVED_TIME * DISPATCHER_SMOOTH_FACTOR/timeWindow * _smoothness); // 估算平滑频率
+            if (count>0 && frequence>=1) {
+                count = MAX(1, ceil(count/frequence));
+            }
+        }
+
+        for (NSInteger i = 0; i < count; i++) {
+            BarrageSprite *sprite = candidates[i];
+            [self activeSprite:sprite];
+            //NSLog(@"%@",sprite.viewParams[@"text"]);
+            [_activeSprites addObject:sprite];
+            [_waitingSpriteQueue removeSprite:sprite];
         }
     }
     else // 倒退,需要起死回生
@@ -128,7 +164,7 @@
         for (NSInteger i = 0; i < _deadSprites.count; i++) { // 活跃精灵队列
             BarrageSprite * sprite = [_deadSprites objectAtIndex:i];
             if (sprite.delay > currentTime) {
-                [_waitingSprites addObject:sprite];
+                [_waitingSpriteQueue addSprite:sprite];
                 [_deadSprites removeObjectAtIndex:i--];
             }
             else if (sprite.delay == currentTime)

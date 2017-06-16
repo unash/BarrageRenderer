@@ -54,17 +54,15 @@
 /// 是否开启过期精灵缓存功能, 默认关闭, 如需支持后退时重新播放弹幕, 则需置为YES.
 @property (nonatomic,assign)BOOL cacheDeadSprites;
 
-/// 当前等待的精灵.
-@property (nonatomic,strong,readonly)NSArray * waitingSprites;
-
 /// 当前活跃的精灵.
 @property (nonatomic,strong,readonly)NSArray * activeSprites;
 
-/// 当前过期的精灵.
-@property (nonatomic,strong,readonly)NSArray * deadSprites;
-
 /// 停止当前被激活的精灵
 - (void)deactiveAllSprites;
+
+/// 平滑系数, 范围为[0,1],当为0时，无平滑; 否则越大，越平滑;
+/// 高平滑值在大量弹幕的时候(一般100+)，可能造成弹幕丢失
+@property(nonatomic,assign)CGFloat smoothness;
 
 @property (nonatomic,weak)id<BarrageDispatcherDelegate> delegate;
 

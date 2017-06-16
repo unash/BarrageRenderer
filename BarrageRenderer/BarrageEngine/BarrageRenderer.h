@@ -69,6 +69,13 @@
 /// 画布是否拦截事件
 @property(nonatomic,assign)BOOL masked;
 
+/// 是否开启平滑; 对于突发弹幕，开启平滑可以降低瞬间的掉帧，默认关闭
+/// 对于 CPU 性能不错的手机(比如>=iphone7)，推荐开启此功能
+/// 设置时间平滑, 应对弹幕激增;
+/// 范围为[0,1],当为0时，无平滑; 否则越大，越平滑;
+/// 高平滑值在大量弹幕的时候(一般100+)，可能造成弹幕丢失
+@property(nonatomic,assign)CGFloat smoothness;
+
 /// 调整弹幕整体速度, 需要>0, 否则会被抛弃.
 @property(nonatomic,assign)CGFloat speed;
 

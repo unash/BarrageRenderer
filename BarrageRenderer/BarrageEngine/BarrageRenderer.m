@@ -68,6 +68,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         _startTime = nil; // 尚未开始
         _pausedTime = nil;
         _redisplay = NO;
+        _smoothness = 0.0f;
         self.pausedDuration = 0;
         [self initClock];
     }
@@ -111,6 +112,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         _startTime = [NSDate date];
         _records = [[NSMutableArray alloc]init];
         _dispatcher = [[BarrageDispatcher alloc]init];
+        _dispatcher.smoothness = self.smoothness;
         _dispatcher.cacheDeadSprites = self.redisplay;
         _dispatcher.delegate = self;
     }
@@ -169,6 +171,14 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     _redisplay = redisplay;
     if (_dispatcher) {
         _dispatcher.cacheDeadSprites = _redisplay;
+    }
+}
+
+- (void)setSmoothness:(CGFloat)smoothness
+{
+    _smoothness = smoothness;
+    if (_dispatcher) {
+        _dispatcher.smoothness = smoothness;
     }
 }
 
