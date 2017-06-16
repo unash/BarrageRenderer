@@ -73,9 +73,13 @@ descriptor.params[@"fadeOutTime"] = @(1); // 隐出时间
 
 最简单的弹幕只是文本, 但有时候你可能需要添加emoji表情或者图片上去。emoji表情是UTF字符集原生支持的，对待他和其他的文本字符没有区别；对于图片，你有两种方式可以添加图片弹幕, 一种是使用 attributedText 设置属性文本，一种是自定义 view. 自定义 view 可以参考 BarrageWalkImageTextSprite。 需要注意的是，如果 ```- (UIView *)bindingView``` 方法返回的是你自定义的 view，你需要覆盖你自定义 view 的 ```- (CGSize)sizeThatFits``` 方法，返回正确的 view 大小。
 
+在 V2 版本中，bindingView 方法被废除，你需要通过 descriptor.params[@"viewClassName"] 指明 sprite 所要关联的 view 类。
+
 ### 直接在 Sprite 子类中布局元素
 
 你可能在方法 ```- (UIView *)bindingView``` 中创建了许多视图元素，而并非返回一个自定义 view，因此，这时候你并不方便自定义 view 的 ```- (CGSize)sizeThatFits``` 方法，为此你可以选择覆盖 BarrageSprite 的 size 属性的 ```- (CGSize)size``` 方法，在此方法中返回你的弹幕 view 的大小。当然，在 ```- (UIView *)bindingView``` 里你要设置各个子 view 的位置，以及处理一些可变大小元素比如 UILabel 的布局问题。
+
+在 V2 版本中，bindingView 方法被废除，相关的子 view 布局则写在 sprite 关联的 view 类中。
 
 ### 外部设置弹幕元素的大小
 
@@ -163,7 +167,7 @@ V2 在创建自定义弹幕的时候，涉及到两部分：
 descriptor.params[@"viewClassName"] = @"UILabel";
 ```
 
-2.将原来写在 sprite 子类中的布局代码迁出到独立的view中，为此类实现 BarrageViewProtocol 协议中的方法；一般可以为 view 类添加相应的扩展。比如 UILabel+BarrageView.h。如此，你的 sprite 不必再关心布局的细节，只需要处理好时间逻辑。
+2.将原来写在 sprite 子类 bindingView 中的布局代码迁出到独立的view中，为此类实现 BarrageViewProtocol 协议中的方法；一般可以为 view 类添加相应的扩展。比如 UILabel+BarrageView.h。如此，你的 sprite 不必再关心布局的细节，只需要处理好时间逻辑。
 
 更详细的使用，你可以参考 BarrageRenderer 中提供的 sprite 默认实现或者 demo。
 
