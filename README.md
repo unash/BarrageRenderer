@@ -28,6 +28,7 @@
 
 1. 下载版本库,进入BarrageRendererDemo目录. 运行pod update拉取相关库, 即可以运行BarrageRendererDemo.xcworkspace
 1. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', '1.9.1'*  并在工程目录下的命令行中运行 pod update, (CocoaPods 版本 0.39)
+1. 或者尝试使用 2.0.0 版本，此版本使用更方便，在部分特殊情况下的性能也有所提升.
 1. 或者将代码下载下来, 将BarrageRenderer/目录添加到您的工程当中
 1. 在需要使用弹幕渲染功能的地方 ```#import<BarrageRenderer/BarrageRenderer.h>```
 1. 创建BarrageRenderer,添加BarrageRenderer.view, 执行start方法, 通过receive方法输入弹幕描述符descriptor, 即可以显示弹幕. 详见demo.
@@ -140,6 +141,31 @@ BarrageRenderer 默认关闭了交互行为的，但如果需要，你可以启�
 弹幕一般呈现在视频之上，而视频解码会消耗大量的 CPU，当可用 CPU 不足时，弹幕动画会出现卡顿。为使弹幕流畅，你可以将 trackNumber 调低一些。另外可以对屏幕上的弹幕数量进行限流。
 
 实测中，如果多个弹幕的delay时间相同(或相距在1/60s之内)，可能使这些弹幕同时进入屏幕，进而导致瞬间卡顿。真实直播弹幕环境下，这种情况出现的比较少。针对性能较好的iPhone，可以设置 BarrageRenderer 的平滑系数 smoothness ，以优化此问题。
+
+## V2 重构
+
+自 2.0 版本起, 对 sprite 及 dispatcher 进行了较大幅度的调整。主要有如下几点：
+
+1. 分离 sprite 更新逻辑与弹幕视图，方便两者组合复用
+1. 针对前版本 layout 不方便使用的问题做了优化
+1. 为视图添加复用机制(不过实测中并没有太大性能提升)
+1. 增加平滑度参数，优化一些特殊情况下的性能。
+
+如果你在使用 V1 系列时，没有创建自己的 sprite 子类，那么你可以在不改动业务代码的时候，升级到 V2 版本; 否则，你需要改动你的 sprite 子类，当然，改动不会太大。
+
+**虽然我对V2版本做了测试，但是无法涵盖所有情况**如果你的应用难以承担较高风险，那么你也可以保持使用 V1 系列，等到 V2 版本相对稳定时再行迁移, V1 显著的 bug 我还是会提供修复; 如果你刚刚接入 V2, 那么建议你尝试使用 V2。
+
+V2 在创建自定义弹幕的时候，涉及到两部分：
+
+1.继承对应的 BarrageRenderer 子类，你也可以直接使用默认的 BarrageWalkSprite 或 BarrageFloatSprite，涉及到修改对应的 view 时，在创建 descriptor 的时候增加一条如下的代码：
+
+``` objective-c
+descriptor.params[@"viewClassName"] = @"UILabel";
+```
+
+2.将原来写在 sprite 子类中的布局代码迁出到独立的view中，为此类实现 BarrageViewProtocol 协议中的方法；一般可以为 view 类添加相应的扩展。比如 UILabel+BarrageView.h。如此，你的 sprite 不必再关心布局的细节，只需要处理好时间逻辑。
+
+更详细的使用，你可以参考 BarrageRenderer 中提供的 sprite 默认实现或者 demo。
 
 ## 支持与联系
 
