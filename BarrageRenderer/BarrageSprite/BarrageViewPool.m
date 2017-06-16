@@ -21,7 +21,6 @@
 + (instancetype)mainPool
 {
     static BarrageViewPool *pool;
-    static dispatch_once_t token;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         pool = [[BarrageViewPool alloc]init];
@@ -76,7 +75,7 @@
     NSString *classifier = [self viewClassifierForSprite:sprite];
     NSMutableArray *views = [self viewsForViewClassifier:classifier];
     
-    id<BarrageViewProtocol> view = [views firstObject];
+    UIView<BarrageViewProtocol> *view = [views firstObject];
     if (!view) {
         view = [[class alloc]initWithFrame:CGRectZero];
     }
