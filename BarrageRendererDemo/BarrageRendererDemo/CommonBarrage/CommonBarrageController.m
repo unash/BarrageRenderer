@@ -43,8 +43,18 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+}
+
+- (void)startMockingBarrageMessage
+{
+    [_timer invalidate];
     NSSafeObject * safeObj = [[NSSafeObject alloc]initWithObject:self withSelector:@selector(autoSendBarrage)];
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
+}
+
+- (void)stopMockingBarrageMessage
+{
+    [_timer invalidate];
 }
 
 - (void)dealloc
@@ -56,10 +66,12 @@
 - (IBAction)start:(id)sender
 {
     [_renderer start];
+    [self startMockingBarrageMessage];
 }
 - (IBAction)stop:(id)sender
 {
     [_renderer stop];
+    [self stopMockingBarrageMessage];
 }
 - (IBAction)pause:(id)sender
 {
