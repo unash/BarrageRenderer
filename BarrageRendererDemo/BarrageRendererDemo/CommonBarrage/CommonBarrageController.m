@@ -207,3 +207,91 @@
 }
 
 @end
+
+#pragma mark - just for test -
+
+#import <KMCGeigerCounter/KMCGeigerCounter.h>
+#import <BarrageRenderer/BarrageSpriteQueue.h>
+#import <BarrageRenderer/BarrageSprite.h>
+
+@interface CommonBarrageController (Test)
+
+@end
+
+@implementation CommonBarrageController (Test)
+
+- (void)testSpriteQueue
+{
+    BarrageSpriteQueue *queue = [[BarrageSpriteQueue alloc]init];
+    [self addQueueValue:1 queue:queue];
+    [self addQueueValue:3 queue:queue];
+    [self addQueueValue:8 queue:queue];
+    [self addQueueValue:5 queue:queue];
+    [self addQueueValue:4 queue:queue];
+    [self addQueueValue:8 queue:queue];
+    [self addQueueValue:8 queue:queue];
+    [self addQueueValue:7 queue:queue];
+    [self addQueueValue:8 queue:queue];
+    [self addQueueValue:9 queue:queue];
+    [self printQueue:queue];
+    BarrageSpriteQueue *ge1 = [queue spriteQueueWithDelayGreaterThanOrEqualTo:8];
+    [self printQueue:ge1];
+    BarrageSpriteQueue *ge2 = [queue spriteQueueWithDelayGreaterThanOrEqualTo:10];
+    [self printQueue:ge2];
+    BarrageSpriteQueue *ge3 = [queue spriteQueueWithDelayGreaterThanOrEqualTo:0];
+    [self printQueue:ge3];
+    BarrageSpriteQueue *ge4 = [queue spriteQueueWithDelayGreaterThanOrEqualTo:1];
+    [self printQueue:ge4];
+    BarrageSpriteQueue *ge5 = [queue spriteQueueWithDelayGreaterThanOrEqualTo:9];
+    [self printQueue:ge5];
+    BarrageSpriteQueue *g1 = [queue spriteQueueWithDelayGreaterThan:8];
+    [self printQueue:g1];
+    BarrageSpriteQueue *g2 = [queue spriteQueueWithDelayGreaterThan:10];
+    [self printQueue:g2];
+    BarrageSpriteQueue *g3 = [queue spriteQueueWithDelayGreaterThan:0];
+    [self printQueue:g3];
+    BarrageSpriteQueue *g4 = [queue spriteQueueWithDelayGreaterThan:1];
+    [self printQueue:g4];
+    BarrageSpriteQueue *g5 = [queue spriteQueueWithDelayGreaterThan:9];
+    [self printQueue:g5];
+    BarrageSpriteQueue *le1 = [queue spriteQueueWithDelayLessThanOrEqualTo:8];
+    [self printQueue:le1];
+    BarrageSpriteQueue *le2 = [queue spriteQueueWithDelayLessThanOrEqualTo:10];
+    [self printQueue:le2];
+    BarrageSpriteQueue *le3 = [queue spriteQueueWithDelayLessThanOrEqualTo:0];
+    [self printQueue:le3];
+    BarrageSpriteQueue *le4 = [queue spriteQueueWithDelayLessThanOrEqualTo:1];
+    [self printQueue:le4];
+    BarrageSpriteQueue *le5 = [queue spriteQueueWithDelayLessThanOrEqualTo:9];
+    [self printQueue:le5];
+    BarrageSpriteQueue *l1 = [queue spriteQueueWithDelayLessThan:8];
+    [self printQueue:l1];
+    BarrageSpriteQueue *l2 = [queue spriteQueueWithDelayLessThan:10];
+    [self printQueue:l2];
+    BarrageSpriteQueue *l3 = [queue spriteQueueWithDelayLessThan:0];
+    [self printQueue:l3];
+    BarrageSpriteQueue *l4 = [queue spriteQueueWithDelayLessThan:1];
+    [self printQueue:l4];
+    BarrageSpriteQueue *l5 = [queue spriteQueueWithDelayLessThan:9];
+    [self printQueue:l5];
+}
+
+- (void)addQueueValue:(NSTimeInterval)value queue:(BarrageSpriteQueue *)queue
+{
+    BarrageSprite *sprite = [[BarrageSprite alloc]init];
+    sprite.delay = value;
+    [queue addSprite:sprite];
+}
+
+- (void)printQueue:(BarrageSpriteQueue *)queue
+{
+    NSArray *array = [queue ascendingSprites];
+    NSMutableString *string = [[NSMutableString alloc]init];
+    for (BarrageSprite *sprite in array) {
+        [string appendString:[@(sprite.delay)stringValue]];
+        [string appendString:@","];
+    }
+    NSLog(@"%@",string);
+}
+
+@end
