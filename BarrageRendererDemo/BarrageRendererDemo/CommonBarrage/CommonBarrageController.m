@@ -210,7 +210,6 @@
 
 #pragma mark - just for test -
 
-#import <KMCGeigerCounter/KMCGeigerCounter.h>
 #import <BarrageRenderer/BarrageSpriteQueue.h>
 #import <BarrageRenderer/BarrageSprite.h>
 
