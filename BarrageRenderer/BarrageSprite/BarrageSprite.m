@@ -137,7 +137,7 @@
 
 - (void)clickSpriteView
 {
-    if (self.clickAction) self.clickAction();
+    if (self.clickAction) self.clickAction(self.viewParams);
 }
 
 ///  区域内的初始位置,只在刚加入渲染器的时候被调用;子类继承需要override.

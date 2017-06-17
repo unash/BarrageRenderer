@@ -133,13 +133,15 @@
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
+    descriptor.params[@"bizMsgId"] = [NSString stringWithFormat:@"%ld",(long)_index];
     descriptor.params[@"text"] = [NSString stringWithFormat:@"过场文字弹幕:%ld",(long)_index++];
     descriptor.params[@"textColor"] = [UIColor blueColor];
     descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);
     descriptor.params[@"direction"] = @(direction);
     descriptor.params[@"side"] = @(side);
-    descriptor.params[@"clickAction"] = ^{
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"弹幕被点击" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+    descriptor.params[@"clickAction"] = ^(NSDictionary *params){
+        NSString *msg = [NSString stringWithFormat:@"弹幕 %@ 被点击",params[@"bizMsgId"]];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
         [alertView show];
     };
     return descriptor;
