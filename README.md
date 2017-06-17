@@ -126,6 +126,8 @@ BarrageRenderer 默认关闭了交互行为的，但如果需要，你可以启�
 1. BarrageRenderer.view.userInteractionEnabled = YES;
 1. 为 descriptor.params[@"clickAction"] 添加参数
 
+在 2.0.1 版本，clickAction 指定的 block 增加了参数，以支持在点击阶段拿到弹幕的相关信息，比如弹幕消息的 id 。
+
 ### 如何使事件透传到底层(业务)view
 
 开启 BarrageRenderer.view.userInteractionEnabled 之后，所有的事件都会被 BarrageRenderer 拦截掉而到不了你的业务 view，这时候你如果在你的业务 View 上添加一个 Button，而 BarrageRenerer.view 又在 Button 之上的话，那么点击这个 Button 是无效的。你可以设置只拦截弹幕上的事件，而将 BarrageRenderer.view 上的事件透传。通过设置属性：
