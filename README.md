@@ -101,7 +101,7 @@ descriptor.params[@"fadeOutTime"] = @(1); // 隐出时间
 
 1. 在视频初始化的时候，批量添加弹幕
 1. 设置 BarrageRenderer 的 redisplay 属性为 YES, 指定其 delegate.
-1. 对于条被添加的 BarrageDescriptor, 为其指定 delay， delay 是此条弹幕对应的视频时间点
+1. 对于1条被添加的 BarrageDescriptor, 为其指定 delay， delay 是此条弹幕对应的视频时间点
 1. 实现 BarrageRendererDelegate 协议方法, 在 ```- (NSTimeInterval)timeForBarrageRenderer:(BarrageRenderer *)renderer;``` 方法中返回当前的视频时间点. 当你的视频播放、快进或者快退时，这个时间也会有变。
 
 在 Demo 的 AdvancedBarrageController 中演示了这一流程，可以参照。
@@ -146,7 +146,7 @@ BarrageRenderer 默认关闭了交互行为的，但如果需要，你可以启�
 
 弹幕一般呈现在视频之上，而视频解码会消耗大量的 CPU，当可用 CPU 不足时，弹幕动画会出现卡顿。为使弹幕流畅，你可以将 trackNumber 调低一些。另外可以对屏幕上的弹幕数量进行限流。
 
-实测中，如果多个弹幕的delay时间相同(或相距在1/60s之内)，可能使这些弹幕同时进入屏幕，进而导致瞬间卡顿。真实直播弹幕环境下，这种情况出现的比较少。针对性能较好的iPhone，可以设置 BarrageRenderer 的平滑系数 smoothness ，以优化此问题。
+实测中，如果多个弹幕的delay时间相同(或相距在1/60s之内)，可能使这些弹幕同时进入屏幕，进而导致瞬间卡顿。真实直播弹幕环境下，这种情况出现的比较少。针对性能较好的iPhone，可以设置 BarrageRenderer 的平滑系数 smoothness ，以优化此问题。此参数从 V2 开始支持。
 
 ## V2 重构
 
