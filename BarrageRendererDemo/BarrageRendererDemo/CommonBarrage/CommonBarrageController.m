@@ -11,7 +11,7 @@
 #import "NSSafeObject.h"
 #import "UIImage+Barrage.h"
 
-@interface CommonBarrageController()
+@interface CommonBarrageController()<BarrageRendererDelegate>
 {
     BarrageRenderer * _renderer;
     NSTimer * _timer;
@@ -33,6 +33,7 @@
 {
     _renderer = [[BarrageRenderer alloc]init];
     _renderer.smoothness = .2f;
+    _renderer.delegate = self;
     [self.view addSubview:_renderer.view];
     _renderer.canvasMargin = UIEdgeInsetsMake(10, 10, 10, 10);
     // 若想为弹幕增加点击功能, 请添加此句话, 并在Descriptor中注入行为
@@ -190,6 +191,25 @@
     descriptor.params[@"duration"] = @(3);
     descriptor.params[@"direction"] = @(direction);
     return descriptor;
+}
+
+#pragma mark - BarrageRendererDelegate
+
+/// 演示如何拿到弹幕的生命周期
+- (void)barrageRenderer:(BarrageRenderer *)renderer spriteStage:(BarrageSpriteStage)stage spriteParams:(NSDictionary *)params
+{
+    if (stage == BarrageSpriteStageBegin) {
+        NSLog(@"%@进入",params[@"bizMsgId"]);
+    } else if (stage == BarrageSpriteStageEnd) {
+        NSLog(@"%@离开",params[@"bizMsgId"]);
+        /* 注释代码演示了如何复制一条弹幕
+        BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+        descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
+        [descriptor.params addEntriesFromDictionary:params];
+        descriptor.params[@"delay"] = @(0);
+        [renderer receive:descriptor];
+        */
+    }
 }
 
 #pragma mark - rotate

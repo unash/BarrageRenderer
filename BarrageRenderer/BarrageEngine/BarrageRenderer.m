@@ -314,6 +314,9 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     [sprite activeWithContext:_context];
     [self indexAddSprite:sprite];
     [_canvas insertSubview:sprite.view atIndex:index];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(barrageRenderer:spriteStage:spriteParams:)]) {
+        [self.delegate barrageRenderer:self spriteStage:BarrageSpriteStageBegin spriteParams:sprite.viewParams];
+    }
 }
 
 - (NSUInteger)viewIndexOfSprite:(BarrageSprite *)sprite
@@ -337,6 +340,9 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     [self indexRemoveSprite:sprite];
     [sprite.view removeFromSuperview];
     [sprite deactive];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(barrageRenderer:spriteStage:spriteParams:)]) {
+        [self.delegate barrageRenderer:self spriteStage:BarrageSpriteStageEnd spriteParams:sprite.viewParams];
+    }
 }
 
 - (NSTimeInterval)timeForBarrageDispatcher:(BarrageDispatcher *)dispatcher

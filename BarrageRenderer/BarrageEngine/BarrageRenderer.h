@@ -31,11 +31,19 @@
 @class BarrageDescriptor;
 @class BarrageRenderer;
 
+typedef NS_ENUM(NSInteger, BarrageSpriteStage) {
+    BarrageSpriteStageBegin = 1, // 弹幕进入屏幕阶段
+    BarrageSpriteStageEnd   = 2  // 弹幕退出屏幕阶段
+};
+
 @protocol BarrageRendererDelegate <NSObject>
 
 @optional
 /// 通过外部渠道获取当前时间,用于内部时间系统; 当依附的视频具有快进快退功能时,必须实现这个函数,并返回时间轴上的当前时刻,即已经播放的时间.
 - (NSTimeInterval)timeForBarrageRenderer:(BarrageRenderer *)renderer;
+
+/// 弹幕生命周期行为，实验特性; 可试用, 亦可以通过继承 BarrageRenderer 来实现相同功能
+- (void)barrageRenderer:(BarrageRenderer *)renderer spriteStage:(BarrageSpriteStage)stage spriteParams:(NSDictionary *)params;
 
 @end
 
