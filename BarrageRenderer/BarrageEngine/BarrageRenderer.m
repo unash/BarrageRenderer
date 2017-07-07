@@ -42,7 +42,6 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     BarrageCanvas * _canvas; // 画布
     BarrageClock * _clock;
     NSMutableDictionary * _spriteClassMap;
-    __block NSTimeInterval _time;
     NSMutableDictionary * _context; // 渲染器上下文
     
     NSMutableArray * _preloadedDescriptors; //预加载的弹幕
@@ -51,6 +50,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     NSTimeInterval _pausedDuration; // 暂停持续时间
     NSDate * _pausedTime; // 上次暂停时间; 如果为nil, 说明当前没有暂停
 }
+@property(nonatomic,assign)NSTimeInterval time;
 @property(nonatomic,assign)NSTimeInterval pausedDuration; // 暂停时间
 @end
 
@@ -81,7 +81,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     __weak id weakSelf = self;
     _clock = [BarrageClock clockWithHandler:^(NSTimeInterval time){
         BarrageRenderer * strongSelf = weakSelf;
-        strongSelf->_time = time;
+        strongSelf.time = time;
         [strongSelf update];
     }];
 }
@@ -286,7 +286,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     [_dispatcher dispatchSprites]; // 分发精灵
     for (BarrageSprite * sprite in _dispatcher.activeSprites) {
-        [sprite updateWithTime:_time];
+        [sprite updateWithTime:self.time];
     }
 }
 
@@ -307,7 +307,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
         [_context setObject:[itemMap copy] forKey:kBarrageRendererContextRelatedSpirts];
     }
     
-    [_context setObject:@(_time) forKey:kBarrageRendererContextTimestamp];
+    [_context setObject:@(self.time) forKey:kBarrageRendererContextTimestamp];
     
     NSInteger index = [self viewIndexOfSprite:sprite];
     
