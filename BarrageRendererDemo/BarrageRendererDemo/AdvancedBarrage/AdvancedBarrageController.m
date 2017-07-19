@@ -133,10 +133,18 @@
     return descriptor;
 }
 
+- (void)updateMockVideoProgress
+{
+    NSTimeInterval interval = [[NSDate date]timeIntervalSinceDate:_startTime];
+    interval += _predictedTime;
+    self.infoLabel.text = [NSString stringWithFormat:@"视频进度：%.1fs",interval];
+}
+
 #pragma mark - BarrageRendererDelegate
 
 - (NSTimeInterval)timeForBarrageRenderer:(BarrageRenderer *)renderer
 {
+    [self updateMockVideoProgress]; // 仅为演示
     NSTimeInterval interval = [[NSDate date]timeIntervalSinceDate:_startTime];
     interval += _predictedTime;
     return interval;
