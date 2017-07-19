@@ -87,14 +87,23 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 }
 
 #pragma mark - control
+/// 接收弹幕，并校对时间
 - (void)receive:(BarrageDescriptor *)descriptor
+{
+    [self receive:descriptor withCorrection:YES];
+}
+
+/// 接收弹幕, 并决定是否要校对时间
+- (void)receive:(BarrageDescriptor *)descriptor withCorrection:(BOOL)correction
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (!_startTime) { // 如果没有启动,则抛弃接收弹幕
             return;
         }
         BarrageDescriptor * descriptorCopy = [descriptor copy];
-        [self convertDelayTime:descriptorCopy];
+        if (correction) {
+            [self convertDelayTime:descriptorCopy];
+        }
         BarrageSprite * sprite = [BarrageSpriteFactory createSpriteWithDescriptor:descriptorCopy];
         [_dispatcher addSprite:sprite];
         if (_recording) {
@@ -124,7 +133,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     [_clock start];
     if (_preloadedDescriptors.count) {
         for (BarrageDescriptor * descriptor in _preloadedDescriptors) {
-            [self receive:descriptor];
+            [self receive:descriptor withCorrection:NO];
         }
         [_preloadedDescriptors removeAllObjects];
     }
@@ -265,7 +274,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     if (_startTime) {
         for (BarrageDescriptor * descriptor in descriptors) {
-            [self receive:descriptor];
+            [self receive:descriptor withCorrection:NO];
         }
     }
     else

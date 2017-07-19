@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, BarrageSpriteStage) {
 /// 对于 CPU 性能不错的手机(比如>=iphone7)，推荐开启此功能
 /// 设置时间平滑, 应对弹幕激增;
 /// 范围为[0,1],当为0时，无平滑; 否则越大，越平滑;
-/// 高平滑值在大量弹幕的时候(一般100+)，可能造成弹幕丢失
+/// 高平滑值在大量弹幕(一般100+)的时候，可能造成弹幕丢失
 @property(nonatomic,assign)CGFloat smoothness;
 
 /// 调整弹幕整体速度, 需要>0, 否则会被抛弃.
@@ -120,6 +120,7 @@ typedef NS_ENUM(NSInteger, BarrageSpriteStage) {
 @property(nonatomic,assign)BOOL recording;
 
 /// 加载已经存在的弹幕,如果已经start, 会立刻被调用receive; 否则, 会等到start的时候再调用receive.
+/// 在 v2.1 之后, 使用 load 不会重新调整 descriptor 的 delay; 而在之前的版本, 会调整 descriptor 的 delay
 - (void)load:(NSArray *)descriptors;
 
 /// 弹幕记录数组.

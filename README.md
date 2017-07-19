@@ -173,6 +173,10 @@ descriptor.params[@"viewClassName"] = @"UILabel";
 
 更详细的使用，你可以参考 BarrageRenderer 中提供的 sprite 默认实现或者 demo。
 
+### load 方法的语义变化
+
+在 v2.1.0 及之后的版本, load 语义有所调整。之前，load 方法所触发的 receive 调用, 会调整 descriptor 的 delay 参数; 而之后的版本，不再整 descriptor 的 delay 参数。所以对于播放弹幕 前/过程中 从网络加载的批量弹幕(delay属性是具体不变的)，推荐使用 load 方法。
+
 ## 支持与联系
 
 * 欢迎在GitHub上提出相关的issue;
