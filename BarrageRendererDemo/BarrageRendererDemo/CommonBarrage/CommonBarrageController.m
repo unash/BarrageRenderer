@@ -10,6 +10,7 @@
 #import <BarrageRenderer/BarrageRenderer.h>
 #import "NSSafeObject.h"
 #import "UIImage+Barrage.h"
+#import "AvatarBarrageView.h"
 
 @interface CommonBarrageController()<BarrageRendererDelegate>
 {
@@ -50,7 +51,7 @@
 {
     [_timer invalidate];
     NSSafeObject * safeObj = [[NSSafeObject alloc]initWithObject:self withSelector:@selector(autoSendBarrage)];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:safeObj selector:@selector(excute) userInfo:nil repeats:YES];
 }
 
 - (void)stopMockingBarrageMessage
@@ -107,6 +108,7 @@
     if (spriteNumber <= 500) { // 用来演示如何限制屏幕上的弹幕量
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideLeft]];
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
+        [_renderer receive:[self avatarBarrageViewSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
         
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideLeft]];
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideRight]];
@@ -146,6 +148,32 @@
         [alertView show];
     };
     return descriptor;
+}
+
+/// 演示自定义弹幕样式
+- (BarrageDescriptor *)avatarBarrageViewSpriteDescriptorWithDirection:(BarrageWalkDirection)direction side:(BarrageWalkSide)side
+{
+    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+    descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
+    descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);
+    descriptor.params[@"direction"] = @(direction);
+    descriptor.params[@"side"] = @(side);
+    descriptor.params[@"viewClassName"] = NSStringFromClass([AvatarBarrageView class]);
+    descriptor.params[@"title"] = [self randomString];
+    descriptor.params[@"detail"] = [self randomString];
+    descriptor.params[@"borderWidth"] = @(1);
+    descriptor.params[@"borderColor"] = [UIColor grayColor];
+    return descriptor;
+}
+
+- (NSString *)randomString
+{
+    NSInteger count = ceil(10*(double)random()/RAND_MAX);
+    NSMutableString *string = [[NSMutableString alloc]initWithCapacity:10];
+    for (NSInteger i = 0; i < count; i++) {
+        [string appendString:@"Br"];
+    }
+    return [string copy];
 }
 
 /// 生成精灵描述 - 浮动文字弹幕

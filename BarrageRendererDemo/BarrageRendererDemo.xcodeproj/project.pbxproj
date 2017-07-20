@@ -20,6 +20,7 @@
 		CCECEDD61B5662F500098E7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCECEDD51B5662F500098E7A /* Images.xcassets */; };
 		CCECEDD91B5662F500098E7A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCECEDD71B5662F500098E7A /* LaunchScreen.xib */; };
 		CCECEDF11B56673E00098E7A /* NSSafeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CCECEDF01B56673E00098E7A /* NSSafeObject.m */; };
+		D0771AAC1F210DAB0092BC2A /* AvatarBarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0771AAB1F210DAB0092BC2A /* AvatarBarrageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		CCECEDD81B5662F500098E7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CCECEDEF1B56673E00098E7A /* NSSafeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSSafeObject.h; sourceTree = "<group>"; };
 		CCECEDF01B56673E00098E7A /* NSSafeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSafeObject.m; sourceTree = "<group>"; };
+		D0771AAA1F210DAB0092BC2A /* AvatarBarrageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AvatarBarrageView.h; path = BarrageDemo/AvatarBarrageView.h; sourceTree = "<group>"; };
+		D0771AAB1F210DAB0092BC2A /* AvatarBarrageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AvatarBarrageView.m; path = BarrageDemo/AvatarBarrageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,7 @@
 			children = (
 				CC853E0E1BFCBE6A000C1FEC /* AdvancedBarrage */,
 				CC853E131BFCBE6A000C1FEC /* CommonBarrage */,
+				D0771AAD1F210DAF0092BC2A /* BarrageDemo */,
 				CCECEDEE1B56673E00098E7A /* SafeObject */,
 				CCECEDCC1B5662F500098E7A /* AppDelegate.h */,
 				CCECEDCD1B5662F500098E7A /* AppDelegate.m */,
@@ -144,6 +148,15 @@
 				CCECEDF01B56673E00098E7A /* NSSafeObject.m */,
 			);
 			path = SafeObject;
+			sourceTree = "<group>";
+		};
+		D0771AAD1F210DAF0092BC2A /* BarrageDemo */ = {
+			isa = PBXGroup;
+			children = (
+				D0771AAA1F210DAB0092BC2A /* AvatarBarrageView.h */,
+				D0771AAB1F210DAB0092BC2A /* AvatarBarrageView.m */,
+			);
+			name = BarrageDemo;
 			sourceTree = "<group>";
 		};
 		F441B024A5ECB5E1DA377E4A /* Pods */ = {
@@ -283,6 +296,7 @@
 				CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */,
 				CCC0B4A51B654DD50088CFDE /* UIImage+Barrage.m in Sources */,
 				CCECEDCE1B5662F500098E7A /* AppDelegate.m in Sources */,
+				D0771AAC1F210DAB0092BC2A /* AvatarBarrageView.m in Sources */,
 				CCD2D7CC1DFED7F3003C8DE2 /* MLEmojiLabel+BarrageView.m in Sources */,
 				CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */,
 				CCECEDCB1B5662F500098E7A /* main.m in Sources */,
