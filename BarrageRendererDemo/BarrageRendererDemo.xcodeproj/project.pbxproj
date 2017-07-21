@@ -21,6 +21,7 @@
 		CCECEDD91B5662F500098E7A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCECEDD71B5662F500098E7A /* LaunchScreen.xib */; };
 		CCECEDF11B56673E00098E7A /* NSSafeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CCECEDF01B56673E00098E7A /* NSSafeObject.m */; };
 		D0771AAC1F210DAB0092BC2A /* AvatarBarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0771AAB1F210DAB0092BC2A /* AvatarBarrageView.m */; };
+		D0B2110C1F226D4800905D24 /* FlowerBarrageSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B2110B1F226D4800905D24 /* FlowerBarrageSprite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		CCECEDF01B56673E00098E7A /* NSSafeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSSafeObject.m; sourceTree = "<group>"; };
 		D0771AAA1F210DAB0092BC2A /* AvatarBarrageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AvatarBarrageView.h; path = BarrageDemo/AvatarBarrageView.h; sourceTree = "<group>"; };
 		D0771AAB1F210DAB0092BC2A /* AvatarBarrageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AvatarBarrageView.m; path = BarrageDemo/AvatarBarrageView.m; sourceTree = "<group>"; };
+		D0B2110A1F226D4800905D24 /* FlowerBarrageSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlowerBarrageSprite.h; path = BarrageDemo/FlowerBarrageSprite.h; sourceTree = "<group>"; };
+		D0B2110B1F226D4800905D24 /* FlowerBarrageSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlowerBarrageSprite.m; path = BarrageDemo/FlowerBarrageSprite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +156,8 @@
 		D0771AAD1F210DAF0092BC2A /* BarrageDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D0B2110A1F226D4800905D24 /* FlowerBarrageSprite.h */,
+				D0B2110B1F226D4800905D24 /* FlowerBarrageSprite.m */,
 				D0771AAA1F210DAB0092BC2A /* AvatarBarrageView.h */,
 				D0771AAB1F210DAB0092BC2A /* AvatarBarrageView.m */,
 			);
@@ -296,6 +301,7 @@
 				CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */,
 				CCC0B4A51B654DD50088CFDE /* UIImage+Barrage.m in Sources */,
 				CCECEDCE1B5662F500098E7A /* AppDelegate.m in Sources */,
+				D0B2110C1F226D4800905D24 /* FlowerBarrageSprite.m in Sources */,
 				D0771AAC1F210DAB0092BC2A /* AvatarBarrageView.m in Sources */,
 				CCD2D7CC1DFED7F3003C8DE2 /* MLEmojiLabel+BarrageView.m in Sources */,
 				CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */,

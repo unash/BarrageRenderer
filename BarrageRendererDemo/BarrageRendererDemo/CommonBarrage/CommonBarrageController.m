@@ -11,6 +11,7 @@
 #import "NSSafeObject.h"
 #import "UIImage+Barrage.h"
 #import "AvatarBarrageView.h"
+#import "FlowerBarrageSprite.h"
 
 @interface CommonBarrageController()<BarrageRendererDelegate>
 {
@@ -112,6 +113,8 @@
         
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideLeft]];
         [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideRight]];
+        [_renderer receive:[self flowerImageSpriteDescriptor]];
+        [_renderer receive:[self avatarBarrageViewSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
         
         [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionB2T side:BarrageFloatSideCenter]];
         [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionT2B side:BarrageFloatSideLeft]];
@@ -174,6 +177,21 @@
         [string appendString:@"Br"];
     }
     return [string copy];
+}
+
+- (BarrageDescriptor *)flowerImageSpriteDescriptor
+{
+    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+    descriptor.spriteName = NSStringFromClass([FlowerBarrageSprite class]);
+    descriptor.params[@"image"] = [[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40.0f, 40.0f)];
+    descriptor.params[@"duration"] = @(10);
+    descriptor.params[@"viewClassName"] = NSStringFromClass([UILabel class]);
+    descriptor.params[@"text"] = @"^ - ^";
+    descriptor.params[@"borderWidth"] = @(1);
+    descriptor.params[@"borderColor"] = [UIColor grayColor];
+    descriptor.params[@"scaleRatio"] = @(4);
+    descriptor.params[@"rotateRatio"] = @(100);
+    return descriptor;
 }
 
 /// 生成精灵描述 - 浮动文字弹幕
