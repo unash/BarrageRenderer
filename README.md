@@ -30,7 +30,7 @@
 
 1. 下载版本库,进入BarrageRendererDemo目录. 运行pod update拉取相关库, 即可以运行BarrageRendererDemo.xcworkspace
 1. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', '1.9.1'*  并在工程目录下的命令行中运行 pod update, (CocoaPods 版本 0.39)
-1. 或者尝试使用 2.0.0 版本，此版本使用更方便，在部分特殊情况下的性能也有所提升.
+1. 或者尝试使用 2.1.0 版本，此版本使用更方便，在部分特殊情况下的性能也有所提升.
 1. 或者将代码下载下来, 将BarrageRenderer/目录添加到您的工程当中
 1. 在需要使用弹幕渲染功能的地方 ```#import<BarrageRenderer/BarrageRenderer.h>```
 1. 创建BarrageRenderer,添加BarrageRenderer.view, 执行start方法, 通过receive方法输入弹幕描述符descriptor, 即可以显示弹幕. 详见demo.
@@ -47,6 +47,27 @@
 当你想要添加一条弹幕到屏幕上的时候，你只需要创建一个弹幕描述符 BarrageDescriptor, 为其指定弹幕 Sprite 的类名，然后通过 params 设置一些属性, 调用 BarrageRenderer 的 receive 方法即可成功将弹幕显示在屏幕上.
 
 弹幕支持的属性可参照 ```BarrageSpriteProtocol.h``` 文件. 以及在 BarrageSprite 族的属性
+
+### 动态移除弹幕
+
+2.1.0 新增特性。
+
+在某些情况下，你可能需要从屏幕中动态地移除弹幕。2.1.0版本为此提供了一个默认的弹幕标识符 ```params[@"identifier"]``` 以及 一个移除弹幕的方法 ```- (void)removeSpriteWithIdentifier:(NSString *)identifier;```。 举例而言，你可以在用户点击弹幕的时候，移除弹幕，代码如下：
+
+``` objective-c
+    __weak BarrageRenderer *render = _renderer;
+    descriptor.params[@"clickAction"] = ^(NSDictionary *params){
+        [render removeSpriteWithIdentifier:params[@"identifier"]];
+    };
+```
+
+### 更新弹幕视图
+
+2.1.0 新增特性。
+
+有时候，你想要为你的弹幕精灵 view 添加动画。当然，你可以使用 animation 或者 NSTimer. 由于 BarrageRenderer 整体由 CADisplayLink 驱动，你可以借用 BarrageRenderer 的时钟，来更新你的精灵 view 。这样做的好处在于，当你通过 BarrageRenderer 暂停弹幕时，你的 弹幕精灵 view 也将暂停。为此，你可以在自定义弹幕精灵 view 的时候，实现协议方法 ```- (void)updateWithTime:(NSTimeInterval)time```来依据时间更新你的 view 。连贯起来就成了动画。你可以参考 demo 中 AvatarBarrageView 类的实现。
+
+需要注意的是，```- (void)updateWithTime:(NSTimeInterval)time``` 中不要放置过多的计算逻辑。在大量弹幕下，这样有可能造成动画的卡顿。
 
 ### 设置靠边位置
 
