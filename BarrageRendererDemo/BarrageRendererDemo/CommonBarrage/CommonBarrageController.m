@@ -156,13 +156,23 @@
 /// 演示自定义弹幕样式
 - (BarrageDescriptor *)avatarBarrageViewSpriteDescriptorWithDirection:(BarrageWalkDirection)direction side:(BarrageWalkSide)side
 {
+    NSArray *titles1 = @[@"♪└|°з°|┐♪",@"♪└|°ε°|┘♪",@"♪┌|°з°|┘♪",@"♪┌|°ε°|┐♪"];
+    NSArray *titles2 = @[@"ʕ•̫͡•ʔ",@"ʕ•̫͡•̫͡•ʔ",@"ʕ•̫͡•=•̫͡•ʔ",@"ʕ•̫͡•ʔ ʕ•̫͡•ʔ",@"ʕ•̫͡•ʔ ʕ•̫͡•̫͡•ʔ",@"ʕ•̫͡•ʔ ʕ•̫͡•=•̫͡•ʔ",@"ʕ•̫͡•ʔ ʕ•̫͡•ʔ ʕ•̫͡•ʔ",
+                         @"ʕ•̫͡•ʔ ʕ•̫͡•=•̫͡•ʔ",@"ʕ•̫͡•ʔ ʕ•̫͡•̫͡•ʔ",@"ʕ•̫͡•ʔ ʕ•̫͡•ʔ",@"ʕ•̫͡•=•̫͡•ʔ",@"ʕ•̫͡•̫͡•ʔ",@"ʕ•̫͡•ʔ"];
+    
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
     descriptor.spriteName = NSStringFromClass([BarrageWalkSprite class]);
     descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);
     descriptor.params[@"direction"] = @(direction);
     descriptor.params[@"side"] = @(side);
     descriptor.params[@"viewClassName"] = NSStringFromClass([AvatarBarrageView class]);
-    descriptor.params[@"titles"] = @[@"♪└|°з°|┐♪",@"♪└|°ε°|┘♪",@"♪┌|°з°|┘♪",@"♪┌|°ε°|┐♪"];
+    descriptor.params[@"titles"] = (_index%2) ? titles1: titles2;
+    
+    __weak BarrageRenderer *render = _renderer;
+    descriptor.params[@"clickAction"] = ^(NSDictionary *params){
+        [render removeSpriteWithIdentifier:params[@"identifier"]];
+    };
+    
     return descriptor;
 }
 

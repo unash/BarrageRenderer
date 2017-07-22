@@ -49,6 +49,7 @@
     if (self = [super init]) {
         _identifier = [[NSProcessInfo processInfo]globallyUniqueString];
         _params = [[NSMutableDictionary alloc]init];
+        _params[@"identifier"] = _identifier;
     }
     return self;
 }
