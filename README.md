@@ -22,6 +22,8 @@
 
 ![效果动画](./BarrageRendererDemo.gif)
 
+![效果动画](./BarrageRendererDemo1.gif)
+
 视频演示地址: [http://v.youku.com/v_show/id_XMTI5NDM4ODk3Ng==.html](http://v.youku.com/v_show/id_XMTI5NDM4ODk3Ng==.html)
 
 ## 使用方式
