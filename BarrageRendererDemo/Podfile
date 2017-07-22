@@ -3,6 +3,6 @@ source "https://github.com/CocoaPods/Old-Specs"
 
 platform :ios, '6.0'
 target "BarrageRendererDemo" do
-    pod 'BarrageRenderer', '2.1.0'
+    pod 'BarrageRenderer', :path => '../'
     pod 'MLEmojiLabel', '1.0.0'
 end
