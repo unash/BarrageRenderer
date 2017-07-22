@@ -12,7 +12,8 @@
 @interface AvatarBarrageView ()
 @property(nonatomic,strong)UIImageView *imageView;
 @property(nonatomic,strong)UILabel *titleLabel;
-@property(nonatomic,strong)UILabel *detailLabel;
+@property(nonatomic,assign)NSTimeInterval time;
+@property(nonatomic,strong)NSArray *titles;
 @end
 
 @implementation AvatarBarrageView
@@ -35,31 +36,41 @@
     self.titleLabel.textColor = [UIColor purpleColor];
     self.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     [self addSubview:self.titleLabel];
-    
-    _detailLabel = [[UILabel alloc]init];
-    self.detailLabel.textColor = [UIColor lightGrayColor];
-    self.detailLabel.font = [UIFont systemFontOfSize:12.0f];
-    [self addSubview:self.detailLabel];
 }
 
 - (void)layoutSubviews
 {
     CGFloat const imageWidth = 30.0f;
     [super layoutSubviews];
-    self.imageView.frame = CGRectMake(0, 0, imageWidth, imageWidth);
-    CGSize titleSize = [self.titleLabel sizeThatFits:CGSizeMake(10000, 10)];
-    self.titleLabel.frame = CGRectMake(imageWidth, 0, self.bounds.size.width-imageWidth, titleSize.height);
-    self.detailLabel.frame = CGRectMake(imageWidth, titleSize.height, self.bounds.size.width-imageWidth, self.bounds.size.height-titleSize.height);
+    NSTimeInterval time = self.time*10;
+    NSInteger num = 10;
+    NSInteger frame = fabs(num/2 - time + (NSInteger)(time/num)*num);
+    CGFloat newImageWidth = imageWidth*pow(0.9, frame);
+    self.imageView.frame = CGRectMake((imageWidth-newImageWidth)/2, (imageWidth-newImageWidth)/2, newImageWidth, newImageWidth);
+    self.titleLabel.frame = CGRectMake(imageWidth, 0, self.bounds.size.width-imageWidth, self.bounds.size.height);
 }
 
 - (CGSize)sizeThatFits:(CGSize)size
 {
     CGFloat const imageWidth = 30.0f;
-    CGSize titleSize = [self.titleLabel sizeThatFits:CGSizeMake(10000, 10)];
-    CGSize detailSize = [self.detailLabel sizeThatFits:CGSizeMake(10000, 10)];
-    CGFloat height = MAX(titleSize.height+detailSize.height, imageWidth);
-    CGFloat width = imageWidth+MAX(titleSize.width, detailSize.width);
-    return CGSizeMake(width, height);
+    UILabel *prototypeLabel = self.titleLabel;
+    CGFloat maxWidth = 0;
+    CGFloat maxHeight = 0;
+    for (NSString *title in self.titles) {
+        prototypeLabel.text = title;
+        CGSize titleSize = [prototypeLabel sizeThatFits:CGSizeMake(10000, 10)];
+        if (titleSize.width>maxWidth) {
+            maxWidth = titleSize.width;
+        }
+        if (titleSize.height>maxHeight) {
+            maxHeight = titleSize.height;
+        }
+    }
+    if (imageWidth>maxHeight) {
+        maxHeight = imageWidth;
+    }
+    maxWidth+= imageWidth;
+    return CGSizeMake(maxWidth, maxHeight);
 }
 
 #pragma mark - BarrageViewProtocol
@@ -67,10 +78,24 @@
 - (void)configureWithParams:(NSDictionary *)params
 {
     [super configureWithParams:params];
-    NSString *title = params[@"title"];
-    NSString *detail = params[@"detail"];
-    self.titleLabel.text = title;
-    self.detailLabel.text = detail;
+    self.titles = params[@"titles"];
+    self.titleLabel.text = [self.titles firstObject];
+}
+
+- (void)updateWithTime:(NSTimeInterval)time
+{
+    _time = time;
+    [self updateTexts];
+    [self setNeedsLayout];
+}
+
+- (void)updateTexts
+{
+    if (!self.titles.count) {
+        return;
+    }
+    NSInteger frame = ((NSInteger)floor(self.time*5)) % self.titles.count;
+    self.titleLabel.text = self.titles[frame];
 }
 
 @end

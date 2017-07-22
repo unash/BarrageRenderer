@@ -157,15 +157,12 @@
 - (BarrageDescriptor *)avatarBarrageViewSpriteDescriptorWithDirection:(BarrageWalkDirection)direction side:(BarrageWalkSide)side
 {
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
-    descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
+    descriptor.spriteName = NSStringFromClass([BarrageWalkSprite class]);
     descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);
     descriptor.params[@"direction"] = @(direction);
     descriptor.params[@"side"] = @(side);
     descriptor.params[@"viewClassName"] = NSStringFromClass([AvatarBarrageView class]);
-    descriptor.params[@"title"] = [self randomString];
-    descriptor.params[@"detail"] = [self randomString];
-    descriptor.params[@"borderWidth"] = @(1);
-    descriptor.params[@"borderColor"] = [UIColor grayColor];
+    descriptor.params[@"titles"] = @[@"♪└|°з°|┐♪",@"♪└|°ε°|┘♪",@"♪┌|°з°|┘♪",@"♪┌|°ε°|┐♪"];
     return descriptor;
 }
 
@@ -186,7 +183,7 @@
     descriptor.params[@"image"] = [[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40.0f, 40.0f)];
     descriptor.params[@"duration"] = @(10);
     descriptor.params[@"viewClassName"] = NSStringFromClass([UILabel class]);
-    descriptor.params[@"text"] = @"^ - ^";
+    descriptor.params[@"text"] = @"^*-*^";
     descriptor.params[@"borderWidth"] = @(1);
     descriptor.params[@"borderColor"] = [UIColor grayColor];
     descriptor.params[@"scaleRatio"] = @(4);
