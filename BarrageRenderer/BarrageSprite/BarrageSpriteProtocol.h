@@ -32,6 +32,10 @@ typedef void(^BarrageClickAction)(NSDictionary *params);
 /// UIView 弹幕协议
 @protocol BarrageViewProtocol <NSObject>
 
+@optional
+
+- (void)updateWithTime:(NSTimeInterval)time;
+
 @required
 
 - (void)prepareForReuse;

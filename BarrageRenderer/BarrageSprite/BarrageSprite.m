@@ -64,6 +64,9 @@
 {
     _valid = !self.forcedInvalid && [self validWithTime:time];
     _view.frame = [self rectWithTime:time];
+    if ([_view respondsToSelector:@selector(updateWithTime:)]) {
+        [_view updateWithTime:time];
+    }
 }
 
 - (CGRect)rectWithTime:(NSTimeInterval)time
