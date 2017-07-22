@@ -251,10 +251,11 @@
 /// 演示如何拿到弹幕的生命周期
 - (void)barrageRenderer:(BarrageRenderer *)renderer spriteStage:(BarrageSpriteStage)stage spriteParams:(NSDictionary *)params
 {
+    NSString *subid = [params[@"identifier"] substringToIndex:8];
     if (stage == BarrageSpriteStageBegin) {
-        NSLog(@"%@进入",params[@"bizMsgId"]);
+        NSLog(@"id:%@,bizMsgId:%@ =>进入",subid,params[@"bizMsgId"]);
     } else if (stage == BarrageSpriteStageEnd) {
-        NSLog(@"%@离开",params[@"bizMsgId"]);
+        NSLog(@"id:%@,bizMsgId:%@ =>离开",subid,params[@"bizMsgId"]);
         /* 注释代码演示了如何复制一条弹幕
         BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
         descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
