@@ -124,7 +124,7 @@ descriptor.params[@"fadeOutTime"] = @(1); // 隐出时间
 
 1. 在视频初始化的时候，批量添加弹幕
 1. 设置 BarrageRenderer 的 redisplay 属性为 YES, 指定其 delegate.
-1. 对于1条被添加的 BarrageDescriptor, 为其指定 delay， delay 是此条弹幕对应的视频时间点
+1. 对于1条被添加的 BarrageDescriptor, 为其指定 delay，delay 是此条弹幕对应的视频时间点(一般从服务器端获得)；在 2.1.0 版本之后，请尽量调用load方法。如果此条被添加的弹幕 BarrageDescriptor 来自某方实时发送的(因而服务端接口并未给出对应视频时间点)，可调用 receive 方法。
 1. 实现 BarrageRendererDelegate 协议方法, 在 ```- (NSTimeInterval)timeForBarrageRenderer:(BarrageRenderer *)renderer;``` 方法中返回当前的视频时间点. 当你的视频播放、快进或者快退时，这个时间也会有变。
 
 在 Demo 的 AdvancedBarrageController 中演示了这一流程，可以参照。
@@ -141,6 +141,22 @@ descriptor.params[@"fadeOutTime"] = @(1); // 隐出时间
 ### 如何设置弹幕速率与文本长度正相关
 
 一些弹幕组件的速度会与文本长度成正比，这在 BarrageRenderer 中实现起来也十分容易。在创建弹幕描述符 BarrageDescriptor 的时候，根据文本长度设置 BarrageSprite 的速度值即可。
+
+### 限制过场弹幕只显示屏幕上方5行
+
+虽然 BarrageWalkSprite 弹幕设有 trackNumber 属性，但是 trackNumber 的本质，并不很适合某些业务下，固定屏幕弹幕行数的需求。若非要如此，比如需要限制过场弹幕只显示屏幕上方5行，可继承 BarrageWalkTextSprite ，重写```- (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites```方法，如下：
+
+```objective-c
+- (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites
+{
+    CGRect newRect = rect;
+    newRect.size.height = 100; // 这里你根据你的文本大小，为固定的行数估出一个合适的高度来
+    self.trackNumber = 5; // 这里是你需要限定的弹幕行数,这里设置之后，descriptor 的 trackNumber 参数自然就失效了
+    return [super originInBounds:newRect withSprites:sprites];
+}
+```
+
+如此，就生成了满足上述需求的弹幕形式。
 
 ### 为弹幕添加点击操作
 
@@ -159,7 +175,7 @@ BarrageRenderer 默认关闭了交互行为的，但如果需要，你可以启�
 
 ### 如何对弹幕进行限流
 
-通过 ```- (NSInteger)spritesNumberWithName:(NSString *)spriteName;``` 方法可以获取屏幕上当前的弹幕数量，你可以在调用 BarrageRenderer 的 receive 方法之前，获取屏幕上的弹幕数量，然后根据一定的规则决定要不要添加这条弹幕。
+通过 ```- (NSInteger)spritesNumberWithName:(NSString *)spriteName;``` 方法可以获取屏幕上当前的弹幕数量，你可以在调用 BarrageRenderer 的 receive 方法之前，获取屏幕上的弹幕数量，然后根据一定的规则决定要不要添加这条弹幕。缩小过场弹幕的速度幅度，也有助于降低弹幕的重叠几率。当然，最合理的方式，还是服务端将大量的弹幕过滤到一个合适的范围之中。
 
 ### 为弹幕添加背景图片
 
