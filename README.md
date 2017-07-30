@@ -136,7 +136,7 @@ descriptor.params[@"fadeOutTime"] = @(1); // 隐出时间
 
 ### 修改弹幕的初始位置
 
-原生的 BarrageSprite 子类不支持自定义弹幕位置。如果需要，你需要自定义你自己的 BarrageSprite。你可以继承 BarrageWalkTextSprite ，然后覆盖 ```- (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites```根据屏幕上已有的同类弹幕信息返回你的弹幕的初始位置。
+原生的 BarrageSprite 子类不支持自定义弹幕位置。如果需要，你需要自定义你自己的 BarrageSprite。你可以继承 BarrageWalkTextSprite ，然后覆盖 ```- (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites```根据屏幕上已有的同类弹幕信息返回你的弹幕的初始位置。另外需要注意的是，如果你是继承的 BarrageWalkSprite ，你还需要在此方法中计算出终点位置 ```CGPoint _destination;```的值。
 
 ### 如何设置弹幕速率与文本长度正相关
 
