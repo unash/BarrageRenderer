@@ -45,6 +45,7 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
         _side = BarrageWalkSideDefault;
         _speed = 30.0f; // 默认值
         _trackNumber = 40;
+        _avoidCollision = NO;
     }
     return self;
 }
@@ -138,6 +139,7 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
     NSUInteger leastActiveTimeStrip = 0; // 最小时间的行
     NSUInteger leastActiveSpriteStrip = 0; // 最小网格的行
     
+    BOOL hasBestTrack = !self.avoidCollision;
     for (NSUInteger i = 0; i < stripNum; i++) {
         //寻找当前行里包含的sprites
         CGFloat stripFrom = i * (oritation?stripHeight:stripWidth);
@@ -165,6 +167,7 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
             availableFrom = i+1;
         }
         else if (i - availableFrom >= overlandStripNum - 1){
+            hasBestTrack |= YES;
             break; // eureka!
         }
         if (i <= stripNum - overlandStripNum) {
@@ -184,13 +187,21 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
     if (oritation) { // 水平
         _destination.y = origin.y = (rotation?stripHeight*availableFrom:rect.size.height-stripHeight * availableFrom-self.size.height)+rect.origin.y;
         origin.x = (self.direction == BarrageWalkDirectionL2R)?rect.origin.x - self.size.width:rect.origin.x + rect.size.width;
-        _destination.x = (self.direction == BarrageWalkDirectionL2R)?rect.origin.x + rect.size.width:rect.origin.x - self.size.width;
+        if (hasBestTrack) {
+            _destination.x = (self.direction == BarrageWalkDirectionL2R)?rect.origin.x + rect.size.width:rect.origin.x - self.size.width;
+        } else {
+            _destination.x = (self.direction == BarrageWalkDirectionL2R)?origin.x-1:origin.x+1;
+        }
     }
     else
     {
         _destination.x = origin.x = (rotation?stripWidth*availableFrom:rect.size.width-stripWidth*availableFrom -self.size.width)+rect.origin.x;
         origin.y = (self.direction == BarrageWalkDirectionT2B)?rect.origin.y - self.size.height:rect.origin.y + rect.size.height;
-        _destination.y = (self.direction == BarrageWalkDirectionT2B)?rect.origin.y + rect.size.height:rect.origin.y - self.size.height;
+        if (hasBestTrack) {
+            _destination.y = (self.direction == BarrageWalkDirectionT2B)?rect.origin.y + rect.size.height:rect.origin.y - self.size.height;
+        } else {
+            _destination.y = (self.direction == BarrageWalkDirectionT2B)?origin.y-1:origin.y+1;
+        }
     }
     return origin;
 }

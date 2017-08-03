@@ -58,6 +58,9 @@ typedef NS_ENUM(NSUInteger, BarrageWalkSide) {
 /// 需要在originInBounds:withSprites: 方法中修改 _destination的值以表示运动的终点
 @property(nonatomic,assign,readonly)CGPoint destination;
 
+/// 防止碰撞，只针对同方向的弹幕有效。默认为NO。开启后，弹幕可能会丢失。
+@property(nonatomic,assign)BOOL avoidCollision;
+
 /// 轨道数量
 @property(nonatomic,assign)NSUInteger trackNumber;
 
