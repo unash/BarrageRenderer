@@ -44,6 +44,7 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
         _fadeInTime = 0.0f;
         _fadeOutTime = 0.0f;
         _side = BarrageFloatSideCenter;
+        _avoidCollision = NO;
         self.duration = 1.0f;
     }
     return self;
@@ -101,6 +102,7 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
     NSUInteger leastActiveTimeStrip = 0; // 最小时间的行
     NSUInteger leastActiveSpriteStrip = 0; // 最小网格精灵的行
     
+    BOOL hasBestTrack = !self.avoidCollision;
     for (NSUInteger i = 0; i < stripNum; i++) {
         //寻找当前行里包含的sprites
         CGFloat stripFrom = down?(i * stripHeight+rect.origin.y):(rect.origin.y+rect.size.height - i * stripHeight);
@@ -121,6 +123,7 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
             availableFrom = i+1;
         }
         else if (i - availableFrom >= overlandStripNum - 1){
+            hasBestTrack |= YES;
             break; // eureka!
         }
         if (i <= stripNum - overlandStripNum) {
@@ -146,6 +149,10 @@ static NSUInteger const STRIP_NUM = 80; // 总共的网格条数
         origin.x = rect.origin.x;
     }
     origin.y = down?(stripHeight * availableFrom+rect.origin.y):(rect.origin.y+rect.size.height-stripHeight * availableFrom - self.size.height);
+    if (!hasBestTrack) {
+        origin.y = -self.size.height+rect.origin.y;
+        _duration = 0;
+    }
     return origin;
 }
 

@@ -59,4 +59,7 @@ typedef NS_ENUM(NSUInteger, BarrageFloatSide) {
 /// 隐出时间, 默认0
 @property(nonatomic,assign)NSTimeInterval fadeOutTime;
 
+/// 防止碰撞，只针对同方向的弹幕有效。默认为NO。开启后，弹幕可能会丢失。
+@property(nonatomic,assign)BOOL avoidCollision;
+
 @end
