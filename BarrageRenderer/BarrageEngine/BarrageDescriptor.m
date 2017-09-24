@@ -63,4 +63,9 @@
     return copy;
 }
 
+- (void)clickAction:(BarrageClickAction)clickAction{
+    
+    self.params[@"clickAction"] = clickAction;
+    
+}
 @end
