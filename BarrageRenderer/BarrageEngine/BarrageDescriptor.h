@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-
+#import "BarrageSpriteProtocol.h"
 /// 统一的持久化层
 @interface BarrageDescriptor : NSObject<NSCopying>
 
