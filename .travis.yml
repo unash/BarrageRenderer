@@ -1,0 +1,7 @@
+language: objective-c
+osx_image: xcode9
+xcode_sdk: iphonesimulator10.0
+podfile: ./BarrageRendererDemo/Podfile
+script:
+- set -o pipefail
+- travis_retry xcodebuild -workspace ./BarrageRendererDemo/BarrageRendererDemo.xcworkspace -scheme "BarrageRendererDemo" -destination "platform=iOS Simulator,name=iPhone 6" | xcpretty
