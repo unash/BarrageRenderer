@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D55A75E9E6287C3EC838B09 /* libPods-BarrageRendererDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */; };
+		ADF9FFC680A00BA9E4D24F7C /* libPods-BarrageRendererDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29884472DF4A619E65B68A0B /* libPods-BarrageRendererDemo.a */; };
 		CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */; };
 		CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E121BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m */; };
 		CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E151BFCBE6A000C1FEC /* CommonBarrageController.m */; };
@@ -25,9 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1C26C0B8A6A60E09DB1FAC28 /* Pods-BarrageRendererDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.release.xcconfig"; sourceTree = "<group>"; };
-		5C13A3B15DEEFF78D2777351 /* Pods-BarrageRendererDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarrageRendererDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B4AA4F8C40F9CCA4E403615 /* Pods-BarrageRendererDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		29884472DF4A619E65B68A0B /* libPods-BarrageRendererDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarrageRendererDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52A68FC2D7818C1433F4955A /* Pods-BarrageRendererDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.release.xcconfig"; sourceTree = "<group>"; };
 		CC853E0F1BFCBE6A000C1FEC /* AdvancedBarrageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedBarrageController.h; sourceTree = "<group>"; };
 		CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedBarrageController.m; sourceTree = "<group>"; };
 		CC853E111BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageWalkImageTextSprite.h; sourceTree = "<group>"; };
@@ -60,17 +60,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D55A75E9E6287C3EC838B09 /* libPods-BarrageRendererDemo.a in Frameworks */,
+				ADF9FFC680A00BA9E4D24F7C /* libPods-BarrageRendererDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BCAB4A02DE79583900493392 /* Frameworks */ = {
+		6B51F37174CE27536307E887 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A2F5B09F38A598332AB834B1 /* libPods-BarrageRendererDemo.a */,
+				1B4AA4F8C40F9CCA4E403615 /* Pods-BarrageRendererDemo.debug.xcconfig */,
+				52A68FC2D7818C1433F4955A /* Pods-BarrageRendererDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8FC9C2B9D55BEF2F294D34DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29884472DF4A619E65B68A0B /* libPods-BarrageRendererDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -102,8 +111,8 @@
 			children = (
 				CCECEDC71B5662F500098E7A /* BarrageRendererDemo */,
 				CCECEDC61B5662F500098E7A /* Products */,
-				F441B024A5ECB5E1DA377E4A /* Pods */,
-				BCAB4A02DE79583900493392 /* Frameworks */,
+				6B51F37174CE27536307E887 /* Pods */,
+				8FC9C2B9D55BEF2F294D34DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,15 +173,6 @@
 			name = BarrageDemo;
 			sourceTree = "<group>";
 		};
-		F441B024A5ECB5E1DA377E4A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5C13A3B15DEEFF78D2777351 /* Pods-BarrageRendererDemo.debug.xcconfig */,
-				1C26C0B8A6A60E09DB1FAC28 /* Pods-BarrageRendererDemo.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -180,12 +180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCECEDE81B5662F500098E7A /* Build configuration list for PBXNativeTarget "BarrageRendererDemo" */;
 			buildPhases = (
-				3C3AD3B41A9212AF94F222A9 /* Check Pods Manifest.lock */,
+				572CE44BC040E4D2F84C6DE2 /* [CP] Check Pods Manifest.lock */,
 				CCECEDC11B5662F500098E7A /* Sources */,
 				CCECEDC21B5662F500098E7A /* Frameworks */,
 				CCECEDC31B5662F500098E7A /* Resources */,
-				EF2CDBDC4FC3AE77A059CD3C /* Copy Pods Resources */,
-				95AD912ADA39BC0C1617CEB4 /* Embed Pods Frameworks */,
+				C495AAF13D59EF1528D7F47D /* [CP] Embed Pods Frameworks */,
+				28C90FF3366B6A438BADF6A1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -245,49 +245,58 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3C3AD3B41A9212AF94F222A9 /* Check Pods Manifest.lock */ = {
+		28C90FF3366B6A438BADF6A1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo-resources.sh",
+				"${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.plist",
+				"${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_ExpressionImage.plist",
+				"${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle",
+				"${PODS_ROOT}/MLEmojiLabel/Classes/MLEmoji_Expression.bundle/gifexpression.bundle",
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		95AD912ADA39BC0C1617CEB4 /* Embed Pods Frameworks */ = {
+		572CE44BC040E4D2F84C6DE2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BarrageRendererDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C495AAF13D59EF1528D7F47D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EF2CDBDC4FC3AE77A059CD3C /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -415,7 +424,7 @@
 		};
 		CCECEDE91B5662F500098E7A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C13A3B15DEEFF78D2777351 /* Pods-BarrageRendererDemo.debug.xcconfig */;
+			baseConfigurationReference = 1B4AA4F8C40F9CCA4E403615 /* Pods-BarrageRendererDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = C6FYK5JX7E;
@@ -430,7 +439,7 @@
 		};
 		CCECEDEA1B5662F500098E7A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C26C0B8A6A60E09DB1FAC28 /* Pods-BarrageRendererDemo.release.xcconfig */;
+			baseConfigurationReference = 52A68FC2D7818C1433F4955A /* Pods-BarrageRendererDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = C6FYK5JX7E;
