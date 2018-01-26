@@ -1,5 +1,7 @@
 # BarrageRenderer
 
+![TravisCi](https://api.travis-ci.org/unash/BarrageRenderer.svg?branch=master)
+
 一个 iOS 上的开源弹幕渲染库.
 
 ## 发起原因
