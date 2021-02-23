@@ -86,10 +86,11 @@
 
 #pragma mark - active and deactive
 
-- (void)activeWithContext:(NSDictionary *)context
+- (BOOL)activeWithContext:(NSDictionary *)context
 {
     CGRect rect = [[context objectForKey:kBarrageRendererContextCanvasBounds]CGRectValue];
     NSArray * sprites = [context objectForKey:kBarrageRendererContextRelatedSpirts];
+
     NSTimeInterval timestamp = [[context objectForKey:kBarrageRendererContextTimestamp]doubleValue];
     _timestamp = timestamp;
     [[BarrageViewPool mainPool]assembleBarrageViewForSprite:self];
@@ -98,8 +99,14 @@
     if (!CGSizeEqualToSize(_mandatorySize, CGSizeZero)) {
         self.view.frame = CGRectMake(0, 0, _mandatorySize.width, _mandatorySize.height);
     }
-    _origin = [self originInBounds:rect withSprites:sprites];
+
+    CGPoint origin = [self originInBounds:rect withSprites:sprites];
+    if (CGPointEqualToPoint(origin, CGPointZero)) {
+        return NO;
+    }
+    _origin = origin;
     self.view.frame = CGRectMake(_origin.x, _origin.y, self.size.width, self.size.height);
+    return YES;
 }
 
 - (void)deactive

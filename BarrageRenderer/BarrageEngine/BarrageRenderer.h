@@ -70,6 +70,8 @@ typedef NS_ENUM(NSInteger, BarrageSpriteStage) {
 /// 接收弹幕消息, 如果尚未start, 则调用无效.
 - (void)receive:(BarrageDescriptor *)descriptor;
 
+- (NSUInteger)waitingSprite;
+
 #pragma mark - config
 
 /// 画布的边距

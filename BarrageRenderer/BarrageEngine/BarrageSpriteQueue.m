@@ -142,6 +142,11 @@
     }
 }
 
+- (NSUInteger)queueCount
+{
+    return _sprites.count;
+}
+
 #pragma mark - util
 
 // 找到则返回元素在数组中的下标，如果没找到，则返回这个元素在有序数组中的位置

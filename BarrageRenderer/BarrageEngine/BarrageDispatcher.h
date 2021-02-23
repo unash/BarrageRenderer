@@ -37,7 +37,7 @@
 - (NSTimeInterval)timeForBarrageDispatcher:(BarrageDispatcher *)dispatcher;
 
 @required
-- (void)willActiveSprite:(BarrageSprite *)sprite;
+- (BOOL)willActiveSprite:(BarrageSprite *)sprite;
 - (void)willDeactiveSprite:(BarrageSprite *)sprite;
 
 @end
@@ -65,5 +65,9 @@
 @property(nonatomic,assign)CGFloat smoothness;
 
 @property (nonatomic,weak)id<BarrageDispatcherDelegate> delegate;
+
+- (NSUInteger)waitingCount;
+
+- (NSUInteger)activeCount;
 
 @end

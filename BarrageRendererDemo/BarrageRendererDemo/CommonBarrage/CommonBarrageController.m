@@ -36,11 +36,14 @@
     _renderer = [[BarrageRenderer alloc]init];
     _renderer.smoothness = .2f;
     _renderer.delegate = self;
-    [self.view addSubview:_renderer.view];
+    _renderer.speed = 10.0f;
     _renderer.canvasMargin = UIEdgeInsetsMake(10, 10, 10, 10);
     // 若想为弹幕增加点击功能, 请添加此句话, 并在Descriptor中注入行为
     _renderer.view.userInteractionEnabled = YES;
-    [self.view sendSubviewToBack:_renderer.view];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 120)];
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view];
+    [view addSubview:_renderer.view];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -104,29 +107,74 @@
 
 - (void)autoSendBarrage
 {
-    NSInteger spriteNumber = [_renderer spritesNumberWithName:nil];
-    self.infoLabel.text = [NSString stringWithFormat:@"当前屏幕弹幕数量: %ld",(long)spriteNumber];
-    if (spriteNumber <= 500) { // 用来演示如何限制屏幕上的弹幕量
-        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideLeft]];
-        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
-        [_renderer receive:[self avatarBarrageViewSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
-        
-        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideLeft]];
-        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideRight]];
-        [_renderer receive:[self flowerImageSpriteDescriptor]];
-        [_renderer receive:[self avatarBarrageViewSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
-        
-        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionB2T side:BarrageFloatSideCenter]];
-        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionT2B side:BarrageFloatSideLeft]];
-        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionT2B side:BarrageFloatSideRight]];
-        
-        [_renderer receive:[self walkImageSpriteDescriptorWithDirection:BarrageWalkDirectionL2R]];
-        [_renderer receive:[self walkImageSpriteDescriptorWithDirection:BarrageWalkDirectionL2R]];
-        [_renderer receive:[self floatImageSpriteDescriptorWithDirection:BarrageFloatDirectionT2B]];
-    }
+    [_renderer receive:[self imageTextDescriptor]];
+//        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
+//        [_renderer receive:[self avatarBarrageViewSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
+//
+//        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideLeft]];
+//        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionB2T side:BarrageWalkSideRight]];
+//        [_renderer receive:[self flowerImageSpriteDescriptor]];
+//        [_renderer receive:[self avatarBarrageViewSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
+//
+//        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionB2T side:BarrageFloatSideCenter]];
+//        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionT2B side:BarrageFloatSideLeft]];
+//        [_renderer receive:[self floatTextSpriteDescriptorWithDirection:BarrageFloatDirectionT2B side:BarrageFloatSideRight]];
+//
+//        [_renderer receive:[self walkImageSpriteDescriptorWithDirection:BarrageWalkDirectionL2R]];
+//        [_renderer receive:[self walkImageSpriteDescriptorWithDirection:BarrageWalkDirectionL2R]];
+//        [_renderer receive:[self floatImageSpriteDescriptorWithDirection:BarrageFloatDirectionT2B]];
 }
 
 #pragma mark - 弹幕描述符生产方法
+- (BarrageDescriptor *)imageTextDescriptor
+{
+    NSArray *texts = @[
+//        @"短弹幕",
+//        @"短弹幕",
+//        @"短弹幕",
+//        @"短弹幕",
+//        @"短弹幕",
+//        @"长长长长长长长长长长长长长长弹幕",
+//        @"长长长长长长长长长长长长长长弹幕",
+//        @"长长长长长长长长长长长长长长弹幕",
+//        @"长长长长长长长长长长长长长长弹幕",
+//        @"长长长长长长长长长长长长长长弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+    ];
+    uint32_t index = arc4random_uniform((uint32_t)texts.count);
+    static int countIndex = 0;
+    NSString *text = [texts[index] stringByAppendingFormat:@":%d", countIndex++];
+
+    UIImage *image = [[UIImage imageNamed:@"avatar"]barrageImageScaleToSize:CGSizeMake(40.0f, 40.0f)];
+    
+    CGSize imageSize = image.size;
+    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+    descriptor.spriteName = NSStringFromClass([BarrageWalkSprite class]);
+    descriptor.params[@"direction"] = @(BarrageWalkDirectionR2L);
+    descriptor.params[@"viewClassName"] = NSStringFromClass([UILabel class]);
+    descriptor.params[@"trackNumber"] = @(2); // 轨道数量
+
+    NSMutableAttributedString *fullText = [[NSMutableAttributedString alloc] init];
+    NSTextAttachment *imageAttachment = [[NSTextAttachment alloc] init];
+    imageAttachment.image = image;
+    NSAttributedString *imagePart = [NSAttributedString attributedStringWithAttachment:imageAttachment];
+    [fullText appendAttributedString:imagePart];
+    NSMutableAttributedString *textPart = [[NSMutableAttributedString alloc] initWithString:text];
+    CGSize textSize = [textPart boundingRectWithSize:imageSize options:0 context:0].size;
+    CGFloat offset = (imageSize.height - textSize.height)/2.0;
+    [textPart addAttribute:NSBaselineOffsetAttributeName value:@(offset) range:NSMakeRange(0, textPart.length)];
+    [fullText appendAttributedString:textPart];
+    descriptor.params[@"attributedText"] = fullText;
+    __weak BarrageRenderer *render = _renderer;
+    descriptor.params[@"clickAction"] = ^(NSDictionary *params){
+        [render removeSpriteWithIdentifier:params[@"identifier"]];
+    };
+    return descriptor;
+}
 
 /// 生成精灵描述 - 过场文字弹幕
 - (BarrageDescriptor *)walkTextSpriteDescriptorWithDirection:(BarrageWalkDirection)direction
@@ -185,6 +233,7 @@
     }
     return [string copy];
 }
+
 
 - (BarrageDescriptor *)flowerImageSpriteDescriptor
 {

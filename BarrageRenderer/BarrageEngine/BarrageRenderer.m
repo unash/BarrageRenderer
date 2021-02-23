@@ -97,7 +97,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 - (void)receive:(BarrageDescriptor *)descriptor withCorrection:(BOOL)correction
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (!_startTime) { // 如果没有启动,则抛弃接收弹幕
+        if (!self->_startTime) { // 如果没有启动,则抛弃接收弹幕
             return;
         }
         BarrageDescriptor * descriptorCopy = [descriptor copy];
@@ -105,11 +105,16 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
             [self convertDelayTime:descriptorCopy];
         }
         BarrageSprite * sprite = [BarrageSpriteFactory createSpriteWithDescriptor:descriptorCopy];
-        [_dispatcher addSprite:sprite];
-        if (_recording) {
+        [self->_dispatcher addSprite:sprite];
+        if (self->_recording) {
             [self recordDescriptor:descriptorCopy];
         }
     });
+}
+
+- (NSUInteger)waitingSprite
+{
+    return [_dispatcher waitingCount];
 }
 
 - (void)start
@@ -303,6 +308,8 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 /// 每个刷新周期执行一次
 - (void)update
 {
+    NSLog(@"Waiting count:%lu, active count:%lu", [_dispatcher waitingCount], [_dispatcher activeCount]);
+    
     [_dispatcher dispatchSprites]; // 分发精灵
     for (BarrageSprite * sprite in _dispatcher.activeSprites) {
         [sprite updateWithTime:self.time];
@@ -316,7 +323,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     return !_pausedTime;
 }
 
-- (void)willActiveSprite:(BarrageSprite *)sprite
+- (BOOL)willActiveSprite:(BarrageSprite *)sprite
 {
     NSValue * value = [NSValue valueWithCGRect:_canvas.bounds];
     [_context setObject:value forKey:kBarrageRendererContextCanvasBounds];
@@ -330,12 +337,15 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
     
     NSInteger index = [self viewIndexOfSprite:sprite];
     
-    [sprite activeWithContext:_context];
+    if (![sprite activeWithContext:_context]) {
+        return NO;
+    }
     [self indexAddSprite:sprite];
     [_canvas insertSubview:sprite.view atIndex:index];
     if (self.delegate && [self.delegate respondsToSelector:@selector(barrageRenderer:spriteStage:spriteParams:)]) {
         [self.delegate barrageRenderer:self spriteStage:BarrageSpriteStageBegin spriteParams:sprite.viewParams];
     }
+    return YES;
 }
 
 - (NSUInteger)viewIndexOfSprite:(BarrageSprite *)sprite

@@ -81,7 +81,7 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 #pragma mark - called, part of lifecycle
 
 /// 结合相关上下文激活精灵; 如要覆盖, 请要先调用super方法
-- (void)activeWithContext:(NSDictionary *)context;
+- (BOOL)activeWithContext:(NSDictionary *)context;
 
 /// 结合相关上下文失活精灵; 如要覆盖, 请要先调用super方法
 - (void)deactive;

@@ -135,6 +135,7 @@
             }
             else
             {
+                NSLog(@"barrage too old, drop it");
                 if (_cacheDeadSprites) {
                     [_deadSprites addObject:sprite];
                 }
@@ -153,10 +154,10 @@
 
         for (NSInteger i = 0; i < count; i++) {
             BarrageSprite *sprite = candidates[i];
-            [self activeSprite:sprite];
-            //NSLog(@"%@",sprite.viewParams[@"text"]);
-            [_activeSprites addObject:sprite];
-            [_waitingSpriteQueue removeSprite:sprite];
+            if ([self activeSprite:sprite]) {
+                [_activeSprites addObject:sprite];
+                [_waitingSpriteQueue removeSprite:sprite];
+            }
         }
     }
     else // 倒退,需要起死回生
@@ -170,9 +171,10 @@
             else if (sprite.delay == currentTime)
             {
                 if ([self shouldActiveSprite:sprite]) {
-                    [self activeSprite:sprite];
-                    [_activeSprites addObject:sprite];
-                    [_deadSprites removeObjectAtIndex:i--];
+                    if ([self activeSprite:sprite]) {
+                        [_activeSprites addObject:sprite];
+                        [_deadSprites removeObjectAtIndex:i--];
+                    }
                 }
             }
         }
@@ -191,19 +193,24 @@
 }
 
 /// 激活精灵
-- (void)activeSprite:(BarrageSprite *)sprite
+- (BOOL)activeSprite:(BarrageSprite *)sprite
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(willActiveSprite:)]) {
-        [self.delegate willActiveSprite:sprite];
-    }
+    return [self.delegate willActiveSprite:sprite];
 }
 
 /// 精灵失活
 - (void)deactiveSprite:(BarrageSprite *)sprite
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(willDeactiveSprite:)]) {
-        [self.delegate willDeactiveSprite:sprite];
-    }
+    [self.delegate willDeactiveSprite:sprite];
 }
 
+- (NSUInteger)waitingCount
+{
+    return _waitingSpriteQueue.queueCount;
+}
+
+- (NSUInteger)activeCount
+{
+    return _activeSprites.count;
+}
 @end
