@@ -25,24 +25,24 @@
 // THE SOFTWARE.
 
 #import "BarrageClock.h"
-@interface BarrageClock()
+@interface BarrageClock ()
 {
-    void (^_block)(NSTimeInterval time);
-    CADisplayLink * _displayLink; // 周期
+    void (^ _block)(NSTimeInterval time);
+    CADisplayLink *_displayLink;  // 周期
     CFTimeInterval _previousDate; // 上一次更新时间
     CGFloat _pausedSpeed; // 暂停之前的时间流速
 }
 ///是否处于启动状态
-@property(nonatomic,assign)BOOL launched;
+@property (nonatomic, assign) BOOL launched;
 ///逻辑时间
-@property(nonatomic,assign)NSTimeInterval time;
+@property (nonatomic, assign) NSTimeInterval time;
 @end
 
 @implementation BarrageClock
 
 + (instancetype)clockWithHandler:(void (^)(NSTimeInterval time))block
 {
-    BarrageClock * clock = [[BarrageClock alloc]initWithHandler:block];
+    BarrageClock *clock = [[BarrageClock alloc]initWithHandler:block];
     return clock;
 }
 
@@ -73,13 +73,8 @@
 {
     if (!_displayLink) {
         [self setupDisplayLink];
-        _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
-        self.launched = NO;
-        if (_speed == 0.0f) {
-            _speed = _pausedSpeed;
-        }
     }
-    
+
     if (self.launched) {
         _speed = _pausedSpeed;
     } else {
