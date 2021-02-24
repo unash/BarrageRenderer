@@ -12,6 +12,7 @@
 #import "UIImage+Barrage.h"
 #import "AvatarBarrageView.h"
 #import "FlowerBarrageSprite.h"
+#import "LiveCommentView.h"
 
 @interface CommonBarrageController()<BarrageRendererDelegate>
 {
@@ -110,7 +111,7 @@
     static int count = 0;
     static int maxCount = INT_MAX;
     if (count++ < maxCount) {
-        [_renderer receive:[self imageTextDescriptor]];
+        [_renderer receive:[self liveCommentDescriptor]];
     }
 //        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
 //        [_renderer receive:[self avatarBarrageViewSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
@@ -130,6 +131,43 @@
 }
 
 #pragma mark - 弹幕描述符生产方法
+- (BarrageDescriptor *)liveCommentDescriptor
+{
+    NSArray *texts = @[
+        @"短弹幕",
+        @"短弹幕",
+        @"短弹幕",
+        @"短弹幕",
+        @"短弹幕",
+        @"长长长1234567890长长弹幕",
+        @"长长长1234567890长长弹幕",
+        @"长长长1234567890长长弹幕",
+        @"长长长1234567890长长弹幕",
+        @"长长长1234567890长长弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+        @"超级1234567890123456789012345678901234567890弹幕",
+    ];
+    uint32_t index = arc4random_uniform((uint32_t)texts.count);
+    static int countIndex = 0;
+    NSString *text = [texts[index] stringByAppendingFormat:@":%d", countIndex++];
+
+    BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
+    descriptor.spriteName = NSStringFromClass([BarrageWalkSprite class]);
+    descriptor.params[@"direction"] = @(BarrageWalkDirectionR2L);
+    descriptor.params[@"viewClassName"] = NSStringFromClass([LiveCommentView class]);
+    descriptor.params[@"trackNumber"] = @(2); // 轨道数量
+    descriptor.params[@"text"] = text;
+    descriptor.params[@"portraitUrl"] = @"http://192.168.18.60:8000/avatar.png";
+    __weak BarrageRenderer *render = _renderer;
+    descriptor.params[@"clickAction"] = ^(NSDictionary *params){
+        [render removeSpriteWithIdentifier:params[@"identifier"]];
+    };
+    return descriptor;
+}
+
 - (BarrageDescriptor *)imageTextDescriptor
 {
     NSArray *texts = @[
@@ -157,9 +195,8 @@
     
     CGSize imageSize = image.size;
     BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
-    descriptor.spriteName = NSStringFromClass([BarrageWalkSprite class]);
+    descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
     descriptor.params[@"direction"] = @(BarrageWalkDirectionR2L);
-    descriptor.params[@"viewClassName"] = NSStringFromClass([UILabel class]);
     descriptor.params[@"trackNumber"] = @(2); // 轨道数量
 
     NSMutableAttributedString *fullText = [[NSMutableAttributedString alloc] init];
@@ -306,9 +343,9 @@
 {
     NSString *subid = [params[@"identifier"] substringToIndex:8];
     if (stage == BarrageSpriteStageBegin) {
-        NSLog(@"id:%@,bizMsgId:%@ =>进入",subid,params[@"bizMsgId"]);
+//        NSLog(@"id:%@,bizMsgId:%@ =>进入",subid,params[@"bizMsgId"]);
     } else if (stage == BarrageSpriteStageEnd) {
-        NSLog(@"id:%@,bizMsgId:%@ =>离开",subid,params[@"bizMsgId"]);
+//        NSLog(@"id:%@,bizMsgId:%@ =>离开",subid,params[@"bizMsgId"]);
         /* 注释代码演示了如何复制一条弹幕
         BarrageDescriptor * descriptor = [[BarrageDescriptor alloc]init];
         descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);

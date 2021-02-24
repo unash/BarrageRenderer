@@ -2,15 +2,20 @@ PODS:
   - BarrageRenderer (0.0.1)
   - MLEmojiLabel (1.0.0):
     - TTTAttributedLabel (~> 1.13.4)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
   - TTTAttributedLabel (1.13.4)
 
 DEPENDENCIES:
   - BarrageRenderer (from `../`)
   - MLEmojiLabel (= 1.0.0)
+  - SDWebImage
 
 SPEC REPOS:
   https://github.com/CocoaPods/Old-Specs:
     - MLEmojiLabel
+    - SDWebImage
     - TTTAttributedLabel
 
 EXTERNAL SOURCES:
@@ -20,8 +25,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   BarrageRenderer: 1c4204aa4242ec066e5e65191e504356570f94d1
   MLEmojiLabel: ceeab17d10d296cc00636bf201c8da597fdede10
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-PODFILE CHECKSUM: 775706bdffb2cc4ec819b5f702cfaa18a6859f5f
+PODFILE CHECKSUM: 480a186e6483d0ad7f46ca7b00637b58265f3625
 
 COCOAPODS: 1.8.4

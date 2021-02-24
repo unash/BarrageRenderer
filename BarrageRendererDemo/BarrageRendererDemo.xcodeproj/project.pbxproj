@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CC2026C25E5F675006E7FF4 /* LiveCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2026B25E5F675006E7FF4 /* LiveCommentView.m */; };
 		ADF9FFC680A00BA9E4D24F7C /* libPods-BarrageRendererDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29884472DF4A619E65B68A0B /* libPods-BarrageRendererDemo.a */; };
 		CC853E161BFCBE6A000C1FEC /* AdvancedBarrageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */; };
 		CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CC853E121BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m */; };
@@ -27,6 +28,8 @@
 /* Begin PBXFileReference section */
 		1B4AA4F8C40F9CCA4E403615 /* Pods-BarrageRendererDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		29884472DF4A619E65B68A0B /* libPods-BarrageRendererDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarrageRendererDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CC2026A25E5F675006E7FF4 /* LiveCommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LiveCommentView.h; path = BarrageDemo/LiveCommentView.h; sourceTree = "<group>"; };
+		2CC2026B25E5F675006E7FF4 /* LiveCommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LiveCommentView.m; path = BarrageDemo/LiveCommentView.m; sourceTree = "<group>"; };
 		52A68FC2D7818C1433F4955A /* Pods-BarrageRendererDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarrageRendererDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-BarrageRendererDemo/Pods-BarrageRendererDemo.release.xcconfig"; sourceTree = "<group>"; };
 		CC853E0F1BFCBE6A000C1FEC /* AdvancedBarrageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedBarrageController.h; sourceTree = "<group>"; };
 		CC853E101BFCBE6A000C1FEC /* AdvancedBarrageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedBarrageController.m; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				D0B2110B1F226D4800905D24 /* FlowerBarrageSprite.m */,
 				D0771AAA1F210DAB0092BC2A /* AvatarBarrageView.h */,
 				D0771AAB1F210DAB0092BC2A /* AvatarBarrageView.m */,
+				2CC2026A25E5F675006E7FF4 /* LiveCommentView.h */,
+				2CC2026B25E5F675006E7FF4 /* LiveCommentView.m */,
 			);
 			name = BarrageDemo;
 			sourceTree = "<group>";
@@ -216,6 +221,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -301,6 +307,7 @@
 				D0771AAC1F210DAB0092BC2A /* AvatarBarrageView.m in Sources */,
 				CCD2D7CC1DFED7F3003C8DE2 /* MLEmojiLabel+BarrageView.m in Sources */,
 				CC853E181BFCBE6A000C1FEC /* CommonBarrageController.m in Sources */,
+				2CC2026C25E5F675006E7FF4 /* LiveCommentView.m in Sources */,
 				CCECEDCB1B5662F500098E7A /* main.m in Sources */,
 				CC853E171BFCBE6A000C1FEC /* BarrageWalkImageTextSprite.m in Sources */,
 			);

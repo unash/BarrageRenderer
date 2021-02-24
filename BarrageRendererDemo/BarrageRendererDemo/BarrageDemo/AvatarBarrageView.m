@@ -85,7 +85,7 @@
 - (void)updateWithTime:(NSTimeInterval)time
 {
     _time = time;
-//    [self updateTexts];
+    [self updateTexts];
     [self setNeedsLayout];
 }
 
