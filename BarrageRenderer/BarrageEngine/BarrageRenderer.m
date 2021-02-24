@@ -308,7 +308,7 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 /// 每个刷新周期执行一次
 - (void)update
 {
-    NSLog(@"Waiting count:%lu, active count:%lu", [_dispatcher waitingCount], [_dispatcher activeCount]);
+//    NSLog(@"Waiting count:%lu, active count:%lu", [_dispatcher waitingCount], [_dispatcher activeCount]);
     
     [_dispatcher dispatchSprites]; // 分发精灵
     for (BarrageSprite * sprite in _dispatcher.activeSprites) {

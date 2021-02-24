@@ -71,7 +71,12 @@
 - (void)start
 {
     if (!_displayLink) {
-        [self reset];
+        _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
+        self.launched = NO;
+        if (_speed == 0.0f) {
+            _speed = _pausedSpeed;
+        }
+//        [self reset];
     }
     
     if (self.launched) {

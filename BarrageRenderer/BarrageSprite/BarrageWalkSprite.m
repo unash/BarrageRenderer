@@ -104,6 +104,27 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
     return activeDistance / self.speed;
 }
 
+// 估算全部显示到界面的时间
+- (NSTimeInterval)estimateAllDisplayedTime:(CGRect)rect {
+    CGFloat activeDistance = 0;
+    switch (_direction) {
+        case BarrageWalkDirectionR2L:
+            activeDistance = self.position.x - _destination.x - rect.size.width;
+            break;
+        case BarrageWalkDirectionL2R:
+            activeDistance = _destination.x - self.position.x - rect.size.width;
+            break;
+        case BarrageWalkDirectionT2B:
+            activeDistance = _destination.y - self.position.y - rect.size.height;
+            break;
+        case BarrageWalkDirectionB2T:
+            activeDistance = self.position.y - _destination.y - rect.size.height;
+        default:
+            break;
+    }
+    return activeDistance / self.speed;
+}
+
 #pragma mark - launch
 
 - (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites
@@ -116,7 +137,7 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
         }
     }
 
-    static BOOL const AVAERAGE_STRATEGY = YES; // YES:条纹平均精灵策略(体验会好一些); NO:最快时间策略
+//    static BOOL const AVAERAGE_STRATEGY = YES; // YES:条纹平均精灵策略(体验会好一些); NO:最快时间策略
     NSTimeInterval stripMaxActiveTimes[STRIP_NUM] = { 0 }; // 每一条网格 已有精灵中最后退出屏幕的时间
     NSUInteger stripSpriteNumbers[STRIP_NUM] = { 0 }; // 每一条网格 包含精灵的数目
     NSUInteger stripNum = MIN(STRIP_NUM, MAX(self.trackNumber, 1)); // between (1,STRIP_NUM)
@@ -153,9 +174,10 @@ static NSUInteger const STRIP_NUM = 160; // 总共的网格条数
             CGFloat spriteTo = spriteFrom + (oritation ? sprite.size.height : sprite.size.width);
             if ((spriteTo - spriteFrom) + (stripTo - stripFrom) > MAX(stripTo - spriteFrom, spriteTo - stripFrom)) { // 在条条里
                 stripSpriteNumbers[i]++;
-                NSTimeInterval activeTime = [sprite estimateActiveTime];
-                if (activeTime > stripMaxActiveTimes[i]) { // 获取最慢的那个
-                    stripMaxActiveTimes[i] = activeTime;
+//                NSTimeInterval activeTime = [sprite estimateActiveTime];
+                NSTimeInterval appendTime = [sprite estimateAllDisplayedTime:rect];
+                if (appendTime > stripMaxActiveTimes[i]) { // 获取最慢的那个
+                    stripMaxActiveTimes[i] = appendTime;
                     CGFloat distance = oritation ? fabs(sprite.position.x - sprite.origin.x) : fabs(sprite.position.y - sprite.origin.y);
                     lastDistanceAllOut = distance > (oritation ? sprite.size.width : sprite.size.height);
                 }

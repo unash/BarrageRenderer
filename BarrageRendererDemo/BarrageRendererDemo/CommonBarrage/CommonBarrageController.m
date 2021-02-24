@@ -36,7 +36,7 @@
     _renderer = [[BarrageRenderer alloc]init];
     _renderer.smoothness = .2f;
     _renderer.delegate = self;
-    _renderer.speed = 10.0f;
+    _renderer.speed = 5.0f;
     _renderer.canvasMargin = UIEdgeInsetsMake(10, 10, 10, 10);
     // 若想为弹幕增加点击功能, 请添加此句话, 并在Descriptor中注入行为
     _renderer.view.userInteractionEnabled = YES;
@@ -92,7 +92,7 @@
 {
     CGFloat speed = _renderer.speed + 0.5;
     if (speed >= 10) {
-        speed = 10.0f;
+        speed = 5.0f;
     }
     _renderer.speed = speed;
 }
@@ -107,7 +107,10 @@
 
 - (void)autoSendBarrage
 {
-    [_renderer receive:[self imageTextDescriptor]];
+    static int count = 0;
+    if (count++ < 10) {
+        [_renderer receive:[self imageTextDescriptor]];
+    }
 //        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
 //        [_renderer receive:[self avatarBarrageViewSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
 //
@@ -167,7 +170,7 @@
     CGSize textSize = [textPart boundingRectWithSize:imageSize options:0 context:0].size;
     CGFloat offset = (imageSize.height - textSize.height)/2.0;
     [textPart addAttribute:NSBaselineOffsetAttributeName value:@(offset) range:NSMakeRange(0, textPart.length)];
-    [fullText appendAttributedString:textPart];
+    [fullText appendAttributedString:textPart];    
     descriptor.params[@"attributedText"] = fullText;
     __weak BarrageRenderer *render = _renderer;
     descriptor.params[@"clickAction"] = ^(NSDictionary *params){
