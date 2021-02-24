@@ -26,7 +26,7 @@
 
 #import "BarrageSprite.h"
 
-typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
+typedef NS_ENUM (NSUInteger, BarrageWalkDirection) {
     BarrageWalkDirectionR2L = 1,  // 右向左
     BarrageWalkDirectionL2R = 2,  // 左向右
     BarrageWalkDirectionT2B = 3,  // 上往下
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, BarrageWalkDirection) {
 };
 
 ///注: 此处侧边的含义与悬浮弹幕(BarrageFloatSide)并不相同!
-typedef NS_ENUM(NSUInteger, BarrageWalkSide) {
+typedef NS_ENUM (NSUInteger, BarrageWalkSide) {
     BarrageWalkSideDefault = 0,   // 默认,根据选择的方向而定
     BarrageWalkSideRight   = 1,   // 靠右侧行驶,运动方向的右手法则
     BarrageWalkSideLeft    = 2    // 靠左侧行驶,运动方向的左手法则
@@ -47,21 +47,21 @@ typedef NS_ENUM(NSUInteger, BarrageWalkSide) {
 }
 
 /// 速度,point/second
-@property(nonatomic,assign)CGFloat speed;
+@property (nonatomic, assign) CGFloat speed;
 
 /// 运动方向
-@property(nonatomic,assign)BarrageWalkDirection direction;
+@property (nonatomic, assign) BarrageWalkDirection direction;
 
 /// 运动侧边
-@property(nonatomic,assign)BarrageWalkSide side;
+@property (nonatomic, assign) BarrageWalkSide side;
 
 /// 需要在originInBounds:withSprites: 方法中修改 _destination的值以表示运动的终点
-@property(nonatomic,assign,readonly)CGPoint destination;
+@property (nonatomic, assign, readonly) CGPoint destination;
 
 /// 防止碰撞，只针对同方向的弹幕有效。默认为NO。开启后，弹幕可能会丢失。
-@property(nonatomic,assign)BOOL avoidCollision;
+@property (nonatomic, assign) BOOL avoidCollision;
 
 /// 轨道数量
-@property(nonatomic,assign)NSUInteger trackNumber;
+@property (nonatomic, assign) NSUInteger trackNumber;
 
 @end

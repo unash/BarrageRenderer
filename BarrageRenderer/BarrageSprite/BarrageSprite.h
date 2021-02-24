@@ -28,9 +28,9 @@
 #import "BarrageSpriteUtility.h"
 #import "BarrageSpriteProtocol.h"
 
-extern NSString * const kBarrageRendererContextCanvasBounds;  // 画布大小
-extern NSString * const kBarrageRendererContextRelatedSpirts; // 相关精灵
-extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
+extern NSString *const kBarrageRendererContextCanvasBounds;   // 画布大小
+extern NSString *const kBarrageRendererContextRelatedSpirts;  // 相关精灵
+extern NSString *const kBarrageRendererContextTimestamp;      // 时间戳
 
 /// 精灵基类
 @interface BarrageSprite : NSObject<BarrageActionProtocol>
@@ -43,40 +43,40 @@ extern NSString * const kBarrageRendererContextTimestamp;     // 时间戳
 
 /// 延时, 这个是相对于rendered的绝对时间/秒
 /// 如果delay<0, 当然不会提前显示 ^ - ^
-@property(nonatomic,assign)NSTimeInterval delay;
+@property (nonatomic, assign) NSTimeInterval delay;
 
 /// 创建的绝对时间,初始化的时候创建; 目前好像没啥用处
-@property(nonatomic,strong,readonly)NSDate * birth;
+@property (nonatomic, strong, readonly) NSDate *birth;
 
 /// 时间戳,表示这个弹幕处于的时间位置;相对于时间引擎启动的时候;精灵被激活的时候生成
-@property(nonatomic,assign,readonly)CFTimeInterval timestamp;
+@property (nonatomic, assign, readonly) CFTimeInterval timestamp;
 
 // 最底层是0, 往上依次叠加; 默认值是0
-@property(nonatomic,assign)NSUInteger z_index;
+@property (nonatomic, assign) NSUInteger z_index;
 
 /// 起始位置,为了获取这个值,子类需要重写 originInBounds:withSprites: 方法
-@property(nonatomic,assign,readonly)CGPoint origin;
+@property (nonatomic, assign, readonly) CGPoint origin;
 
 /// 为了获取此值,子类可能需要在 updateWithTime: 中修改 _position成员变量
-@property(nonatomic,assign,readonly)CGPoint position;
+@property (nonatomic, assign, readonly) CGPoint position;
 
 /// calculate inside, return for others;如果需要不同大小的size
-@property(nonatomic,assign,readonly)CGSize size;
+@property (nonatomic, assign, readonly) CGSize size;
 
 /// 是否有效,默认YES; 当过了动画时间之后,就会被标记成NO; 永世不得翻身;子类可能需要在 updateWithTime: 中修改 _valid成员变量
-@property(nonatomic,assign,readonly,getter=isValid)BOOL valid;
+@property (nonatomic, assign, readonly, getter = isValid) BOOL valid;
 
 #pragma mark - reusableView
 
 /// 输出的view,这样就不必自己再绘制图形了,并且可以使用硬件加速
-@property(nonatomic,strong)UIView<BarrageViewProtocol> * view;
+@property (nonatomic, strong) UIView<BarrageViewProtocol> *view;
 
-@property(nonatomic,strong,readonly)NSString *viewClassName;
+@property (nonatomic, strong, readonly) NSString *viewClassName;
 
-@property(nonatomic,strong)NSDictionary *viewParams;
+@property (nonatomic, strong) NSDictionary *viewParams;
 
 /// 强制性大小,默认为CGSizeZero,大小自适应; 否则使用mandatorySize的值来设置view大小
-@property(nonatomic,assign)CGSize mandatorySize;
+@property (nonatomic, assign) CGSize mandatorySize;
 
 #pragma mark - called, part of lifecycle
 

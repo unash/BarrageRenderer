@@ -27,9 +27,9 @@
 #import "BarrageSprite.h"
 #import "BarrageViewPool.h"
 
-@interface BarrageSprite()
-@property(nonatomic,strong)UITapGestureRecognizer *tapGestureRecognizer;
-@property(nonatomic,assign)BOOL forcedInvalid;
+@interface BarrageSprite ()
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, assign) BOOL forcedInvalid;
 @end
 
 @implementation BarrageSprite
@@ -52,7 +52,7 @@
         _z_index = 0;
         _forcedInvalid = NO;
         _mandatorySize = CGSizeZero;
-        
+
         _viewClassName = NSStringFromClass([UIView class]);
     }
     return self;
@@ -89,7 +89,7 @@
 - (BOOL)activeWithContext:(NSDictionary *)context
 {
     CGRect rect = [[context objectForKey:kBarrageRendererContextCanvasBounds]CGRectValue];
-    NSArray * sprites = [context objectForKey:kBarrageRendererContextRelatedSpirts];
+    NSArray *sprites = [context objectForKey:kBarrageRendererContextRelatedSpirts];
 
     NSTimeInterval timestamp = [[context objectForKey:kBarrageRendererContextTimestamp]doubleValue];
     _timestamp = timestamp;
@@ -153,8 +153,8 @@
 ///  区域内的初始位置,只在刚加入渲染器的时候被调用;子类继承需要override.
 - (CGPoint)originInBounds:(CGRect)rect withSprites:(NSArray *)sprites
 {
-    CGFloat x = random_between(rect.origin.x, rect.origin.x+rect.size.width-self.size.width);
-    CGFloat y = random_between(rect.origin.y, rect.origin.y+rect.size.height-self.size.height);
+    CGFloat x = random_between(rect.origin.x, rect.origin.x + rect.size.width - self.size.width);
+    CGFloat y = random_between(rect.origin.y, rect.origin.y + rect.size.height - self.size.height);
     return CGPointMake(x, y);
 }
 

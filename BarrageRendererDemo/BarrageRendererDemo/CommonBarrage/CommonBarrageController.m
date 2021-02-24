@@ -36,7 +36,7 @@
     _renderer = [[BarrageRenderer alloc]init];
     _renderer.smoothness = .2f;
     _renderer.delegate = self;
-    _renderer.speed = 5.0f;
+    _renderer.speed = 2.0f;
     _renderer.canvasMargin = UIEdgeInsetsMake(10, 10, 10, 10);
     // 若想为弹幕增加点击功能, 请添加此句话, 并在Descriptor中注入行为
     _renderer.view.userInteractionEnabled = YES;
@@ -108,7 +108,8 @@
 - (void)autoSendBarrage
 {
     static int count = 0;
-    if (count++ < 10) {
+    static int maxCount = INT_MAX;
+    if (count++ < maxCount) {
         [_renderer receive:[self imageTextDescriptor]];
     }
 //        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L side:BarrageWalkSideDefault]];
@@ -132,16 +133,16 @@
 - (BarrageDescriptor *)imageTextDescriptor
 {
     NSArray *texts = @[
-//        @"短弹幕",
-//        @"短弹幕",
-//        @"短弹幕",
-//        @"短弹幕",
-//        @"短弹幕",
-//        @"长长长长长长长长长长长长长长弹幕",
-//        @"长长长长长长长长长长长长长长弹幕",
-//        @"长长长长长长长长长长长长长长弹幕",
-//        @"长长长长长长长长长长长长长长弹幕",
-//        @"长长长长长长长长长长长长长长弹幕",
+        @"短弹幕",
+        @"短弹幕",
+        @"短弹幕",
+        @"短弹幕",
+        @"短弹幕",
+        @"长长长1234567890长长弹幕",
+        @"长长长1234567890长长弹幕",
+        @"长长长1234567890长长弹幕",
+        @"长长长1234567890长长弹幕",
+        @"长长长1234567890长长弹幕",
         @"超级1234567890123456789012345678901234567890弹幕",
         @"超级1234567890123456789012345678901234567890弹幕",
         @"超级1234567890123456789012345678901234567890弹幕",

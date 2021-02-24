@@ -37,6 +37,7 @@
 - (NSTimeInterval)timeForBarrageDispatcher:(BarrageDispatcher *)dispatcher;
 
 @required
+// 如果可以active则返回true，并执行active操作；否则返回false(比如弹幕冲突)
 - (BOOL)willActiveSprite:(BarrageSprite *)sprite;
 - (void)willDeactiveSprite:(BarrageSprite *)sprite;
 
