@@ -54,12 +54,13 @@
     return self;
 }
 
-- (void)reset
+- (void)setupDisplayLink
 {
     _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
-    _speed = 1.0f;
-    _pausedSpeed = _speed;
     self.launched = NO;
+    if (_speed == 0.0f) {
+        _speed = _pausedSpeed;
+    }
 }
 
 - (void)update
@@ -71,12 +72,12 @@
 - (void)start
 {
     if (!_displayLink) {
+        [self setupDisplayLink];
         _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
         self.launched = NO;
         if (_speed == 0.0f) {
             _speed = _pausedSpeed;
         }
-//        [self reset];
     }
     
     if (self.launched) {
