@@ -1,22 +1,27 @@
 PODS:
-  - BarrageRenderer (0.0.1)
-  - MLEmojiLabel (1.0.0):
+  - BarrageRenderer (2.1.1)
+  - MLEmojiLabel (1.0.2):
     - TTTAttributedLabel (~> 1.13.4)
   - TTTAttributedLabel (1.13.4)
 
 DEPENDENCIES:
   - BarrageRenderer (from `../`)
-  - MLEmojiLabel (= 1.0.0)
+  - MLEmojiLabel (~> 1.0.0)
+
+SPEC REPOS:
+  trunk:
+    - MLEmojiLabel
+    - TTTAttributedLabel
 
 EXTERNAL SOURCES:
   BarrageRenderer:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BarrageRenderer: 1c4204aa4242ec066e5e65191e504356570f94d1
-  MLEmojiLabel: ceeab17d10d296cc00636bf201c8da597fdede10
+  BarrageRenderer: 75386895f8e0b9f21630b0b4b1674d1c6f1a047c
+  MLEmojiLabel: 36d73c19f9975cbf9def24e5bc135263b0337fd8
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-PODFILE CHECKSUM: 775706bdffb2cc4ec819b5f702cfaa18a6859f5f
+PODFILE CHECKSUM: 00dfc6536da5b887d7cf13ec8e3e4ad36899a7f8
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.10.1

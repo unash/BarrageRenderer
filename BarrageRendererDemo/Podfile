@@ -1,8 +1,7 @@
-source "https://github.com/CocoaPods/Old-Specs"
-#source "https://github.com/CocoaPods/Specs"
+platform :ios, '9.0'
+use_frameworks!
 
-platform :ios, '6.0'
 target "BarrageRendererDemo" do
     pod 'BarrageRenderer', :path => '../'
-    pod 'MLEmojiLabel', '1.0.0'
+    pod 'MLEmojiLabel', '~> 1.0.0'
 end
