@@ -30,6 +30,17 @@
 
 ## 使用方式
 
+#### CocoaPods
+
+```ruby
+platform :ios, '10.0'
+use_frameworks!
+
+target 'MyApp' do
+  pod 'BarrageRendererTV', '~> 2.1.1'
+end
+```
+
 1. 下载版本库,进入BarrageRendererDemo目录. 运行pod update拉取相关库, 即可以运行BarrageRendererDemo.xcworkspace
 1. 也可以在您工程的podfile中添加一条引用: *pod 'BarrageRenderer', '1.9.1'*  并在工程目录下的命令行中运行 pod update, (CocoaPods 版本 0.39)
 1. 或者尝试使用 2.1.0 版本，此版本使用更方便，在部分特殊情况下的性能也有所提升.
