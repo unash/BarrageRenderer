@@ -408,6 +408,10 @@ NSString * const kBarrageRendererContextTimestamp = @"kBarrageRendererContextTim
 {
     _canvas.margin = canvasMargin;
 }
+- (void)setCanvasPercentMargin:(UIEdgeInsets)canvasPercentMargin
+{
+	_canvas.percentMargin = canvasPercentMargin;
+}
 
 - (void)setMasked:(BOOL)masked
 {
