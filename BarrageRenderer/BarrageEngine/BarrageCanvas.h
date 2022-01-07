@@ -27,6 +27,8 @@
 #import <UIKit/UIKit.h>
 
 @interface BarrageCanvas : UIView
+/// 和 margin 类似，但数值为 superview.bounds.size 的百分比。例如，左0.5右0.5，width 就会为0。该值优先于 margin。
+@property(nonatomic, assign)UIEdgeInsets percentMargin;
 @property(nonatomic, assign)UIEdgeInsets margin;
 @property(nonatomic, assign)BOOL masked; // canvas是否拦截事件, 默认 YES.
 @end

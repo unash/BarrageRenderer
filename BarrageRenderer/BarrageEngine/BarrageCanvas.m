@@ -35,6 +35,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.clipsToBounds = YES;
         _margin = UIEdgeInsetsZero;
+		_percentMargin = UIEdgeInsetsZero;
         _masked = YES;
     }
     return self;
@@ -44,10 +45,21 @@
 {
     [super layoutSubviews];
     if (self.superview) {
-        CGRect frame = UIEdgeInsetsInsetRect(self.superview.bounds, self.margin);
-        if (!CGRectEqualToRect(self.frame, frame)) {
-            self.frame = frame;
-        }
+		if (!UIEdgeInsetsEqualToEdgeInsets(self.percentMargin, UIEdgeInsetsZero)) {
+			UIEdgeInsets newMargin = UIEdgeInsetsMake(self.percentMargin.top * self.superview.bounds.size.height,
+													  self.percentMargin.left * self.superview.bounds.size.width,
+													  self.percentMargin.bottom * self.superview.bounds.size.height,
+													  self.percentMargin.right * self.superview.bounds.size.width);
+			CGRect frame = UIEdgeInsetsInsetRect(self.superview.bounds, newMargin);
+			if (!CGRectEqualToRect(self.frame, frame)) {
+				self.frame = frame;
+			}
+		} else {
+			CGRect frame = UIEdgeInsetsInsetRect(self.superview.bounds, self.margin);
+			if (!CGRectEqualToRect(self.frame, frame)) {
+				self.frame = frame;
+			}
+		}
     }
 }
 
@@ -58,6 +70,15 @@
         _margin = margin;
         [self setNeedsLayout];
     }
+}
+
+- (void)setPercentMargin:(UIEdgeInsets)percentMargin
+{
+	if(!UIEdgeInsetsEqualToEdgeInsets(percentMargin, _percentMargin))
+	{
+		_percentMargin = percentMargin;
+		[self setNeedsLayout];
+	}
 }
 
 - (void)didMoveToSuperview

@@ -74,6 +74,8 @@ typedef NS_ENUM(NSInteger, BarrageSpriteStage) {
 
 /// 画布的边距
 @property(nonatomic,assign)UIEdgeInsets canvasMargin;
+/// 和 canvasMargin 类似，但数值为 superview.bounds.size 的百分比。例如，左0.5右0.5，width 就会为0。该值优先于 canvasMargin。
+@property(nonatomic, assign)UIEdgeInsets canvasPercentMargin;
 /// 画布是否拦截事件
 @property(nonatomic,assign)BOOL masked;
 
