@@ -27,7 +27,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef void(^BarrageClickAction)(NSDictionary *params);
+typedef void(^BarrageClickAction)(id sprite, NSDictionary *params);
 
 /// UIView 弹幕协议
 @protocol BarrageViewProtocol <NSObject>

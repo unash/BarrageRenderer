@@ -145,7 +145,7 @@
     descriptor.params[@"speed"] = @(100 * (double)random()/RAND_MAX+50);
     descriptor.params[@"direction"] = @(direction);
     descriptor.params[@"side"] = @(side);
-    descriptor.params[@"clickAction"] = ^(NSDictionary *params){
+    descriptor.params[@"clickAction"] = ^(id sprite, NSDictionary *params) {
         NSString *msg = [NSString stringWithFormat:@"弹幕 %@ 被点击",params[@"bizMsgId"]];
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
         [alertView show];
@@ -168,9 +168,26 @@
     descriptor.params[@"viewClassName"] = NSStringFromClass([AvatarBarrageView class]);
     descriptor.params[@"titles"] = (_index%2) ? titles1: titles2;
     
-    __weak BarrageRenderer *render = _renderer;
-    descriptor.params[@"clickAction"] = ^(NSDictionary *params){
-        [render removeSpriteWithIdentifier:params[@"identifier"]];
+    __weak typeof(self) weakSelf = self;
+    descriptor.params[@"clickAction"] = ^(id sprite, NSDictionary *params) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (nil == strongSelf) {
+            return;
+        }
+        
+        ((BarrageSprite *)sprite).pause = YES;
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"被点击了！！" message:@"妖怪哪里跑？" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"继续飞" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            ((BarrageSprite *)sprite).pause = NO;
+        }]];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            ((BarrageSprite *)sprite).pause = NO;
+            [strongSelf->_renderer removeSpriteWithIdentifier:params[@"identifier"]];
+        }]];
+        
+        [strongSelf presentViewController:alert animated:YES completion:nil];
     };
     
     return descriptor;
