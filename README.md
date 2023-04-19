@@ -58,7 +58,7 @@
 
 ``` objective-c
     __weak BarrageRenderer *render = _renderer;
-    descriptor.params[@"clickAction"] = ^(NSDictionary *params){
+    descriptor.params[@"clickAction"] = ^(id sprite, NSDictionary *params){
         [render removeSpriteWithIdentifier:params[@"identifier"]];
     };
 ```

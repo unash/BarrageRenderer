@@ -62,6 +62,12 @@
 
 - (void)updateWithTime:(NSTimeInterval)time
 {
+    if (_pause) {
+        _timestamp = time;
+        _origin = self.view.frame.origin;
+        return;
+    }
+    
     _valid = !self.forcedInvalid && [self validWithTime:time];
     _view.frame = [self rectWithTime:time];
     if ([_view respondsToSelector:@selector(updateWithTime:)]) {
@@ -140,7 +146,7 @@
 
 - (void)clickSpriteView
 {
-    if (self.clickAction) self.clickAction(self.viewParams);
+    if (self.clickAction) self.clickAction(self, self.viewParams);
 }
 
 ///  区域内的初始位置,只在刚加入渲染器的时候被调用;子类继承需要override.
